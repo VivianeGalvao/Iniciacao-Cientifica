@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1412430098 source:/home/viviane/Área de Trabalho/PS_and_PSO/PSOversion1.0/Avaliation_Function.cpp
+	<iostream>
+	<math.h>
+
