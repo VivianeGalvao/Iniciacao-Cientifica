@@ -7,12 +7,12 @@ using namespace std;
 
 
 double Sphere_function(double *x, int size){
-    cout<<endl<<"SPHERE FUNCTION"<<endl;
-    for(int i=0; i<size; i++){ cout<<x[i]<<" ";}
+   // cout<<endl<<"SPHERE FUNCTION"<<endl;
+    //for(int i=0; i<size; i++){ cout<<x[i]<<" ";}
     double fx=0.0;
     for(int i=0; i<size; i++){
         fx += x[i]*x[i];
-        cout<<"fx: "<<fx<<endl;
+        //cout<<"fx: "<<fx<<endl;
     }
     return fx;
 }

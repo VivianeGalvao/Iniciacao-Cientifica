@@ -4,6 +4,9 @@
 #include"ParticleSwarm.h"
 #include<time.h>
 #define NUMFUNC 1
+#define NUMINTERACOES 10000
+
+using namespace std;
 
 typedef struct particle{
     double *position;
@@ -13,7 +16,13 @@ typedef struct particle{
     double best_fitness;
 }Particle;
 
-double* ParticleSwarm(int dimension, int number_particles, double criterion_stop){
+double* ParticleSwarm(int dimension, int number_particles){
+    cout<<"---------------------------------------------------------------------------"<<endl;
+    cout<<"PARTICLE SWARM"<<endl;
+    cout<<"DADOS DO PROBLEMA:"<<endl;
+    cout<<"Dimensao do Problema: "<<dimension<<"; Numero de Particulas: "<<number_particles<<endl;
+    cout<<"Criterio de Parada: "<<NUMINTERACOES<<" avaliações de funçoes"<<endl;
+    cout<<"----------------------------------------------------------------------------"<<endl;
     srand(0);
 
     Particle *population = new Particle[number_particles];
@@ -60,8 +69,8 @@ double* ParticleSwarm(int dimension, int number_particles, double criterion_stop
         }
     }
 
-    double stop = 1;
-    while(stop > criterion_stop){
+    double stop = 0;
+    while(stop < NUMINTERACOES){
         for(i=0; i<number_particles; i++){
             for(j=0; j<dimension; j++){
                 population[i].velocity[j] = inertia_factor*population[i].velocity[j] + cognition_parameter*omega1[i][j]*(population[i].best_position[j] -
@@ -82,7 +91,8 @@ double* ParticleSwarm(int dimension, int number_particles, double criterion_stop
                 for(j=0; j<dimension; j++){
                     position_global[j] = population[i].position[j];
                 }
-            }else{ stop = stop*0.5;}
+            }
+            stop++;
         }
     }
 
