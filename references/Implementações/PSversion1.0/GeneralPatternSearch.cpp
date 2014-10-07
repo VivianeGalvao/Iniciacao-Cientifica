@@ -31,6 +31,7 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
         /* if f(xk+1) > f(xk) => unsuccessful iteration */
         /* try xk+1 = xk - delta*e1 */
         if(fx < fx_perturbation){
+            x_perturbation[i] = x_iteration[i];
             x_perturbation[i] = x_iteration[i] - delta*pattern[i];
             fx_perturbation = Compute_Function(x_perturbation, size, NUNFUNC);
         }
