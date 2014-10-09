@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Avaliation_Function.h"
 #include "ParticleSwarm.h"
-#define SIZEPOPULATION 2
-#define SIZEPROBLEM 1
+#define SIZEPOPULATION 2000
+#define SIZEPROBLEM 10
 
 using namespace std;
 
@@ -13,7 +13,7 @@ int main()
 
     cout<<"Minimizador: ";
     for(int i=0; i<SIZEPROBLEM; i++){ cout<<x[i]<<" ";}
-    cout<<endl<<"Hello world!"<<endl;
+    cout<<endl<<"Valor da funçao objetivo: "<<Compute_Function(x, SIZEPROBLEM, 1)<<endl;
 
     return 0;
 }

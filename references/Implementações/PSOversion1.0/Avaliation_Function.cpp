@@ -7,12 +7,12 @@ using namespace std;
 
 
 double Sphere_function(double *x, int size){
-   // cout<<endl<<"SPHERE FUNCTION"<<endl;
+    //cout<<endl<<"SPHERE FUNCTION"<<endl;
     //for(int i=0; i<size; i++){ cout<<x[i]<<" ";}
     double fx=0.0;
     for(int i=0; i<size; i++){
         fx += x[i]*x[i];
-        //cout<<"fx: "<<fx<<endl;
+      //  cout<<"fx: "<<fx<<endl;
     }
     return fx;
 }
@@ -24,15 +24,16 @@ double Sphere_function(double *x, int size){
 //    fx = term1 + term2;
 //}
 //
-//void Rosenbrock_function(double fx, double* x, int size){
-//    fx = 0.0;
-//    double a1, a2;
-//    for(int i=0; i<size-1; i++){
-//        a1 = (x[i+1] - x[i]*x[i]);
-//        a2 = (x[i]-1);
-//        fx += 100*(a1*a1) + a2*a2;
-//    }
-//}
+double Rosenbrock_function(double* x, int size){
+    double fx = 0.0;
+    double a1, a2;
+    for(int i=0; i<size-1; i++){
+        a1 = (x[i+1] - x[i]*x[i]);
+        a2 = (x[i]-1);
+        fx += 100*(a1*a1) + a2*a2;
+    }
+    return fx;
+}
 
 double Compute_Function(double* x, int size, int num_func){
     switch(num_func){
@@ -42,9 +43,9 @@ double Compute_Function(double* x, int size, int num_func){
 //        case 2:
 //            Ackleys_function(fx, x, size);
 //        break;
-//        case 3:
-//            Rosenbrock_function(fx, x, size);
-//        break;
+        case 3:
+            return Rosenbrock_function(x, size);
+        break;
 
     }
 }

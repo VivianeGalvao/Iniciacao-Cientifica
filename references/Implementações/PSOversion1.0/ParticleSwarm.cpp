@@ -3,7 +3,7 @@
 #include"Avaliation_Function.h"
 #include"ParticleSwarm.h"
 #include<time.h>
-#define NUMFUNC 1
+#define NUMFUNC 3
 #define NUMINTERACOES 10000
 
 using namespace std;
@@ -30,16 +30,16 @@ double* ParticleSwarm(int dimension, int number_particles){
 
     //velocity parameters
     double inertia_factor = 1.0;
-    double cognition_parameter = 1.0;
-    double social_parameter = 1.0;
+    double cognition_parameter = 0.5;
+    double social_parameter = 0.5;
     double **omega1 = new double*[number_particles], **omega2=new double*[number_particles];
 
     for(i=0; i<number_particles; i++){
         omega1[i] = new double[dimension];
         omega2[i] = new double[dimension];
         for(j=0; j<dimension; j++){
-            omega1[i][j] = rand()*0.1;
-            omega2[i][j] = rand()*0.1;
+            omega1[i][j] = (rand()%10)*0.1;
+            omega2[i][j] = (rand()%10)*0.1;
         }
     }
 
@@ -49,12 +49,13 @@ double* ParticleSwarm(int dimension, int number_particles){
         population[i].velocity = new double[dimension];
         population[i].best_position = new double[dimension];
         for(j=0; j<dimension; j++){
-            population[i].position[j] = rand();
+            population[i].position[j] = (rand()%10)*0.1;
+        //    cout<<"posicao da particula "<<i<<": "<<population[i].position[j]<<" ";
             population[i].best_position[j] = population[i].position[j];
-            population[i].velocity[j] = 0.0;
+            population[i].velocity[j] = (rand()%10)*0.1;
             population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC);
             population[i].best_fitness = population[i].fitness;
-        }
+        } //cout<<endl;
     }
     //population intialized
 
@@ -68,13 +69,17 @@ double* ParticleSwarm(int dimension, int number_particles){
             for(j=0; j<dimension; j++){ position_global[j] = population[i].position[j]; }
         }
     }
+   // cout<<"Melhor fitness inicial: "<<fitness_global<<endl;
+   // cout<<"Melhor posição inicial: "<<endl;
+  //  for(int t=0; t<dimension; t++){cout<<" "<<position_global[t]; }
 
-    double stop = 0;
+    int stop = 0;
     while(stop < NUMINTERACOES){
         for(i=0; i<number_particles; i++){
             for(j=0; j<dimension; j++){
-                population[i].velocity[j] = inertia_factor*population[i].velocity[j] + cognition_parameter*omega1[i][j]*(population[i].best_position[j] -
-                                            population[i].position[j]) + social_parameter*omega2[i][j]*(position_global[j] - population[i].position[j]);
+                population[i].velocity[j] = (inertia_factor*population[i].velocity[j]) + (cognition_parameter*omega1[i][j]*(population[i].best_position[j] -
+                                            population[i].position[j])) + (social_parameter*omega2[i][j]*(position_global[j] - population[i].position[j]));
+ //               cout<<"velocidade "<<population[i].velocity[j]<<endl;
                 population[i].position[j] = population[i].position[j] + population[i].velocity[j];
             }
 
@@ -97,13 +102,11 @@ double* ParticleSwarm(int dimension, int number_particles){
     }
 
     for(i=0; i<number_particles; i++){
-        for(j=0; j<dimension; j++){
-            delete []population[i].position;
-            delete []population[i].best_position;
-            delete []population[i].velocity;
-            delete []omega1[j];
-            delete []omega2[j];
-        }
+        delete []population[i].position;
+        delete []population[i].best_position;
+        delete []population[i].velocity;
+        delete []omega1[i];
+        delete []omega2[i];
     }
     delete []population;
     delete []omega1;
