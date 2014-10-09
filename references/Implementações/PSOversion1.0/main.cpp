@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Avaliation_Function.h"
 #include "ParticleSwarm.h"
-#define SIZEPOPULATION 2000
+#define SIZEPOPULATION 100
 #define SIZEPROBLEM 10
 
 using namespace std;

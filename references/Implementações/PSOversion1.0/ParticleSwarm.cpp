@@ -23,7 +23,7 @@ double* ParticleSwarm(int dimension, int number_particles){
     cout<<"Dimensao do Problema: "<<dimension<<"; Numero de Particulas: "<<number_particles<<endl;
     cout<<"Criterio de Parada: "<<NUMINTERACOES<<" avaliações de funçoes"<<endl;
     cout<<"----------------------------------------------------------------------------"<<endl;
-    srand(0);
+    srand(0); //passar a semente como parametro
 
     Particle *population = new Particle[number_particles];
     int i, j;
@@ -41,7 +41,7 @@ double* ParticleSwarm(int dimension, int number_particles){
             omega1[i][j] = (rand()%10)*0.1;
             omega2[i][j] = (rand()%10)*0.1;
         }
-    }
+    }   //sortear a cada analise da populaçao
 
     //initialize a population of particles with random positions and velocities
     for(i = 0; i<number_particles; i++){
@@ -49,7 +49,7 @@ double* ParticleSwarm(int dimension, int number_particles){
         population[i].velocity = new double[dimension];
         population[i].best_position = new double[dimension];
         for(j=0; j<dimension; j++){
-            population[i].position[j] = (rand()%10)*0.1;
+            population[i].position[j] = (rand()%10)*0.1;    //atraves das bounds constraints
         //    cout<<"posicao da particula "<<i<<": "<<population[i].position[j]<<" ";
             population[i].best_position[j] = population[i].position[j];
             population[i].velocity[j] = (rand()%10)*0.1;
@@ -75,6 +75,7 @@ double* ParticleSwarm(int dimension, int number_particles){
 
     int stop = 0;
     while(stop < NUMINTERACOES){
+        //gerar omegas
         for(i=0; i<number_particles; i++){
             for(j=0; j<dimension; j++){
                 population[i].velocity[j] = (inertia_factor*population[i].velocity[j]) + (cognition_parameter*omega1[i][j]*(population[i].best_position[j] -
