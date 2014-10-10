@@ -16,17 +16,23 @@ typedef struct particle{
     double best_fitness;
 }Particle;
 
-double* ParticleSwarm(int dimension, int number_particles){
+double* ParticleSwarm(int dimension, int number_particles, int seed){
     cout<<"---------------------------------------------------------------------------"<<endl;
     cout<<"PARTICLE SWARM"<<endl;
     cout<<"DADOS DO PROBLEMA:"<<endl;
     cout<<"Dimensao do Problema: "<<dimension<<"; Numero de Particulas: "<<number_particles<<endl;
     cout<<"Criterio de Parada: "<<NUMINTERACOES<<" avaliações de funçoes"<<endl;
     cout<<"----------------------------------------------------------------------------"<<endl;
-    srand(0); //passar a semente como parametro
+    srand(seed);
 
     Particle *population = new Particle[number_particles];
     int i, j;
+    double *lb, *ub;
+    lb = Lower_Bounds(NUMFUNC, dimension);
+    ub = Upper_Bounds(NUMFUNC, dimension);
+    if(lb != NULL && ub != NULL){ cout<<"Bounds Constraints Defined"<<endl; }
+    else{cout<<"Problem without bounds constraints"<<endl<<"Problem Number: "<<NUMFUNC<<endl;}
+    cout<<endl;
 
     //velocity parameters
     double inertia_factor = 1.0;
@@ -34,27 +40,25 @@ double* ParticleSwarm(int dimension, int number_particles){
     double social_parameter = 0.5;
     double **omega1 = new double*[number_particles], **omega2=new double*[number_particles];
 
-    for(i=0; i<number_particles; i++){
-        omega1[i] = new double[dimension];
-        omega2[i] = new double[dimension];
-        for(j=0; j<dimension; j++){
-            omega1[i][j] = (rand()%10)*0.1;
-            omega2[i][j] = (rand()%10)*0.1;
-        }
-    }   //sortear a cada analise da populaçao
 
     //initialize a population of particles with random positions and velocities
     for(i = 0; i<number_particles; i++){
         population[i].position = new double[dimension];
         population[i].velocity = new double[dimension];
         population[i].best_position = new double[dimension];
+        //velocity parameters
+        omega1[i] = new double[dimension];
+        omega2[i] = new double[dimension];
         for(j=0; j<dimension; j++){
-            population[i].position[j] = (rand()%10)*0.1;    //atraves das bounds constraints
-        //    cout<<"posicao da particula "<<i<<": "<<population[i].position[j]<<" ";
+            if(lb != NULL && ub != NULL){ population[i].position[j] = (rand()%(int)lb[j])+ub[j]; }
+            else{ population[i].position[j] = (rand()%10)*0.1; }    //atraves das bounds constraints
             population[i].best_position[j] = population[i].position[j];
             population[i].velocity[j] = (rand()%10)*0.1;
             population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC);
             population[i].best_fitness = population[i].fitness;
+            //velocity paramenters
+            omega1[i][j] = (rand()%10)*0.1;
+            omega2[i][j] = (rand()%10)*0.1;
         } //cout<<endl;
     }
     //population intialized
@@ -70,32 +74,41 @@ double* ParticleSwarm(int dimension, int number_particles){
         }
     }
    // cout<<"Melhor fitness inicial: "<<fitness_global<<endl;
-   // cout<<"Melhor posição inicial: "<<endl;
-  //  for(int t=0; t<dimension; t++){cout<<" "<<position_global[t]; }
+    cout<<"Melhor posição inicial: "<<endl;
+    for(int t=0; t<dimension; t++){cout<<" "<<position_global[t]; }
+    cout<<endl;
 
     int stop = 0;
     while(stop < NUMINTERACOES){
-        //gerar omegas
+
+        for(i=0; i<number_particles; i++){
+            for(j=0; j<dimension; j++){
+                omega1[i][j] = (rand()%10)*0.1;
+                omega2[i][j] = (rand()%10)*0.1;
+            }
+        }
         for(i=0; i<number_particles; i++){
             for(j=0; j<dimension; j++){
                 population[i].velocity[j] = (inertia_factor*population[i].velocity[j]) + (cognition_parameter*omega1[i][j]*(population[i].best_position[j] -
                                             population[i].position[j])) + (social_parameter*omega2[i][j]*(position_global[j] - population[i].position[j]));
- //               cout<<"velocidade "<<population[i].velocity[j]<<endl;
-                population[i].position[j] = population[i].position[j] + population[i].velocity[j];
-            }
 
+                population[i].position[j] = population[i].position[j] + population[i].velocity[j];
+                if(lb != NULL && ub != NULL){
+                    if(population[i].position[j] < lb[j]){ population[i].position[j] = lb[j] - population[i].velocity[j]; }
+                    else if(population[i].position[j] > ub[j]){ population[i].position[j] = ub[j] - population[i].velocity[j]; }
+                }
+            }
             population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC);
             if(population[i].fitness < population[i].best_fitness){
                 population[i].best_fitness = population[i].fitness;
                 for(j=0; j<dimension; j++){
                     population[i].best_position[j] = population[i].position[j];
                 }
-            }
-
-            if(population[i].fitness < fitness_global){
-                fitness_global = population[i].fitness;
-                for(j=0; j<dimension; j++){
-                    position_global[j] = population[i].position[j];
+                if(population[i].fitness < fitness_global){
+                    fitness_global = population[i].fitness;
+                    for(j=0; j<dimension; j++){
+                        position_global[j] = population[i].position[j];
+                    }
                 }
             }
             stop++;
