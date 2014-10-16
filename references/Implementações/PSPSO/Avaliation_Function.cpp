@@ -19,12 +19,12 @@ double Sphere_function(double *x, int size){
 
 double Ackleys_function(double *x, int size){
     if(size == 2){
-    cout<<endl<<"ACKLEYS FUNCTION"<<endl<<"VERTOR X: ";
-    for(int i=0; i<size; i++){ cout<<x[i]<<" ";}
+   // cout<<endl<<"ACKLEYS FUNCTION"<<endl<<"VERTOR X: ";
+    //for(int i=0; i<size; i++){ cout<<x[i]<<" ";}
         double square_root = -0.2*(sqrt(0.5*(x[0]*x[0] + x[1]*x[1])));
         double term1 = -20*exp(square_root);
         double term2 = -exp(0.5*(cos(2*PI*x[0]) + cos(2*PI*x[1]))) + 20 + EULER;
-         cout<<"fx: "<<term1+term2<<endl;
+       // cout<<"fx: "<<term1+term2<<endl;
         return term1 + term2;
     }
     else return 10000;

@@ -35,6 +35,7 @@
 		<Unit filename="Avaliation_Function.cpp" />
 		<Unit filename="Avaliation_Function.h" />
 		<Unit filename="PsPso.cpp" />
+		<Unit filename="PsPso.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
