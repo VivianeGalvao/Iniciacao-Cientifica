@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Avaliation_Function.cpp" open="1" top="0" tabpos="3">
+	<File name="Avaliation_Function.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="1852" topLine="61" />
 	</File>
-	<File name="Avaliation_Function.h" open="1" top="0" tabpos="5">
+	<File name="Avaliation_Function.h" open="0" top="0" tabpos="5">
 		<Cursor position="293" topLine="0" />
 	</File>
-	<File name="ParticleSwarm.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="5357" topLine="0" />
+	<File name="ParticleSwarm.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="850" topLine="0" />
 	</File>
-	<File name="ParticleSwarm.h" open="1" top="0" tabpos="4">
+	<File name="ParticleSwarm.h" open="0" top="0" tabpos="4">
 		<Cursor position="135" topLine="0" />
 	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="237" topLine="0" />
+	<File name="main.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="128" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

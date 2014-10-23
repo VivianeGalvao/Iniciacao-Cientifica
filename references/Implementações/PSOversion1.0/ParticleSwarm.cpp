@@ -50,7 +50,7 @@ double* ParticleSwarm(int dimension, int number_particles, int seed){
         omega1[i] = new double[dimension];
         omega2[i] = new double[dimension];
         for(j=0; j<dimension; j++){
-            if(lb != NULL && ub != NULL){ population[i].position[j] = (rand()%(int)lb[j])+ub[j]; }
+            if(lb != NULL && ub != NULL){ population[i].position[j] = (rand()%(int)lb[j])*0.1+ub[j]*0.1; }
             else{ population[i].position[j] = (rand()%10)*0.1; }    //atraves das bounds constraints
             population[i].best_position[j] = population[i].position[j];
             population[i].velocity[j] = (rand()%10)*0.1;
