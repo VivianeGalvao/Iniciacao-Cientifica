@@ -114,7 +114,7 @@ double f11(double *x, int size){
     double sum=0, prod=1;
     for(int i = 0; i<size; i++){
         sum += x[i]*x[i];
-        prod = prod*cos(x[i]/sqrt(i));
+        prod = prod*cos(x[i]/sqrt(i+1));
     }
     return sum/4000 - prod +1;
 }

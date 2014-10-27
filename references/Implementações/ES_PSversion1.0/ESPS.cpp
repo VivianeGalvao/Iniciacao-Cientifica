@@ -7,8 +7,8 @@
 #define STOP 1;
 using namespace std;
 
-bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int size, int number_function){
-    cout<<endl<<"----------------"<<endl<<"EXPLORATORY MOVES"<<endl;
+bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int size, int number_function, double* lb, double* ub){
+
 
     bool exit = false;
     int i;
@@ -20,30 +20,48 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
     for(i = 0; i<size; i++){x_perturbation[i] = x_iteration[i];}
 
     for(i=0; i<size; i++){
-        cout<<"Iteração: "<<i+1<<endl;
-        cout<<"Padrão: "<<"| ";
-        for(int t=0; t<size; t++){cout<<pattern[t]<<"| ";}
-        cout<<endl;
         /* xk+1 = xk + delta*e1 */
         x_perturbation[i] = x_iteration[i] + delta*pattern[i];
-        fx_perturbation = Compute_Function(x_perturbation, size, number_function);
-        /* if f(xk+1) > f(xk) => unsuccessful iteration */
-        /* try xk+1 = xk - delta*e1 */
-        if(fx < fx_perturbation){
-            x_perturbation[i] = x_iteration[i];
-            x_perturbation[i] = x_iteration[i] - delta*pattern[i];
-            fx_perturbation = Compute_Function(x_perturbation, size, number_function);
+
+        if(lb != NULL && ub != NULL){
+            if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){
+                x_perturbation[i] = x_iteration[i];
+                x_perturbation[i] = x_iteration[i] - delta*pattern[i];
+                if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = x_iteration[i]; }
+                else{
+                    fx_perturbation = Compute_Function(x_perturbation, size, number_function);
+                    if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
+                    else{ x_perturbation[i] = x_iteration[i]; }
+                }
+            } else{
+                 fx_perturbation = Compute_Function(x_perturbation, size, number_function);
+                /* if f(xk+1) > f(xk) => unsuccessful iteration */
+                /* try xk+1 = xk - delta*e1 */
+                if(fx < fx_perturbation){
+//                    x_perturbation[i] = x_iteration[i];
+                    x_perturbation[i] = x_iteration[i] - delta*pattern[i];
+                    fx_perturbation = Compute_Function(x_perturbation, size, number_function);
+                }
+                /* if f(xk+1) < f(xk) => successful iteration */
+                if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
+                else{ x_perturbation[i] = x_iteration[i]; }
+            }
         }
-        /* if f(xk+1) < f(xk) => successful iteration */
-        if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true; cout<<"sucesso"<<endl;}
-        else{ x_perturbation[i] = x_iteration[i]; }
 
+        else{
+            fx_perturbation = Compute_Function(x_perturbation, size, number_function);
 
-        cout<<endl<<"-----------------------"<<endl;
-           cout<<"f(x): "<<fx<<endl;
-           cout<<"Minimizador: ";
-           for(int t=0; t<size; t++){ cout<<x_iteration[t]<<" ";}
-           cout<<endl<<"-------------------------"<<endl;
+            /* if f(xk+1) > f(xk) => unsuccessful iteration */
+            /* try xk+1 = xk - delta*e1 */
+            if(fx < fx_perturbation){
+                x_perturbation[i] = x_iteration[i];
+                x_perturbation[i] = x_iteration[i] - delta*pattern[i];
+                fx_perturbation = Compute_Function(x_perturbation, size, number_function);
+            }
+            /* if f(xk+1) < f(xk) => successful iteration */
+            if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
+            else{ x_perturbation[i] = x_iteration[i]; }
+        }
     }
 
     delete []x_perturbation;
@@ -56,36 +74,44 @@ double Normal_distribuition(double mean, double desvio_padrao){
     return distribution(generator);
 }
 
-double* Evolutionary_Strategy(int seed, double expected_mean, int dimension, int number_function, double delta){
+double* Evolutionary_Strategy(int seed, double expected_mean, int dimension, int number_function, double delta, double *x){
 
     if(delta > 0){
         srand(seed);
-        double **pattern = new double*[2*dimension];
-        int t = 0, i, stop = 0;
+        double **pattern = new double*[2*dimension+1];
+        int i;
         bool success = false;
-        double *x = new double[dimension], desvio_padrao = expected_mean/sqrt(dimension);
+        double desvio_padrao = expected_mean/sqrt(dimension);
         int *successful = new int[dimension*10];
 
         //matriz de padrões
-        for(i = 0; i<2*dimension; i++){
+        for(i = 0; i<2*dimension+1; i++){
+             pattern[i] = new double[dimension];
             for(int j=0; j<dimension; j++){
-                pattern[i] = new double[dimension];
-                if(i<dimension){
-                    if(i==j){pattern[i][j] = 1.0;}
+                if(i<dimension+1){
+                    if(j==i-1){pattern[i][j] = 1.0;}
                     else{ pattern[i][j] = 0.0; }
                 }
                 else{
-                    if(i - j == dimension){ pattern[i][j] = -1.0; }
+                    if(i-j == dimension + 1){ pattern[i][j] = -1.0; }
                     else{ pattern[i][j] = 0.0; }
                 }
             }
         }
 
+       double *lb = new double[dimension], *ub = new double[dimension];
+       Lower_Bounds(number_function, dimension, lb);
+       Upper_Bounds(number_function, dimension, ub);
+
         for(i=0; i<dimension*10; i++){ successful[i] = 0; }
-        //população inicial
+        //indivíduo inicial
         for(i=0; i<dimension; i++){ x[i] = (rand()%10)*0.1; }
 
-        while(stop < 20*dimension){
+        int es = 0, ps  = 0, criteria = Number_Evaluations(number_function);
+        int t=0, stop=0;
+
+        while(stop < criteria){
+            success=false;
             //regra de 1/5 de sucessos
             if(t%dimension == 0 && t>=dimension*10){
                 double sum=0, ps;
@@ -96,23 +122,47 @@ double* Evolutionary_Strategy(int seed, double expected_mean, int dimension, int
             }
             double y[dimension], normalDistribuition = Normal_distribuition(0, desvio_padrao);
             for(i=0; i<dimension; i++){ y[i] = x[i] + normalDistribuition; }
+            if(lb != NULL && ub != NULL){
+                for(i = 0; i<dimension; i++){
+                    if(y[i] < lb[i]){ if(t%dimension==0){y[i] = lb[i];} }
+                    if(y[i] > ub[i]){ if(t%dimension==0){y[i] = ub[i];} }
+                }
+            }
             if(Compute_Function(y, dimension, number_function) < Compute_Function(x, dimension, number_function)){
                 for(i=0; i<dimension; i++){ x[i] = y[i]; }
                 successful[(t+1)%(dimension*10)] = 1;
                 success = true;
             }
-            else{ successful[(t+1)%(dimension*10)] = 0; }
+            else{ successful[(t+1)%(dimension*10)] = 0;}
 
             if(!success){
-                for(i=0; i<2*dimension; i++){
-                        if(Exploratory_Moves(pattern[i],delta, x, dimension, number_function)){ delta = 2*delta;}
-                        else{ delta = (0.5)*delta; }
+                es++;
+                bool exit = false;
+                for(i=0; i<2*dimension+1; i++){
+                        if(Exploratory_Moves(pattern[i],delta, x, dimension, number_function, lb, ub)){ delta = 1.5*delta; exit = false;}
+                        else{ delta = (0.5)*delta; exit = true; }
                 }
+                if(exit)ps++;
             }
             t = t+1;
             stop++;
         }
+        cout<<"NUMERO DE ITERACOES ----------------- "<<stop<<endl;
+        cout<<"ITERACOES SEM SUCESSO ES ------------ "<<es<<endl;
+        cout<<"ITERACOES SEM SUCESSO PS ------------ "<<ps<<endl;
+        cout<<"ITERACOES DE SUCESSO ---------------- "<<(stop - es) + (es - ps)<<endl;
+        cout<<"NUMERO DA FUNÇAO -------------------- "<<number_function<<endl;
+        cout<<endl;
+//        cout<<"FUNCAO OBJETIVO --------------------- "<<Compute_Function(x,dimension, number_function)<<endl;
+//        cout<<"DELTA ------------------------------- "<<delta<<endl;
+
         delete []successful;
+        for(i=0; i<2*dimension+1; i++){ delete []pattern[i]; }
+        delete []pattern;
+        if(lb != NULL && ub != NULL){
+            delete []lb;
+            delete []ub;
+        }
         return x;
     }
     return NULL;

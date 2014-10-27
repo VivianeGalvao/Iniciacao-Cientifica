@@ -1,9 +1,24 @@
 #ifndef AVALIATION_FUNCTION_H_INCLUDED
 #define AVALIATION_FUNCTION_H_INCLUDED
 
+
 double Compute_Function(double* x, int size, int num_func);
+void Lower_Bounds(int num_fun, int size, double *lb);
+void Upper_Bounds(int num_fun, int size, double *ub);
+int Number_Evaluations(int number_function);
 double Sphere_function(double* x, int size);
-double* Lower_Bounds(int num_fun, int size);
-double* Upper_Bounds(int num_fun, int size);
+double f02(double* x, int size);
+double f03(double* x, int size);
+double f04(double* x, int size);
+double f05(double* x, int size);
+double f06(double* x, int size);
+double f07(double* x, int size);
+double f08(double* x, int size);
+double f09(double* x, int size);
+double f10(double* x, int size);
+double f11(double* x, int size);
+
+
+
 
 #endif // AVALIATION_FUNCTION_H_INCLUDED
