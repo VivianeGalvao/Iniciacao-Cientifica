@@ -1,12 +1,14 @@
 #include<iostream>
+#include<fstream>
 #include "Avaliation_Function.h"
 #include<math.h>
+#include<climits>
 #include<time.h>
 #include<stdlib.h>
 #define NUMPARTICLES 200
 #define CRITERION_STOP  0.00001
-#define NORMA_VELOCIDADE 0.00001
-#define NUMFUNC 3
+#define NORMA_VELOCIDADE 0.1
+#define INF 3.40282347E+38F
 
 using namespace std;
 
@@ -24,10 +26,11 @@ float Size_Velocity(double* velocity, int dimension){
     return sqrt(size);
 }
 
-bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int size, double *lb, double *ub){
+bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int size, double *lb, double *ub, int NUMFUNC){
    // cout<<endl<<"----------------"<<endl<<"EXPLORATORY MOVES"<<endl;
    //cout<<endl<<"DELTA ---------- "<<delta<<endl<<endl;
 
+   // cout<<"DELTA -------------------- "<<delta<<endl;
     bool exit = false;
     int i;
     double *x_perturbation = new double[size];
@@ -46,7 +49,7 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
             if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){
                 x_perturbation[i] = x_iteration[i];
                 x_perturbation[i] = x_iteration[i] - delta*pattern[i];
-                if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = x_iteration[i]; cout<<"RESTRIÇÕES ATINGIDAS"<<endl; }
+                if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = x_iteration[i]; }
                 else{
                     fx_perturbation = Compute_Function(x_perturbation, size, NUMFUNC);
                     if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
@@ -73,7 +76,7 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
             /* if f(xk+1) > f(xk) => unsuccessful iteration */
             /* try xk+1 = xk - delta*e1 */
             if(fx < fx_perturbation){
-//                x_perturbation[i] = x_iteration[i];
+                x_perturbation[i] = x_iteration[i];
                 x_perturbation[i] = x_iteration[i] - delta*pattern[i];
                 fx_perturbation = Compute_Function(x_perturbation, size, NUMFUNC);
             }
@@ -87,29 +90,49 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
     return exit;
 }
 
-double* PSwarm(int dimension, int seed, double delta_initial, double** pattern){
+void PSwarm(int dimension, int seed, double delta_initial, int number_function, double* position_global){
     if(delta_initial > 0){
 
-        cout<<"---------------------------------------------------------------------------"<<endl;
-        cout<<"PARTICLE SWARM"<<endl;
-        cout<<"DADOS DO PROBLEMA:"<<endl;
-        cout<<"Dimensao do Problema: "<<dimension<<"; Numero de Particulas: "<<NUMPARTICLES<<endl;
-       // cout<<"Criterio de Parada: "<<NUMINTERACOES<<" avaliações de funçoes"<<endl;
-        cout<<"----------------------------------------------------------------------------"<<endl;
+        double **pattern = new double*[dimension*2+1];
+        for(int i=0; i<dimension*2+1; i++){ pattern[i] = new double[dimension];}
+        /** Gerando a matriz de direções padrão*/ /**MAXIMAL POSITIVE BASE*/
+        for(int j=0; j<dimension*2+1; j++){
+            for(int i=0; i<dimension; i++){
+               if(j < dimension+1){
+                if( i == j-1){ pattern[j][i] = 1.0;}
+                else { pattern[j][i] = 0.0; }
+               }
+               else{
+                    if(j - i == dimension+1){ pattern[j][i] = -1.0;}
+                    else { pattern[j][i] = 0.0; }
+               }
+            }
+          }
+        cout<<"---------------------------------------------"<<endl;
 
         int number_particles = NUMPARTICLES;
         int ps=0, pso=0;
         double delta = delta_initial;
-        int i, j;
+
+        int i, j, NUMFUNC = number_function;
         srand(seed);
 
         Particle *population = new Particle[NUMPARTICLES];
-        double *lb, *ub;
-        lb = Lower_Bounds(NUMFUNC, dimension);
-        ub = Upper_Bounds(NUMFUNC, dimension);
-        if(lb != NULL && ub != NULL){ cout<<"Bounds Constraints Defined"<<endl; }
-        else{cout<<"Problem without bounds constraints"<<endl<<"Problem Number: "<<NUMFUNC<<endl;}
-        cout<<endl;
+        double *lb = new double[dimension], *ub = new double[dimension] ;
+        Lower_Bounds(NUMFUNC, dimension, lb);
+        Upper_Bounds(NUMFUNC, dimension, ub);
+
+        if(delta >= INF){
+            double mindelta = INF;
+            if(lb && ub){
+                for(i = 0; i<dimension; i++){
+                    if(mindelta > (ub[i] - lb[i])){ mindelta = ub[i] - lb[i]; }
+                }
+            }
+            if(mindelta >=INF || mindelta <= CRITERION_STOP){ delta = 2*sqrt(sqrt(CRITERION_STOP)); }
+            else{ delta = mindelta;}
+        }
+
 
          //velocity parameters
         double inertia_factor = 1.0;
@@ -129,21 +152,19 @@ double* PSwarm(int dimension, int seed, double delta_initial, double** pattern){
             for(j=0; j<dimension; j++){
                 if(lb != NULL && ub != NULL){ population[i].position[j] = (rand()%(int)lb[j])*0.1+ub[j]*0.1; }
                 else{ population[i].position[j] = (rand()%10)*0.1; }    //atraves das bounds constraints
-              //  cout<<"i -- "<<population[i].position[j]<<" ";
                 population[i].best_position[j] = population[i].position[j];
-                population[i].velocity[j] = (rand()%10)*0.1;
-                population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC);
-                population[i].best_fitness = population[i].fitness;
+                population[i].velocity[j] = ((rand()%10)*0.1)*pow(-1,rand()%10);
                 //velocity paramenters
                 omega1[i][j] = (rand()%10)*0.1;
                 omega2[i][j] = (rand()%10)*0.1;
-            }// cout<<endl;
+            }
+            population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC);
+            population[i].best_fitness = population[i].fitness;
         }
         //population intialized
 
-        //find the best fitness
+
         double fitness_global = population[0].fitness;
-        double *position_global = new double[dimension];
         for(j=0; j<dimension; j++){ position_global[j] = population[0].position[j]; }
         for(i=1; i<number_particles; i++){
             if(population[i].fitness < fitness_global){
@@ -151,12 +172,11 @@ double* PSwarm(int dimension, int seed, double delta_initial, double** pattern){
                 for(j=0; j<dimension; j++){ position_global[j] = population[i].position[j]; }
             }
         }
-        cout<<"Melhor posição inicial: "<<endl;
-        for(int t=0; t<dimension; t++){cout<<" "<<position_global[t]; }
-        cout<<endl;
 
-        while(delta > CRITERION_STOP){
-            bool successful = false, exit = false, test=false;
+        int iteracoes = 0, num_max_it = Number_Evaluations(number_function);
+
+         while(iteracoes < num_max_it){
+            bool successful = false, test=false;
             for(i=0; i<number_particles; i++){
                 for(j=0; j<dimension; j++){
                     omega1[i][j] = (rand()%10)*0.1;
@@ -176,8 +196,6 @@ double* PSwarm(int dimension, int seed, double delta_initial, double** pattern){
                     }
                 }
 
-                if(Size_Velocity(population[i].velocity, dimension) < NORMA_VELOCIDADE){ exit = true; break;}
-
                 population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC);
                 if(population[i].fitness < population[i].best_fitness){
                     population[i].best_fitness = population[i].fitness;
@@ -189,22 +207,20 @@ double* PSwarm(int dimension, int seed, double delta_initial, double** pattern){
                         for(j=0; j<dimension; j++){
                             position_global[j] = population[i].position[j];
                         }
-                        delta = delta*2;
                         successful = true;
                     }
                 }
             }
 
-            if(exit){break;}
-
             if(!successful){
                 pso++;
-                for(i=0; i<2*dimension; i++){
-                    if(Exploratory_Moves(pattern[i],delta,position_global,dimension, lb, ub)){ delta = 2*delta;}
+                for(i=0; i<2*dimension+1; i++){
+                    if(Exploratory_Moves(pattern[i],delta,position_global,dimension, lb, ub, NUMFUNC)){ delta = 1.5*delta; test = false;}
                     else{ delta = (0.5)*delta;  test=true; }
                 }
                 if(test){ ps++; }
             }
+            iteracoes++;
         }
 
         for(i=0; i<number_particles; i++){
@@ -217,12 +233,21 @@ double* PSwarm(int dimension, int seed, double delta_initial, double** pattern){
         delete []population;
         delete []omega1;
         delete []omega2;
+        if(lb != NULL && ub != NULL){
+            delete []lb;
+            delete []ub;
+        }
+
+        for(int i=0; i<dimension*2+1; i++){ delete []pattern[i]; }
+        delete []pattern;
 
         cout<<endl;
+        cout<<"ITERACOES ---------------------- "<<iteracoes<<endl;
+        cout<<"ITERACOES DE SUCESSO ----------- "<<(iteracoes - pso) + (pso - ps)<<endl;
         cout<<"ITERAÇÕES SEM SUCESSO - PSO ---- "<<pso<<endl;
         cout<<"ITERAÇÕES SEM SUCESSO - PS ----- "<<ps<<endl;
-        cout<<"FUNCAO OBJETIVO ---------------- "<<Compute_Function(position_global, dimension, NUMFUNC)<<endl;
-        return position_global;
+        cout<<"NUMERO DA FUNCAO --------------- "<<number_function<<endl;
+        cout<<endl;
     }
-    return NULL;
+
 }

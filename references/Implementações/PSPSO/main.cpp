@@ -1,46 +1,42 @@
 #include <iostream>
+#include <fstream>
+#include<climits>
 #include "Avaliation_Function.h"
 #include "PsPso.h"
-#define DIMENSION 2
-#define DELTA 10
-#define SEED 20
+#define DIMENSION 30
+#define FLT_MAX 3.40282347E+38F
+//#define SEED 2
+#define N 11
 
 using namespace std;
 
 int main()
 {
-    double **pattern = new double*[DIMENSION*2];
-    for(int i=0; i<DIMENSION*2; i++){ pattern[i] = new double[DIMENSION];}
-    /** Gerando a matriz de direções padrão*/ /**MAXIMAL POSITIVE BASE*/
-    for(int j=0; j<DIMENSION*2; j++){
-        for(int i=0; i<DIMENSION; i++){
-           if(j < DIMENSION){
-            if( i == j){ pattern[j][i] = 1.0;}
-            else { pattern[j][i] = 0.0; }
-           }
-           else{
-                if(j - i == DIMENSION){ pattern[j][i] = -1.0;}
-                else { pattern[j][i] = 0.0; }
-           }
+    ofstream myfile;
+    myfile.open("results.csv");
+
+    myfile<<"Dimensão;"<<DIMENSION<<"\n";
+    myfile<<"Delta Inicial;"<<"Infinito"<<"\n";
+    myfile<<"\n";
+    myfile<<"Num Function; Seed; Valor da Função Objetivo\n";
+ //   cout<<"---------------------------------------------"<<endl;
+
+    double *x = new double[DIMENSION];
+    double DELTA = FLT_MAX;
+    //double DELTA = 0.01;
+    for(int i=1; i<N+1; i++){
+        for(int j=1; j<4; j++){
+            myfile<<i<<";";
+            myfile<<j<<";";
+            PSwarm(DIMENSION, j, DELTA,i, x);
+            myfile<<Compute_Function(x, DIMENSION, i)<<"\n";
+            //cout<<"SEMENTE ------------- "<<j<<"    MINIMIZADOR: "<<endl;
+            //for(int i=0; i<DIMENSION && x!=NULL; i++){ cout<<"x"<<i+1<<": "<<x[i]<<endl;}
+
         }
-      }
-    cout<<"---------------------------------------------"<<endl;
-    cout<<"MATRIX OF PATTERNS"<<endl;
-    for(int i=0; i<DIMENSION*2; i++){
-        cout<<i<<"| ";
-        for(int j=0; j<DIMENSION; j++){
-            cout<<pattern[i][j]<<"  ";
-        }
-        cout<<endl;
     }
-    cout<<"---------------------------------------------"<<endl;
-    double *x = PSwarm(DIMENSION, SEED, DELTA, pattern );
 
-    cout<<"MINIMIZADOR: "<<endl;
-    for(int i=0; i<DIMENSION && x!=NULL; i++){ cout<<"x"<<i+1<<": "<<x[i]<<endl;}
-
-
-    for(int i=0; i<DIMENSION*2; i++){ delete []pattern[i]; }
-    delete []pattern;
+    myfile.close();
+    delete []x;
     return 0;
 }
