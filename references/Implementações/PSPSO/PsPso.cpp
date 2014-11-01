@@ -5,12 +5,14 @@
 #include<climits>
 #include<time.h>
 #include<stdlib.h>
-#define NUMPARTICLES 200
+#define NUMPARTICLES 50
 #define CRITERION_STOP  0.00001
 #define NORMA_VELOCIDADE 0.1
 #define INF 3.40282347E+38F
 
 using namespace std;
+
+int evaluations;
 
 typedef struct particle{
     double *position;
@@ -92,7 +94,7 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
 
 void PSwarm(int dimension, int seed, double delta_initial, int number_function, double* position_global){
     if(delta_initial > 0){
-
+        evaluations = 0;
         double **pattern = new double*[dimension*2+1];
         for(int i=0; i<dimension*2+1; i++){ pattern[i] = new double[dimension];}
         /** Gerando a matriz de direções padrão*/ /**MAXIMAL POSITIVE BASE*/
@@ -158,7 +160,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                 omega1[i][j] = (rand()%10)*0.1;
                 omega2[i][j] = (rand()%10)*0.1;
             }
-            population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC);
+            population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC);evaluations++;
             population[i].best_fitness = population[i].fitness;
         }
         //population intialized
@@ -196,7 +198,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                     }
                 }
 
-                population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC);
+                population[i].fitness = Compute_Function(population[i].position, dimension, NUMFUNC); evaluations++;
                 if(population[i].fitness < population[i].best_fitness){
                     population[i].best_fitness = population[i].fitness;
                     for(j=0; j<dimension; j++){
