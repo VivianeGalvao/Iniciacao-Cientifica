@@ -139,9 +139,9 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
        for(i=0; i<MI; i++){
             progenitor[i].position = new double[dimension];
             if(lb != NULL && ub != NULL){
-                for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = (ub[i] - lb[i])*(rand()%100*0.01) + lb[i]; }
+                for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = (ub[i] - lb[i])*(rand()%10*0.01) + lb[i]*0.01; }
             }
-            else{ for(int j=0; j<dimension; j++){ progenitor[i].position[j] = rand()%100*0.01; } }
+            else{ for(int j=0; j<dimension; j++){ progenitor[i].position[j] = rand()%10*0.01; } }
             progenitor[i]->objective_function = Compute_Function(progenitor[i]->position, dimension, number_function);
             stop++;
             progenitor[i]->standard_deviation = expected_mean/sqrt(dimension);
@@ -158,8 +158,8 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
                     for(int k=0; k<dimension; k++){
                         progeny[t]->position[k] = progenitor[i]->position[k] + Normal_distribution(0, progenitor[i]->standard_deviation);
                         if(lb != NULL && ub != NULL){
-                            if(progeny[t]->position[k] < lb[i]){ progeny[t]->position[k] = lb[i]; }
-                            if(progeny[t]->position[k] > ub[i]){ progeny[t]->position[k] = ub[i]; }
+                            if(progeny[t]->position[k] < lb[i]){ progeny[t]->position[k] = progenitor[i]->position[k]; }
+                            if(progeny[t]->position[k] > ub[i]){ progeny[t]->position[k] = progenitor[i]->position[k]; }
                         }
                     }
                     progeny[t]->standard_deviation = progenitor[i]->standard_deviation;
