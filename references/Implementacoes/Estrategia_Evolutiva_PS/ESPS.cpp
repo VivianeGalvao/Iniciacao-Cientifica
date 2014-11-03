@@ -8,13 +8,14 @@
 using namespace std;
 
 int stop;
+double best_function;
 
-bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, double function, int size, int number_function, double* lb, double* ub){
+bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int size, int number_function, double* lb, double* ub){
 
     bool exit = false;
     int i;
     double *x_perturbation = new double[size];
-    double fx=function, fx_perturbation=0.0;
+    double fx=best_function, fx_perturbation=0.0;
 
 
     for(i = 0; i<size; i++){x_perturbation[i] = x_iteration[i];}
@@ -25,7 +26,6 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, doubl
 
         if(lb != NULL && ub != NULL){
             if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){
-                x_perturbation[i] = x_iteration[i];
                 x_perturbation[i] = x_iteration[i] - delta*pattern[i];
                 if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = x_iteration[i]; }
                 else{
@@ -36,7 +36,6 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, doubl
             } else{
                 fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
                 if(fx < fx_perturbation){
-                    x_perturbation[i] = x_iteration[i];
                     x_perturbation[i] = x_iteration[i] - delta*pattern[i];
                 }
                 if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = x_iteration[i]; }
@@ -76,7 +75,7 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
         double **pattern = new double*[2*dimension];
         int i;
         bool success = false;
-        double desvio_padrao = expected_mean/sqrt(dimension),objective_function;
+        double desvio_padrao = expected_mean/sqrt(dimension);
         int *successful = new int[dimension*10];
 
         //matriz de padrões
@@ -108,7 +107,7 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
             //cout<<endl;
         }
         else{ for(i=0; i<dimension; i++){ x[i] = (rand()%10)*0.01; } }
-        objective_function = Compute_Function(x, dimension, number_function);
+        best_function = Compute_Function(x, dimension, number_function);
         stop++;
 
         int es = 0, ps  = 0, criteria = Number_Evaluations(number_function);
@@ -133,8 +132,8 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
                 }
             }
             double aux = Compute_Function(y, dimension, number_function); stop++;
-            if(aux < objective_function){
-                objective_function = aux;
+            if(aux < best_function){
+                best_function = aux;
                 for(i=0; i<dimension; i++){ x[i] = y[i]; }
                 successful[(t+1)%(dimension*10)] = 1;
                 success = true;
@@ -145,11 +144,7 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
                 es++;
                 bool exit = false;
                 for(i=0; i<2*dimension && stop < criteria; i++){
-                        if(Exploratory_Moves(pattern[i],delta, x, objective_function, dimension, number_function, lb, ub)){
-                            delta = 1.5*delta;
-                            //exit = false;
-                            objective_function = Compute_Function(x, dimension, number_function); stop++;
-                        }
+                        if(Exploratory_Moves(pattern[i],delta, x, dimension, number_function, lb, ub)){ delta = 1.5*delta; exit = false;}
                         else{ delta = (0.5)*delta; exit = true; }
                 }
                 if(exit)ps++;

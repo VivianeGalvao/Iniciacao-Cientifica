@@ -195,7 +195,7 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
         }
         delete []progenitor;
         delete []progeny;
-        for(i=0; i<2*dimension+1; i++){ delete []pattern[i]; }
+        for(i=0; i<2*dimension; i++){ delete []pattern[i]; }
         delete []pattern;
         if(lb != NULL && ub != NULL){
             delete []lb;

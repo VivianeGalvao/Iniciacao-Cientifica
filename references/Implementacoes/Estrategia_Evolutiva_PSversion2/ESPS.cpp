@@ -35,12 +35,13 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
                  fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
                 if(fx < fx_perturbation){
                     x_perturbation[i] = x_iteration[i] - delta*pattern[i];
-                    if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){ x_perturbation[i] = x_iteration[i] }
-                    else{ fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++; }
                 }
-
-                if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
-                else{ x_perturbation[i] = x_iteration[i]; }
+                if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){ x_perturbation[i] = x_iteration[i] }
+                else{
+                    fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+                    if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
+                    else{ x_perturbation[i] = x_iteration[i]; }
+                }
             }
         }
 
@@ -57,7 +58,7 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
         }
     }
 
-    best_function = fx;
+    if(exit)best_function = fx;
     delete []x_perturbation;
     return exit;
 }
@@ -127,10 +128,7 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
                 es++;
                 bool exit = false;
                 for(i=0; i<2*dimension && stop < criteria; i++){
-                        if(Exploratory_Moves(pattern[i],delta, x, dimension, number_function, lb, ub)){
-                            delta = 1.5*delta;
-                            exit = false;
-                        }
+                        if(Exploratory_Moves(pattern[i],delta, x, dimension, number_function, lb, ub)){delta = 1.5*delta; exit = false; }
                         else{ delta = (0.5)*delta; exit = true; }
                 }
                 if(exit)ps++;
@@ -144,7 +142,7 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
         cout<<"ITERACOES DE SUCESSO ---------------- "<<(t - es) + (es - ps)<<endl;
 
 
-        for(i=0; i<2*dimension+1; i++){ delete []pattern[i]; }
+        for(i=0; i<2*dimension; i++){ delete []pattern[i]; }
         delete []pattern;
         if(lb != NULL && ub != NULL){
             delete []lb;
