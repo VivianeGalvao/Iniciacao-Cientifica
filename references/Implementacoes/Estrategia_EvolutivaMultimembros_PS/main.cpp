@@ -18,7 +18,7 @@ int main()
     myfile<<"Num Function; Seed; Valor da Função Objetivo\n";
     double *x = new double[DIM];
     for(int i=1; i<N+1; i++){
-        cout<<"NUMERO DA FUNÇAO -------------------- "<<i<<endl;
+       cout<<"NUMERO DA FUNCAO ---------------- "<<i<<endl;
         for(int j=1; j<4; j++){
             myfile<<i<<";";
             myfile<<j<<";";

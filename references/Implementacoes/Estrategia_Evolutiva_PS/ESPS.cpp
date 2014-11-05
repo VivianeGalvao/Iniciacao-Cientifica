@@ -111,7 +111,7 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
         stop++;
 
         int es = 0, ps  = 0, criteria = Number_Evaluations(number_function);
-        int t=0, stop=0;
+        int t=0;
 
         while(stop < criteria){
             success=false;
@@ -121,7 +121,7 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
                 for(i=0; i<dimension*10; i++){sum += successful[i]; }
                 ps = sum/10*dimension;
                 if(ps > 1/5){ desvio_padrao = desvio_padrao/0.85;}
-                if(ps < 1/5){ desvio_padrao = desvio_padrao*0.85; }
+                else if(ps < 1/5){ desvio_padrao = desvio_padrao*0.85; }
             }
             double y[dimension];
             for(i=0; i<dimension; i++){

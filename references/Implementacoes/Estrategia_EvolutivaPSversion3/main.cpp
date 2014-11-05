@@ -19,7 +19,7 @@ int main()
     double *x = new double[DIM];
     for(int i=1; i<N+1; i++){
         cout<<"NUMBER FUNCTION ---------------- "<<i<<endl;
-        for(int j=8; j<9; j++){
+        for(int j=1; j<4; j++){
             myfile<<i<<";";
             myfile<<j<<";";
             Evolutionary_Strategy(j, 0.7, DIM, i, 0.7, x);

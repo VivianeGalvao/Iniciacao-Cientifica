@@ -32,8 +32,8 @@ int main()
             myfile<<Compute_Function(x, DIMENSION, i)<<"\n";
             //cout<<"SEMENTE ------------- "<<j<<"    MINIMIZADOR: "<<endl;
             //for(int i=0; i<DIMENSION && x!=NULL; i++){ cout<<"x"<<i+1<<": "<<x[i]<<endl;}
-
         }
+        cout<<endl;
     }
 
     myfile.close();

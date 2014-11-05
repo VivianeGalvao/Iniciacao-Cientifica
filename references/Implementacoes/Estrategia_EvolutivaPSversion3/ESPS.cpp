@@ -36,7 +36,7 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
                 if(fx < fx_perturbation){
                     x_perturbation[i] = x_iteration[i] - delta*pattern[i];
                 }
-                if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){ x_perturbation[i] = x_iteration[i] }
+                if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){ x_perturbation[i] = x_iteration[i]; }
                 else{
                     fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
                     if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}

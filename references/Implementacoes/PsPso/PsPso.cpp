@@ -99,7 +99,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                }
             }
           }
-        cout<<"---------------------------------------------"<<endl;
+     //   cout<<"---------------------------------------------"<<endl;
 
         int number_particles = NUMPARTICLES;
         int ps=0, pso=0;
@@ -121,8 +121,9 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                 }
             }
             if(mindelta >=INF || mindelta <= CRITERION_STOP){ delta = 2*sqrt(sqrt(CRITERION_STOP)); }
-            else{ delta = mindelta;}
+            else{ delta = mindelta/5;}
         }
+       // cout<<"DELTA INICIAL ----------- "<<delta<<endl;
 
 
          //velocity parameters
@@ -141,10 +142,11 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
             omega1[i] = new double[dimension];
             omega2[i] = new double[dimension];
             for(j=0; j<dimension; j++){
-                if(lb != NULL && ub != NULL){ population[i].position[j] = (ub[i]-lb[i])*(rand()%10)*0.01 + lb[i]*0.01; }
+
+                if(lb != NULL && ub != NULL){ population[i].position[j] = (ub[j]-lb[j])*(rand()%10)*0.01 + lb[j]*0.01; }
                 else{ population[i].position[j] = (rand()%10)*0.01; }    //atraves das bounds constraints
                 population[i].best_position[j] = population[i].position[j];
-                population[i].velocity[j] = ((rand()%10)*0.1);
+                population[i].velocity[j] = ((rand()%10)*0.01);
                 //velocity paramenters
                 omega1[i][j] = (rand()%10)*0.1;
                 omega2[i][j] = (rand()%10)*0.1;
@@ -160,9 +162,15 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
         for(i=1; i<number_particles; i++){
             if(population[i].fitness < fitness_global){
                 fitness_global = population[i].fitness;
-                for(j=0; j<dimension; j++){ position_global[j] = population[i].position[j]; }
+                for(j=0; j<dimension; j++){ position_global[j] = population[i].position[j];}
             }
         }
+
+        cout<<"Melhor inicial"<<endl;
+        for(i=0; i<dimension; i++){
+            cout<<" "<<position_global[i];
+        }
+        cout<<endl;
 
         int iteracoes = 0, maxEval = Number_Evaluations(number_function);
 
@@ -205,13 +213,15 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
 
             if(!successful){
                 pso++;
-                for(i=0; i<2*dimension; i++){
+                for(i=0; i<2*dimension && iteracoes<maxEval; i++){
                     if(Exploratory_Moves(pattern[i],delta,position_global,dimension, lb, ub, NUMFUNC)){ delta = 1.5*delta; test = false;}
                     else{ delta = (0.5)*delta;  test=true; }
                 }
                 if(test){ ps++; }
             }
             iteracoes++;
+            if(delta == 0){ delta = 0.7;}
+
         }
 
         for(i=0; i<number_particles; i++){
@@ -233,11 +243,13 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
         delete []pattern;
 
         cout<<endl;
-        cout<<"ITERACOES ---------------------- "<<iteracoes<<endl;
+        cout<<"NUMERO DA FUNCAO --------------- "<<number_function<<endl;
+        cout<<"AVALIACOES DE FUNCAO ----------- "<<iteracoes<<endl;
         cout<<"ITERACOES DE SUCESSO ----------- "<<(iteracoes - pso) + (pso - ps)<<endl;
         cout<<"ITERAÇÕES SEM SUCESSO - PSO ---- "<<pso<<endl;
         cout<<"ITERAÇÕES SEM SUCESSO - PS ----- "<<ps<<endl;
-        cout<<"NUMERO DA FUNCAO --------------- "<<number_function<<endl;
+       // cout<<"DELTA FINAL -------------------- "<<delta<<endl;
+
         cout<<endl;
     }
 

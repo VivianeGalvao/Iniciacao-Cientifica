@@ -8,12 +8,15 @@
 		<Cursor position="196" topLine="0" />
 	</File>
 	<File name="ESPS.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="2065" topLine="38" />
+		<Cursor position="10020" topLine="206" />
 	</File>
 	<File name="ESPS.h" open="1" top="0" tabpos="2">
-		<Cursor position="220" topLine="0" />
+		<Cursor position="605" topLine="0" />
 	</File>
-	<File name="main.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="700" topLine="2" />
+	<File name="Solution.h" open="1" top="0" tabpos="3">
+		<Cursor position="258" topLine="0" />
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="542" topLine="2" />
 	</File>
 </CodeBlocks_layout_file>

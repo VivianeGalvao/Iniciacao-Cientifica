@@ -5,9 +5,9 @@ class Individual{
     public:
         double *position;
         double objective_function;
-        double fitness;
+     //   double fitness;
         double standard_deviation;
-        double size_step;
+      //  double size_step;
         Individual(){}
         ~Individual(){}
 };
