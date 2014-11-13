@@ -98,8 +98,8 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
        Upper_Bounds(number_function, dimension, ub);
 
 
-        if(lb != NULL && ub != NULL){ for(i=0; i<dimension; i++){ x[i] = (ub[i] - lb[i])*(rand()%10)*0.01 + lb[i]*0.01; } }
-        else{ for(i=0; i<dimension; i++){ x[i] = (rand()%10)*0.01; } }
+        if(lb != NULL && ub != NULL){ for(i=0; i<dimension; i++){ x[i] = (ub[i] - lb[i])*(rand()%100)*0.01 + lb[i]; } }
+        else{ for(i=0; i<dimension; i++){ x[i] = (rand()%100)*0.01; } }
         best_function = Compute_Function(x, dimension, number_function);
         stop++;
 
@@ -112,8 +112,8 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
             for(i=0; i<dimension; i++){
                 y[i] = x[i] + Normal_distribuition(0, desvio_padrao*desvio_padrao);
                 if(lb != NULL && ub != NULL){
-                        if(y[i] < lb[i]){ y[i] = lb[i]*0.01; }
-                        if(y[i] > ub[i]){ y[i] = ub[i]*0.01; }
+                        if(y[i] < lb[i]){ y[i] = lb[i]; }
+                        if(y[i] > ub[i]){ y[i] = ub[i]; }
                 }
             }
             double aux = Compute_Function(y, dimension, number_function); stop++;

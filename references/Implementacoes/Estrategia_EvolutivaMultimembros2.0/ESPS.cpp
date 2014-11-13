@@ -15,6 +15,7 @@
 using namespace std;
 
 int stop=0;
+int criteria;
 
 void VerificadorSolucao(double *x, int dimension, int number_function){
     if(x != NULL){
@@ -48,17 +49,20 @@ bool Exploratory_Moves(double *pattern, double delta, Individual *sample, int si
                 x_perturbation[i] = sample->position[i] - delta*pattern[i];
                 if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = sample->position[i]; }
                 else{
+                    if(stop > criteria){ return false;}
                     fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
                     if(fx > fx_perturbation){ sample->position[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
                     else{ x_perturbation[i] = sample->position[i]; }
                 }
             } else{
+                 if(stop > criteria){return false;}
                  fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
                 if(fx < fx_perturbation){
                     x_perturbation[i] = sample->position[i] - delta*pattern[i];
                 }
                 if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = sample->position[i]; }
                 else{
+                    if(stop > criteria){return false;}
                     fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
                     if(fx > fx_perturbation){   sample->position[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
                     else{ x_perturbation[i] = sample->position[i]; }
@@ -67,6 +71,7 @@ bool Exploratory_Moves(double *pattern, double delta, Individual *sample, int si
         }
 
         else{
+            if(stop > criteria){return false;}
             fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
             if(fx < fx_perturbation){
                 x_perturbation[i] = sample->position[i] - delta*pattern[i];
@@ -162,6 +167,7 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
 
     if(delta > 0){
         srand(seed);
+        criteria = 0;
         double **pattern = new double*[2*dimension];
         Individual **progenitor = new Individual*[MI];
         Individual **progeny = new Individual*[LAMBDA];
@@ -200,7 +206,8 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
             progenitor[i]->standard_deviation = expected_mean/sqrt(dimension);
         }
 
-        int es = 0, ps  = 0, criteria = Number_Evaluations(number_function);
+        criteria = Number_Evaluations(number_function);
+        int es = 0, ps  = 0;
         int q = 0;
         while(stop < criteria){
 
@@ -212,8 +219,8 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
                     for(int k=0; k<dimension; k++){
                         progeny[t]->position[k] = progenitor[i]->position[k] + Normal_distribution(0, progenitor[i]->standard_deviation);
                         if(lb != NULL && ub != NULL){
-                            if(progeny[t]->position[k] < lb[i]){ progeny[t]->position[k] = progenitor[i]->position[k]; }
-                            if(progeny[t]->position[k] > ub[i]){ progeny[t]->position[k] = progenitor[i]->position[k]; }
+                            if(progeny[t]->position[k] < lb[i]){ progeny[t]->position[k] = lb[i] + rand()%10;}
+                            if(progeny[t]->position[k] > ub[i]){ progeny[t]->position[k] = ub[i] - rand()%10;}
                         }
                     }
                     progeny[t]->standard_deviation = progenitor[i]->standard_deviation;
@@ -229,7 +236,6 @@ void Evolutionary_Strategy(int seed, double expected_mean, int dimension, int nu
                             else{ delta = (0.5)*delta; exit = true; }
                     }
                     if(exit)ps++;
-                    if(delta == 0)delta = 0.7;
                 }
                 progenitor[i]->standard_deviation = progenitor[i]->standard_deviation*exp(Normal_distribution(0, 1/dimension));
             }

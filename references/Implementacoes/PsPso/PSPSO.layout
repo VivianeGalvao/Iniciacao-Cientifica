@@ -7,13 +7,13 @@
 	<File name="Avaliation_Function.h" open="0" top="0" tabpos="3">
 		<Cursor position="406" topLine="0" />
 	</File>
-	<File name="PsPso.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="6732" topLine="139" />
+	<File name="PsPso.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="10115" topLine="223" />
 	</File>
 	<File name="PsPso.h" open="0" top="0" tabpos="0">
 		<Cursor position="220" topLine="0" />
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="1044" topLine="7" />
+		<Cursor position="706" topLine="7" />
 	</File>
 </CodeBlocks_layout_file>
