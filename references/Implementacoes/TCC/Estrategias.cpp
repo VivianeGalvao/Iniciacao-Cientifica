@@ -6,14 +6,14 @@
 #include <random>
 
 #define NUMPARTICLES 50
-#define STOPPING 0.00001
+#define MAX_DELTA 0.00001
 #define INF 3.40282347E+38F
 #define MI 3
 #define LAMBDA 6
 
 using namespace std;
 
-int stop; //TODO -- mudar nome
+int functionEvaluations;
 int best_function;
 int criteria;
 
@@ -33,21 +33,21 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
                 x_perturbation[i] = x_iteration[i] - delta*pattern[i];
                 if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = x_iteration[i]; }
                 else{
-                    if(stop > criteria){return false;}
-                    fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+                    if(functionEvaluations > criteria){return false;}
+                    fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
                     if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
                     else{ x_perturbation[i] = x_iteration[i]; }
                 }
             } else{
-                 if(stop > criteria){return false;}
-                 fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+                 if(functionEvaluations > criteria){return false;}
+                 fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
                 if(fx < fx_perturbation){
                     x_perturbation[i] = x_iteration[i] - delta*pattern[i];
                 }
                 if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){ x_perturbation[i] = x_iteration[i]; }
                 else{
-                    if(stop > criteria){return false;}
-                    fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+                    if(functionEvaluations > criteria){return false;}
+                    fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
                     if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
                     else{ x_perturbation[i] = x_iteration[i]; }
                 }
@@ -55,13 +55,13 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
         }
 
         else{
-            if(stop > criteria){return false;}
-            fx_perturbation = Compute_Function(x_perturbation, size, number_function);stop++;
+            if(functionEvaluations > criteria){return false;}
+            fx_perturbation = Compute_Function(x_perturbation, size, number_function);functionEvaluations++;
             if(fx < fx_perturbation){
 
                 x_perturbation[i] = x_iteration[i] - delta*pattern[i];
-                if(stop > criteria){return false;}
-                fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+                if(functionEvaluations > criteria){return false;}
+                fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
             }
 
             if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
@@ -92,21 +92,21 @@ bool Exploratory_Moves(double *pattern, double delta, Individual *sample, int si
                 x_perturbation[i] = sample->position[i] - delta*pattern[i];
                 if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = sample->position[i]; }
                 else{
-                    if(stop > criteria){ return false;}
-                    fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+                    if(functionEvaluations > criteria){ return false;}
+                    fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
                     if(fx > fx_perturbation){ sample->position[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
                     else{ x_perturbation[i] = sample->position[i]; }
                 }
             } else{
-                 if(stop > criteria){return false;}
-                 fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+                 if(functionEvaluations > criteria){return false;}
+                 fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
                 if(fx < fx_perturbation){
                     x_perturbation[i] = sample->position[i] - delta*pattern[i];
                 }
                 if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = sample->position[i]; }
                 else{
-                    if(stop > criteria){return false;}
-                    fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+                    if(functionEvaluations > criteria){return false;}
+                    fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
                     if(fx > fx_perturbation){   sample->position[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
                     else{ x_perturbation[i] = sample->position[i]; }
                 }
@@ -114,11 +114,11 @@ bool Exploratory_Moves(double *pattern, double delta, Individual *sample, int si
         }
 
         else{
-            if(stop > criteria){return false;}
-            fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+            if(functionEvaluations > criteria){return false;}
+            fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
             if(fx < fx_perturbation){
                 x_perturbation[i] = sample->position[i] - delta*pattern[i];
-                fx_perturbation = Compute_Function(x_perturbation, size, number_function); stop++;
+                fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
             }
             if(fx > fx_perturbation){ sample->position[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
             else{ x_perturbation[i] = sample->position[i]; }
@@ -135,7 +135,7 @@ bool Exploratory_Moves(double *pattern, double delta, Individual *sample, int si
 void PSwarm(int dimension, int seed, double delta_initial, int number_function, double* position_global){
 
     if(delta_initial > 0){
-        stop = 0;
+        functionEvaluations = 0;
         double **pattern = new double*[dimension*2];
         for(int i=0; i<dimension*2; i++){ pattern[i] = new double[dimension];}
         /** Gerando a matriz de direções padrão*/ /**MAXIMAL POSITIVE BASE*/
@@ -172,7 +172,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                     if(mindelta > (ub[i] - lb[i])){ mindelta = ub[i] - lb[i]; }
                 }
             }
-            if(mindelta >=INF || mindelta <= STOPPING){ delta = 2*sqrt(sqrt(STOPPING)); }
+            if(mindelta >=INF || mindelta <= MAX_DELTA){ delta = 2*sqrt(sqrt(MAX_DELTA)); }
             else{ delta = mindelta/5;}
         }
 
@@ -185,7 +185,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
 
 
         //initialize a population of particles with random positions and velocities
-        stop = 0;
+        functionEvaluations = 0;
         for(i = 0; i<number_particles; i++){
             population[i] = new Particle();
             population[i]->position = new double[dimension];
@@ -209,7 +209,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                 omega1[i][j] = (rand()%10)*0.1; // (rand()%100)*0.01
                 omega2[i][j] = (rand()%10)*0.1; // (rand()%100)*0.01
             }
-            population[i]->fitness = Compute_Function(population[i]->position, dimension, NUMFUNC);stop++;
+            population[i]->fitness = Compute_Function(population[i]->position, dimension, NUMFUNC);functionEvaluations++;
             population[i]->best_fitness = population[i]->fitness;
         }
         //population intialized
@@ -226,7 +226,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
 
         int iteracoes = 0, maxEval = Number_Evaluations(number_function);
         criteria = maxEval;
-         while(stop < maxEval){
+         while(functionEvaluations < maxEval){
 
             bool successful = false, test=false;
             for(i=0; i<number_particles; i++){
@@ -235,7 +235,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                     omega2[i][j] = (rand()%10)*0.1;
                 }
             }
-            for(i=0; i<number_particles && stop < maxEval; i++){
+            for(i=0; i<number_particles && functionEvaluations < maxEval; i++){
                 for(j=0; j<dimension; j++){
                     population[i]->velocity[j] = (inertia_factor*population[i]->velocity[j]) + (cognition_parameter*omega1[i][j]*(population[i]->best_position[j] -
                                                 population[i]->position[j])) + (social_parameter*omega2[i][j]*(position_global[j] - population[i]->position[j]));
@@ -248,7 +248,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                     }
                 }
 
-                population[i]->fitness = Compute_Function(population[i]->position, dimension, NUMFUNC); stop++;
+                population[i]->fitness = Compute_Function(population[i]->position, dimension, NUMFUNC); functionEvaluations++;
                 if(population[i]->fitness < population[i]->best_fitness){
                     population[i]->best_fitness = population[i]->fitness;
                     for(j=0; j<dimension; j++){
@@ -266,11 +266,11 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
 
             if(!successful){
                 pso++;
-                for(int k=0; k<2*dimension && stop<maxEval; k++){
+                for(int k=0; k<2*dimension && functionEvaluations<maxEval; k++){
                     best_function = fitness_global;
                     if(Exploratory_Moves(pattern[k], delta, population[i]->position, dimension, NUMFUNC, lb, ub)){ delta = 1.5*delta; test = false; fitness_global = best_function;}
                     else{
-                        if(delta > STOPPING){ delta = (0.5)*delta; }
+                        if(delta > MAX_DELTA){ delta = (0.5)*delta; }
                         test=true;
                     }
                 }
@@ -301,7 +301,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
 
 //        cout<<endl;
 //        cout<<"NUMERO FUNCAO ------------------ "<<NUMFUNC<<endl;
-//        cout<<"AVALIACOES DE FUNCAO ----------- "<<stop<<endl;
+//        cout<<"AVALIACOES DE FUNCAO ----------- "<<functionEvaluations<<endl;
 //        cout<<"ITERAÇOES TOTAIS --------------- "<<iteracoes<<endl;
 //        cout<<"ITERACOES DE SUCESSO ----------- "<<(iteracoes - pso) + (pso - ps)<<endl;
 //        cout<<"ITERAÇÕES SEM SUCESSO - PSO ---- "<<pso<<endl;
@@ -420,7 +420,7 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
        double *lb = new double[dimension], *ub = new double[dimension];
        Lower_Bounds(number_function, dimension, lb);
        Upper_Bounds(number_function, dimension, ub);
-       stop = 0;
+       functionEvaluations = 0;
        for(i=0; i<MI; i++){
             progenitor[i] = new Individual();
             progenitor[i]->position = new double[dimension];
@@ -429,7 +429,7 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
             }
             else{ for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = rand()%100*0.01; } }
             progenitor[i]->objective_function = Compute_Function(progenitor[i]->position, dimension, number_function);
-            stop++;
+            functionEvaluations++;
             progenitor[i]->standard_deviation = expected_mean/sqrt(dimension);
         }
 
@@ -448,12 +448,12 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
         criteria = Number_Evaluations(number_function);
         int es = 0, ps  = 0;
         int q = 0;
-        while(stop < criteria){
+        while(functionEvaluations < criteria){
             q++;
             for(i=0; i<MI; i++){
                 success = false;
                 int t=0;
-                for(int j=0; j<LAMBDA/MI && t<LAMBDA && stop<criteria; j++, t++){
+                for(int j=0; j<LAMBDA/MI && t<LAMBDA && functionEvaluations<criteria; j++, t++){
                     for(int k=0; k<dimension; k++){
                         progeny[t]->position[k] = progenitor[i]->position[k] + Normal_distribution(0, progenitor[i]->standard_deviation);
                         if(lb != NULL && ub != NULL){
@@ -463,7 +463,7 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
                     }
                     progeny[t]->standard_deviation = progenitor[i]->standard_deviation;
                     progeny[t]->objective_function = Compute_Function(progeny[t]->position, dimension, number_function);
-                    stop++;
+                    functionEvaluations++;
                     if(progeny[t]->objective_function < progenitor[i]->objective_function){
                         if(progeny[t]->objective_function < best_individual->objective_function){
                             best_individual->objective_function = progeny[t]->objective_function;
@@ -476,10 +476,10 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
                 if(!success){
                     es++;
                     bool exit = false;
-                    for(int k=0; k<2*dimension && stop < criteria; k++){
+                    for(int k=0; k<2*dimension && functionEvaluations < criteria; k++){
                             if(Exploratory_Moves(pattern[k],delta, progenitor[i], dimension, number_function, lb, ub)){ delta = 1.5*delta; exit = false;}
                             else{
-                                if(delta > STOPPING){
+                                if(delta > MAX_DELTA){
                                     delta = (0.5)*delta;
                                 }
                                     exit = true;
@@ -495,7 +495,7 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
         for(i=0; i<dimension; i++){ x[i] = progenitor[0]->position[i]; }
         //cout<<Compute_Function(x, dimension, number_function)<<endl;
 //        cout<<"NUMERO FUNCAO ------------------ "<<number_function<<endl;
-//        cout<<"AVALIACOES DE FUNCAO ---------------- "<<stop<<endl;
+//        cout<<"AVALIACOES DE FUNCAO ---------------- "<<functionEvaluations<<endl;
 //        cout<<"NUMERO DE ITERACOES ----------------- "<<q<<endl;
 //        cout<<"ITERACOES SEM SUCESSO ES ------------ "<<es<<endl;
 //        cout<<"ITERACOES SEM SUCESSO PS ------------ "<<ps<<endl;
@@ -522,7 +522,7 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
 void Evolutionary_Strategy2(int seed, double expected_mean, int dimension, int number_function, double delta, double *x){
 
     if(delta > 0){
-        stop = 0;
+        functionEvaluations = 0;
         srand(seed);
         double **pattern = new double*[2*dimension];
         int i;
@@ -552,12 +552,12 @@ void Evolutionary_Strategy2(int seed, double expected_mean, int dimension, int n
         if(lb != NULL && ub != NULL){ for(i=0; i<dimension; i++){ x[i] = (ub[i] - lb[i])*(rand()%100)*0.01 + lb[i]; } }
         else{ for(i=0; i<dimension; i++){ x[i] = (rand()%100)*0.01; } }
         best_function = Compute_Function(x, dimension, number_function);
-        stop++;
+        functionEvaluations++;
 
         int es = 0, ps  = 0, criteria = Number_Evaluations(number_function);
-        int t=0, stop=0;
+        int t=0, functionEvaluations=0;
 
-        while(stop < criteria){
+        while(functionEvaluations < criteria){
             success=false;
             double y[dimension];
             for(i=0; i<dimension; i++){
@@ -567,7 +567,7 @@ void Evolutionary_Strategy2(int seed, double expected_mean, int dimension, int n
                         if(y[i] > ub[i]){ y[i] = ub[i]; }
                 }
             }
-            double aux = Compute_Function(y, dimension, number_function); stop++;
+            double aux = Compute_Function(y, dimension, number_function); functionEvaluations++;
             if(aux < best_function){
                 best_function = aux;
                 for(i=0; i<dimension; i++){ x[i] = y[i]; }
@@ -578,10 +578,10 @@ void Evolutionary_Strategy2(int seed, double expected_mean, int dimension, int n
             if(!success){
                 es++;
                 bool exit = false;
-                for(i=0; i<2*dimension && stop < criteria; i++){
+                for(i=0; i<2*dimension && functionEvaluations < criteria; i++){
                         if(Exploratory_Moves(pattern[i],delta, x, dimension, number_function, lb, ub)){delta = 1.5*delta; exit = false; }
                         else{
-                            if( delta > STOPPING){ delta = (0.5)*delta; }
+                            if( delta > MAX_DELTA){ delta = (0.5)*delta; }
                             exit = true; }
                 }
                 if(exit)ps++;
@@ -589,7 +589,7 @@ void Evolutionary_Strategy2(int seed, double expected_mean, int dimension, int n
             t = t+1;
         }
 //        cout<<"NUMERO FUNCAO ------------------ "<<number_function<<endl;
-//        cout<<"AVALIACOES DA FUNCAO OBJETIVO ------- "<<stop<<endl;
+//        cout<<"AVALIACOES DA FUNCAO OBJETIVO ------- "<<functionEvaluations<<endl;
 //        cout<<"NUMERO DE ITERACOES ----------------- "<<t<<endl;
 //        cout<<"ITERACOES SEM SUCESSO ES ------------ "<<es<<endl;
 //        cout<<"ITERACOES SEM SUCESSO PS ------------ "<<ps<<endl;
@@ -608,7 +608,7 @@ void Evolutionary_Strategy2(int seed, double expected_mean, int dimension, int n
 void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int number_function, double delta, double *x){
 
     if(delta > 0){
-        stop = 0;
+        functionEvaluations = 0;
         srand(seed);
         double **pattern = new double*[2*dimension];
         int i;
@@ -646,12 +646,12 @@ void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int n
         }
         else{ for(i=0; i<dimension; i++){ x[i] = (rand()%10)*0.01; } }
         best_function = Compute_Function(x, dimension, number_function);
-        stop++;
+        functionEvaluations++;
 
         int es = 0, ps  = 0, criteria = Number_Evaluations(number_function);
         int t=0;
 
-        while(stop < criteria){
+        while(functionEvaluations < criteria){
             success=false;
             //regra de 1/5 de sucessos
             if(t%dimension == 0 && t>=dimension*10){
@@ -669,7 +669,7 @@ void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int n
                     if(y[i] > ub[i]){ y[i] = x[i]; }
                 }
             }
-            double aux = Compute_Function(y, dimension, number_function); stop++;
+            double aux = Compute_Function(y, dimension, number_function); functionEvaluations++;
             if(aux < best_function){
                 best_function = aux;
                 for(i=0; i<dimension; i++){ x[i] = y[i]; }
@@ -681,16 +681,19 @@ void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int n
             if(!success){
                 es++;
                 bool exit = false;
-                for(i=0; i<2*dimension && stop < criteria; i++){
+                for(i=0; i<2*dimension && functionEvaluations < criteria; i++){
                         if(Exploratory_Moves(pattern[i],delta, x, dimension, number_function, lb, ub)){ delta = 1.5*delta; exit = false;}
-                        else{ delta = (0.5)*delta; exit = true; }
+                        else{
+                            if(delta > MAX_DELTA){ delta = (0.5)*delta; }
+                                exit = true;
+                        }
                 }
                 if(exit)ps++;
             }
             t = t+1;
         }
 //        cout<<"NUMERO FUNCAO ------------------ "<<number_function<<endl;
-//        cout<<"AVALIACOES DA FUNCAO OBJETIVO ------- "<<stop<<endl;
+//        cout<<"AVALIACOES DA FUNCAO OBJETIVO ------- "<<functionEvaluations<<endl;
 //        cout<<"NUMERO DE ITERACOES ----------------- "<<t<<endl;
 //        cout<<"ITERACOES SEM SUCESSO ES ------------ "<<es<<endl;
 //        cout<<"ITERACOES SEM SUCESSO PS ------------ "<<ps<<endl;
