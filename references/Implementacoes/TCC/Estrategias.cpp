@@ -237,7 +237,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
             }
             for(i=0; i<number_particles && functionEvaluations < maxEval; i++){
                 for(j=0; j<dimension; j++){
-                    population[i]->velocity[j] = (inertia_factor*population[i]->velocity[j]) + (cognition_parameter*omega1[i][j]*(population[i]->best_position[j] -
+                    population[i]->velocity[j] = (inertia_factor*population[i]->velocity[j]) + (cognition_parameter*((rand()%10)*0.1)*(population[i]->best_position[j] -
                                                 population[i]->position[j])) + (social_parameter*omega2[i][j]*(position_global[j] - population[i]->position[j]));
 
 
@@ -467,8 +467,6 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
                     if(progeny[t]->objective_function < progenitor[i]->objective_function){
                         if(progeny[t]->objective_function < best_individual->objective_function){
                             best_individual->objective_function = progeny[t]->objective_function;
-                          //  best_individual->standard_deviation = progeny[t]->standard_deviation;
-                          //  for(int l=0; l<dimension; l++){ best_individual->position[l] = progeny[t]->position[l]; }
                             success = true;
                         }
                     }

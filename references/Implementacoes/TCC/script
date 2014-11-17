@@ -10,7 +10,7 @@ echo "PROBLEMA;SEMENTE;PSO-PS;ES-PS 1;ES-PS 2;ES-PS 3; MEDIA PSO-PS; MEDIA ES-PS
 
 for(( f=1; f<12; f++ ))
   do   
-   for(( s=1; s<4; s++ ))		  
+   for(( s=1; s<7; s++ ))		  
 	  do
 	   ./teste $f $s $e >> resultado.csv
 	  done          
