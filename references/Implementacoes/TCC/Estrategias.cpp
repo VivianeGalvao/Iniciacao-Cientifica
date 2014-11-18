@@ -206,8 +206,6 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                 }
                 population[i]->best_position[j] = population[i]->position[j];
                 //velocity paramenters
-                omega1[i][j] = (rand()%10)*0.1; // (rand()%100)*0.01
-                omega2[i][j] = (rand()%10)*0.1; // (rand()%100)*0.01
             }
             population[i]->fitness = Compute_Function(population[i]->position, dimension, NUMFUNC);functionEvaluations++;
             population[i]->best_fitness = population[i]->fitness;
@@ -229,12 +227,6 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
          while(functionEvaluations < maxEval){
 
             bool successful = false, test=false;
-            for(i=0; i<number_particles; i++){
-                for(j=0; j<dimension; j++){
-                    omega1[i][j] = (rand()%10)*0.1;
-                    omega2[i][j] = (rand()%10)*0.1;
-                }
-            }
             for(i=0; i<number_particles && functionEvaluations < maxEval; i++){
                 for(j=0; j<dimension; j++){
                     population[i]->velocity[j] = (inertia_factor*population[i]->velocity[j]) + (cognition_parameter*((rand()%10)*0.1)*(population[i]->best_position[j] -
