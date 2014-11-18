@@ -1,17 +1,18 @@
 g++ -o teste *.cpp -std=c++0x
 
-rm resultado.csv
+rm result.csv
 
 echo "Este é um script"
 f=0
 s=0
 e=0
-echo "PROBLEMA;SEMENTE;PSO-PS;ES-PS 1;ES-PS 2;ES-PS 3; MEDIA PSO-PS; MEDIA ES-PS 1; MEDIA ES-PS 2; MEDIA ES-PS 3">>resultado.csv
 
-for(( f=1; f<12; f++ ))
+echo "PROBLEMA;SEMENTE;PSO-PS;ES-PS 1;ES-PS 2;ES-PS 3; MEDIA PSO-PS; MEDIA ES-PS 1; MEDIA ES-PS 2; MEDIA ES-PS 3">>result.csv
+
+for(( f=1; f<15; f++ ))
   do   
-   for(( s=1; s<7; s++ ))		  
+   for(( s=1; s<4; s++ ))		  
 	  do
-	   ./teste $f $s $e >> resultado.csv
+	   ./teste $f $s $e >> result.csv
 	  done          
   done 
