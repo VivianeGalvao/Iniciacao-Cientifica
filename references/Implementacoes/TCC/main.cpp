@@ -14,8 +14,8 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    if(argc == 4){
-        int a = atoi(argv[0]);
+    if(argc == 3){
+        //int a = atoi(argv[0]);
         int funcao = atoi(argv[1]);
         int semente = atoi(argv[2]);
         //int estrategia = atoi(argv[3]);

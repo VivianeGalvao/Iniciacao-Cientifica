@@ -99,12 +99,11 @@ double f06(double* x, int size){
 }
 
 double f07(double* x, int size){
-    srand(SEED);
     double sum = 0;
     for(int i=0; i<size; i++){
         sum += (i+1)*x[i]*x[i]*x[i]*x[i];
     }
-    return sum + rand()%100*0.01;
+    return sum + ((rand()-1.0)/RAND_MAX);
 
     //return 7.6*Math.pow(10, -3); //FEP
 	//return 0.13;

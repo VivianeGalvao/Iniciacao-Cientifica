@@ -17,18 +17,43 @@ int functionEvaluations;
 int best_function;
 int criteria;
 
+double generate_ramdom() {
+    return ((rand()-1.0)/RAND_MAX);
+}
+
 bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int size, int number_function, double* lb, double* ub){
     bool exit = false;
     int i;
     double *x_perturbation = new double[size];
+    double *x_perturbation_best = new double[size];
     double fx=best_function, fx_perturbation=0.0;
+    double fx_best=best_function, x_best=0.0;
 
-    for(i = 0; i<size; i++){x_perturbation[i] = x_iteration[i];}
+    for(i = 0; i<size; i++){x_perturbation[i] = x_iteration[i]; x_perturbation_best[i] = x_iteration[i];}
 
     for(i=0; i<size; i++){
-        x_perturbation[i] = x_iteration[i] + delta*pattern[i];
+        //x_perturbation[i] = x_iteration[i] + delta*pattern[i];
+        x_perturbation[i] = x_iteration[i] + delta;
 
         if(lb != NULL && ub != NULL){
+            if(x_perturbation[i] >= lb[i] && x_perturbation[i] <= ub[i]){
+                if(functionEvaluations > criteria){return false;}
+                fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
+                if(fx_perturbation < fx_best){
+                    x_perturbation_best[i] = x_perturbation[i];
+                    fx_best = fx_perturbation;
+                }
+            }
+            x_perturbation[i] = x_iteration[i] - delta;
+            if(x_perturbation[i] >= lb[i] && x_perturbation[i] <= ub[i]){
+                if(functionEvaluations > criteria){return false;}
+                fx_perturbation = Compute_Function(x_perturbation, size, number_function); functionEvaluations++;
+                if(fx_perturbation < fx_best){
+                    x_perturbation_best[i] = x_perturbation[i];
+                    fx_best = fx_perturbation;
+                }
+            }
+            /*
             if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){
                 x_perturbation[i] = x_iteration[i] - delta*pattern[i];
                 if(x_perturbation[i] < lb[i] || x_perturbation[i] > ub[i]){  x_perturbation[i] = x_iteration[i]; }
@@ -51,10 +76,11 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
                     if(fx > fx_perturbation){ x_iteration[i] = x_perturbation[i]; fx = fx_perturbation; exit = true;}
                     else{ x_perturbation[i] = x_iteration[i]; }
                 }
-            }
+            }*/
         }
 
         else{
+            //TODO -- atualizar
             if(functionEvaluations > criteria){return false;}
             fx_perturbation = Compute_Function(x_perturbation, size, number_function);functionEvaluations++;
             if(fx < fx_perturbation){
@@ -69,8 +95,14 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
         }
     }
 
-    if(exit)best_function = fx;
+    if (fx_best < fx) {
+        best_function = fx_best;
+        for(i = 0; i<size; i++){x_iteration[i] = x_perturbation_best[i];}
+    }
+
+    //if(exit)best_function = fx;
     delete []x_perturbation;
+    delete []x_perturbation_best;
     return exit;
 }
 
@@ -197,12 +229,12 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
             for(j=0; j<dimension; j++){
 
                 if(lb != NULL && ub != NULL){
-                    population[i]->position[j] = (ub[j]-lb[j])*(rand()%100)*0.01 + lb[j];
-                    population[i]->velocity[j] = (ub[j]-lb[j])*(rand()%100)*0.01 + lb[j];
+                    population[i]->position[j] = (ub[j]-lb[j])*generate_ramdom() + lb[j];
+                    population[i]->velocity[j] = (ub[j]-lb[j])*generate_ramdom() + lb[j];
                 }
                 else{
-                    population[i]->position[j] = (rand()%100)*0.01;
-                    population[i]->velocity[j] = ((rand()%10)*0.01);
+                    population[i]->position[j] = generate_ramdom();
+                    population[i]->velocity[j] = generate_ramdom();
                 }
                 population[i]->best_position[j] = population[i]->position[j];
                 //velocity paramenters
@@ -229,7 +261,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
             bool successful = false, test=false;
             for(i=0; i<number_particles && functionEvaluations < maxEval; i++){
                 for(j=0; j<dimension; j++){
-                    population[i]->velocity[j] = (inertia_factor*population[i]->velocity[j]) + (cognition_parameter*((rand()%10)*0.1)*(population[i]->best_position[j] -
+                    population[i]->velocity[j] = (inertia_factor*population[i]->velocity[j]) + (cognition_parameter*generate_ramdom()*(population[i]->best_position[j] -
                                                 population[i]->position[j])) + (social_parameter*omega2[i][j]*(position_global[j] - population[i]->position[j]));
 
 
@@ -417,9 +449,9 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
             progenitor[i] = new Individual();
             progenitor[i]->position = new double[dimension];
             if(lb != NULL && ub != NULL){
-                for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = (ub[i] - lb[i])*(rand()%100)*0.01 + lb[i]; }
+                for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = (ub[i] - lb[i])*generate_ramdom() + lb[i]; }
             }
-            else{ for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = rand()%100*0.01; } }
+            else{ for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = generate_ramdom(); } }
             progenitor[i]->objective_function = Compute_Function(progenitor[i]->position, dimension, number_function);
             functionEvaluations++;
             progenitor[i]->standard_deviation = expected_mean/sqrt(dimension);
@@ -467,6 +499,7 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
                     es++;
                     bool exit = false;
                     for(int k=0; k<2*dimension && functionEvaluations < criteria; k++){
+                            //TODO -- passar melhor individuo
                             if(Exploratory_Moves(pattern[k],delta, progenitor[i], dimension, number_function, lb, ub)){ delta = 1.5*delta; exit = false;}
                             else{
                                 if(delta > MAX_DELTA){
@@ -539,8 +572,8 @@ void Evolutionary_Strategy2(int seed, double expected_mean, int dimension, int n
        Upper_Bounds(number_function, dimension, ub);
 
 
-        if(lb != NULL && ub != NULL){ for(i=0; i<dimension; i++){ x[i] = (ub[i] - lb[i])*(rand()%100)*0.01 + lb[i]; } }
-        else{ for(i=0; i<dimension; i++){ x[i] = (rand()%100)*0.01; } }
+        if(lb != NULL && ub != NULL){ for(i=0; i<dimension; i++){ x[i] = (ub[i] - lb[i])*generate_ramdom() + lb[i]; } }
+        else{ for(i=0; i<dimension; i++){ x[i] = generate_ramdom(); } }
         best_function = Compute_Function(x, dimension, number_function);
         functionEvaluations++;
 
@@ -629,12 +662,12 @@ void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int n
         //indivíduo inicial
         if(lb != NULL && ub!=NULL){
             for(i=0; i<dimension; i++){
-                x[i] = (ub[i] - lb[i])*(rand()%10)*0.01 + lb[i]*0.01;
+                x[i] = (ub[i] - lb[i])*generate_ramdom() + lb[i]*0.01;
              //   cout<<x[i]<<"   ";
             }
             //cout<<endl;
         }
-        else{ for(i=0; i<dimension; i++){ x[i] = (rand()%10)*0.01; } }
+        else{ for(i=0; i<dimension; i++){ x[i] = generate_ramdom(); } }
         best_function = Compute_Function(x, dimension, number_function);
         functionEvaluations++;
 
@@ -653,7 +686,7 @@ void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int n
             }
             double y[dimension];
             for(i=0; i<dimension; i++){
-                y[i] = x[i] + Normal_distribution(0, desvio_padrao*desvio_padrao);
+                y[i] = x[i] + Normal_distribution(0, desvio_padrao*desvio_padrao); //TODO -- parametro eh desvio padrao?
                 if(lb != NULL && ub != NULL){
                     if(y[i] < lb[i]){ y[i] = x[i]; }
                     if(y[i] > ub[i]){ y[i] = x[i]; }
