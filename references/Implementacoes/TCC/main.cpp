@@ -24,15 +24,15 @@ int main(int argc, char** argv)
         PSwarm(DIMENSAO, semente, INF, funcao, x);
         if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
 
-        Evolutionary_Strategy1(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
-        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
-
-        Evolutionary_Strategy2(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
-        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
-
-        Evolutionary_Strategy3(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
-        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
-        cout<<endl;
+//        Evolutionary_Strategy1(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
+//        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
+//
+//        Evolutionary_Strategy2(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
+//        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
+//
+//        Evolutionary_Strategy3(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
+//        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
+//        cout<<endl;
 
         delete []x;
     }

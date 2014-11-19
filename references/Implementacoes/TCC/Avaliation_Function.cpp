@@ -11,11 +11,16 @@ using namespace std;
 
 
 double Sphere_function(double *x, int size){
+//    for(int i=0; i<size; i++){
+//        cout<<" >> "<<x[i]<<" ";
+//    }
+//    cout<<endl;
     double fx=0.0;
     for(int i=0; i<size; i++){
         fx += x[i]*x[i];
     }
-    return fx;
+//    cout<<" >> "<<(double)fx<<endl;
+    return (double)fx;
 
     /**Best Values*/
     ///return 5.7*Math.pow(10, -4); //FEP
