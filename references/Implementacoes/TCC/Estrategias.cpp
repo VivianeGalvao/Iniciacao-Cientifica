@@ -468,11 +468,16 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
                     if(progeny[t]->objective_function < progenitor[i]->objective_function){
                         if(progeny[t]->objective_function < best_individual->objective_function){
                             best_individual->objective_function = progeny[t]->objective_function;
+                            for(int w=0; w<dimension; w++){ best_individual->position[w] = progeny->position[w]; }
+                            cout<<" 1>> ">>best_individual->objective_function<<endl;
                             success = true;
                         }
                     }
                 }
-                if(!success){
+
+                progenitor[i]->standard_deviation = progenitor[i]->standard_deviation*exp(Normal_distribution(0, 1/dimension));
+            }
+            if(!success){
                     es++;
                     bool exit = false;
                     if(functionEvaluations < criteria){
@@ -485,13 +490,11 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
                             }
                     }
                     if(exit)ps++;
-                }
-                progenitor[i]->standard_deviation = progenitor[i]->standard_deviation*exp(Normal_distribution(0, 1/dimension));
             }
             Selection(progenitor, progeny, dimension);
         }
 
-        for(i=0; i<dimension; i++){ x[i] = progenitor[0]->position[i]; }
+        for(i=0; i<dimension; i++){ x[i] = best_individual->position[i]; }
 //        cout<<Compute_Function(x, dimension, number_function)<<endl;
 //        cout<<"NUMERO FUNCAO ------------------ "<<number_function<<endl;
 //        cout<<"AVALIACOES DE FUNCAO ---------------- "<<functionEvaluations<<endl;
