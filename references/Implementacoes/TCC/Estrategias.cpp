@@ -152,23 +152,6 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
 
     if(delta_initial > 0){
         functionEvaluations = 0;
-//        double **pattern = new double*[dimension*2];
-//        for(int i=0; i<dimension*2; i++){ pattern[i] = new double[dimension];}
-//        /** Gerando a matriz de direções padrão*/ /**MAXIMAL POSITIVE BASE*/
-//        for(int j=0; j<dimension*2; j++){
-//            for(int i=0; i<dimension; i++){
-//               if(j < dimension){
-//                if( i == j){ pattern[j][i] = 1.0;}
-//                else { pattern[j][i] = 0.0; }
-//               }
-//               else{
-//                    if(j - i == dimension){ pattern[j][i] = -1.0;}
-//                    else { pattern[j][i] = 0.0; }
-//               }
-//            }
-//          }
-
-
         int number_particles = NUMPARTICLES;
         int ps=0, pso=0;
         double delta = delta_initial;
@@ -268,12 +251,13 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
                         successful = true;
                     }
                 }
+            }
 
             if(!successful){
                 pso++;
                 if( functionEvaluations<maxEval ){
                     best_function = fitness_global;
-                    if(Exploratory_Moves(delta, population[i]->position, dimension, NUMFUNC, lb, ub)){ delta = 1.5*delta; test = false; fitness_global = best_function;}
+                    if(Exploratory_Moves(delta, position_global, dimension, NUMFUNC, lb, ub)){ delta = 1.5*delta; test = false; fitness_global = best_function;}
                     else{
                         if(delta > MAX_DELTA){ delta = (0.5)*delta; }
                         test=true;
@@ -283,7 +267,6 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
             }
             iteracoes++;
         }
-    }
 
         for(i=0; i<number_particles; i++){
             delete []population[i]->position;
@@ -368,11 +351,13 @@ void Selection(Individual **progenitor, Individual **progeny, int dimension){
         sample[i]->position = new double[dimension];
         if(i < MI){
             sample[i]->objective_function = progenitor[i]->objective_function;
+//            cout<<"sample1>> "<<sample[i]->objective_function<<endl;
             sample[i]->standard_deviation = progenitor[i]->standard_deviation;
             for(int j=0; j<dimension; j++){ sample[i]->position[j] = progenitor[i]->position[j]; }
         }
         if(i >=MI){
             sample[i]->objective_function = progeny[t]->objective_function;
+//            cout<<"sample2>> "<<sample[i]->objective_function<<endl;
             sample[i]->standard_deviation = progeny[t]->standard_deviation;
             for(int j=0; j<dimension; j++){ sample[i]->position[j] = progeny[t]->position[j]; }
             t++;
@@ -381,6 +366,7 @@ void Selection(Individual **progenitor, Individual **progeny, int dimension){
     QuickSort(sample, 0, (MI+LAMBDA)-1, dimension);
     for(int i=0; i<MI; i++){
         progenitor[i]->objective_function = sample[i]->objective_function;
+//        cout<<"progenitor<< "<<progenitor[i]->objective_function<<endl;
         progenitor[i]->standard_deviation = sample[i]->standard_deviation;
         for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = sample[i]->position[j]; }
         delete []sample[i]->position;
@@ -453,28 +439,28 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
             q++;
             for(i=0; i<MI; i++){
                 success = false;
-                int t=0;
-                for(int j=0; j<LAMBDA/MI && t<LAMBDA && functionEvaluations<criteria; j++, t++){
-                    for(int k=0; k<dimension; k++){
-                        progeny[t]->position[k] = progenitor[i]->position[k] + Normal_distribution(0, progenitor[i]->standard_deviation);
-                        if(lb != NULL && ub != NULL){
-                            if(progeny[t]->position[k] < lb[i]){ progeny[t]->position[k] = lb[i];}
-                            if(progeny[t]->position[k] > ub[i]){ progeny[t]->position[k] = ub[i];}
+                for(int t=0; t<LAMBDA && functionEvaluations<criteria; ){
+                    for(int j=0; j<LAMBDA/MI; j++, t++){
+                        for(int k=0; k<dimension; k++){
+                            progeny[t]->position[k] = progenitor[i]->position[k] + Normal_distribution(0, progenitor[i]->standard_deviation);
+                            if(lb != NULL && ub != NULL){
+                                if(progeny[t]->position[k] < lb[i]){ progeny[t]->position[k] = lb[i];}
+                                if(progeny[t]->position[k] > ub[i]){ progeny[t]->position[k] = ub[i];}
+                            }
                         }
-                    }
-                    progeny[t]->standard_deviation = progenitor[i]->standard_deviation;
-                    progeny[t]->objective_function = Compute_Function(progeny[t]->position, dimension, number_function);
-                    functionEvaluations++;
-                    if(progeny[t]->objective_function < progenitor[i]->objective_function){
-                        if(progeny[t]->objective_function < best_individual->objective_function){
-                            best_individual->objective_function = progeny[t]->objective_function;
-                            for(int w=0; w<dimension; w++){ best_individual->position[w] = progeny->position[w]; }
-                            cout<<" 1>> ">>best_individual->objective_function<<endl;
-                            success = true;
+                        progeny[t]->standard_deviation = progenitor[i]->standard_deviation;
+                        progeny[t]->objective_function = Compute_Function(progeny[t]->position, dimension, number_function);
+                        functionEvaluations++;
+                        if(progeny[t]->objective_function < progenitor[i]->objective_function){
+                            if(progeny[t]->objective_function < best_individual->objective_function){
+                                best_individual->objective_function = progeny[t]->objective_function;
+                                best_individual->standard_deviation = progeny[t]->standard_deviation;
+                                for(int w=0; w<dimension; w++){ best_individual->position[w] = progeny[t]->position[w]; }
+                                success = true;
+                            }
                         }
                     }
                 }
-
                 progenitor[i]->standard_deviation = progenitor[i]->standard_deviation*exp(Normal_distribution(0, 1/dimension));
             }
             if(!success){
@@ -532,21 +518,6 @@ void Evolutionary_Strategy2(int seed, double expected_mean, int dimension, int n
         Individual *individuo = new Individual();
         individuo->position = new double[dimension];
         individuo->standard_deviation = expected_mean/sqrt(dimension);
-
-        //matriz de padrões
-//        for(i = 0; i<2*dimension; i++){
-//             pattern[i] = new double[dimension];
-//            for(int j=0; j<dimension; j++){
-//                if(i<dimension){
-//                    if(j==i){pattern[i][j] = 1.0;}
-//                    else{ pattern[i][j] = 0.0; }
-//                }
-//                else{
-//                    if(i-j == dimension){ pattern[i][j] = -1.0; }
-//                    else{ pattern[i][j] = 0.0; }
-//                }
-//            }
-//        }
 
        double *lb = new double[dimension], *ub = new double[dimension];
        Lower_Bounds(number_function, dimension, lb);
@@ -655,6 +626,7 @@ void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int n
             }
         }
         else{ for(i=0; i<dimension; i++){ individuo->position[i] = generate_ramdom(); } }
+
         individuo->objective_function = Compute_Function(individuo->position, dimension, number_function);
         functionEvaluations++;
 
@@ -673,7 +645,7 @@ void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int n
             }
             double y[dimension];
             for(i=0; i<dimension; i++){
-                y[i] = x[i] + Normal_distribution(0, individuo->standard_deviation); //TODO -- parametro eh desvio padrao?
+                y[i] = x[i] + Normal_distribution(0, individuo->standard_deviation);
                 if(lb != NULL && ub != NULL){
                     if(y[i] < lb[i]){ y[i] = lb[i]; }
                     if(y[i] > ub[i]){ y[i] = ub[i]; }
@@ -709,6 +681,7 @@ void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int n
 //        cout<<"ITERACOES SEM SUCESSO PS ------------ "<<ps<<endl;
 //        cout<<"ITERACOES DE SUCESSO ---------------- "<<(t - es) + (es - ps)<<endl;
 
+        for(int k=0; k<dimension; k++){ x[k] = individuo->position[k]; }
         delete []successful;
 //        for(i=0; i<2*dimension; i++){ delete []pattern[i]; }
 //        delete []pattern;
