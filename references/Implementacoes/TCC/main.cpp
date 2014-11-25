@@ -3,6 +3,11 @@
 #include "Avaliation_Function.h"
 #include "Estrategias.h"
 #include "Solution.h"
+#include "ES_PS1.h"
+#include "ES_PS2.h"
+#include "ES_PS3.h"
+#include "PSO_PS.h"
+#include "PatternSearch.h"
 
 #define DIMENSAO 30
 #define DELTA 0.7

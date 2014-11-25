@@ -2,9 +2,14 @@ g++ -o teste *.cpp -std=c++0x
 
 rm result.csv
 
-echo "Este é um script"
+echo "Codigo Compilado"
 f=0
 s=0
+
+echo "PSO-PS-> Pattern Search com Otimização por Enxame de Partículas" >> README.txt
+echo "ES-PS 1 -> Pattern Search com Estratégia Evolutiva(1+1) considerando adaptação do desvio padrão através da técnica 1/5 de sucessos" >> README.txt
+echo "ES-PS 2 -> Pattern Search com Estrategia Evolutiva(1+1) considerando atualização do desvia padrão isomórfica a cada iteração" >> README.txt
+echo "ES-PS 3 -> Pattern Search com Estrategia Evolutiva(mi + lambda) considerando atualização do desvia padrão isomórfica a cada iteração para cada indivíduo" >> README.txt
 
 echo "PROBLEMA;SEMENTE;PSO-PS;ES-PS 1;ES-PS 2;ES-PS 3; MEDIA PSO-PS; MEDIA ES-PS 1; MEDIA ES-PS 2; MEDIA ES-PS 3">>result.csv
 
@@ -15,3 +20,6 @@ for(( f=1; f<15; f++ ))
 	   ./teste $f $s >> result.csv
 	  done          
   done 
+
+cat README.txt
+cat result.csv

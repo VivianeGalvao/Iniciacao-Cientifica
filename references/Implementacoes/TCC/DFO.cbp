@@ -34,8 +34,18 @@
 		</Compiler>
 		<Unit filename="Avaliation_Function.cpp" />
 		<Unit filename="Avaliation_Function.h" />
+		<Unit filename="ES_PS1.cpp" />
+		<Unit filename="ES_PS1.h" />
+		<Unit filename="ES_PS2.cpp" />
+		<Unit filename="ES_PS2.h" />
+		<Unit filename="ES_PS3.cpp" />
+		<Unit filename="ES_PS3.h" />
 		<Unit filename="Estrategias.cpp" />
 		<Unit filename="Estrategias.h" />
+		<Unit filename="PSO_PS.cpp" />
+		<Unit filename="PSO_PS.h" />
+		<Unit filename="PatternSearch.cpp" />
+		<Unit filename="PatternSearch.h" />
 		<Unit filename="Solution.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>

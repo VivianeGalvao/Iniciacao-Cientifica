@@ -2,6 +2,7 @@
 #include "Estrategias.h"
 #include "Solution.h"
 #include "Avaliation_Function.h"
+#include "PatternSearch.h"
 #include<cmath>
 #include <random>
 
