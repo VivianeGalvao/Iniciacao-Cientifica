@@ -8,6 +8,7 @@ bool Exploratory_Moves(double *pattern, double delta, double *x_iteration, int s
 
 double Normal_distribution(double mean, double desvio_padrao);
 
+void Evolutionary_Strategy4(int seed, double expected_mean, int dimension, int number_function, double delta, double *x);
 void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int number_function, double delta, double *x);
 void Selection(Individual **progenitor, Individual **progeny, int dimension);
 void QuickSort(Individual **sample, int left, int right, int dimension);

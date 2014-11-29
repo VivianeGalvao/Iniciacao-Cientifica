@@ -3,11 +3,7 @@
 #include "Avaliation_Function.h"
 #include "Estrategias.h"
 #include "Solution.h"
-#include "ES_PS1.h"
-#include "ES_PS2.h"
-#include "ES_PS3.h"
-#include "PSO_PS.h"
-#include "PatternSearch.h"
+
 
 #define DIMENSAO 30
 #define DELTA 0.7
@@ -26,21 +22,24 @@ int main(int argc, char** argv)
         //int estrategia = atoi(argv[3]);
         double *x = new double[DIMENSAO];
 //        cout<<funcao<<" ; "<<semente<<" ; ";
-        PSwarm(DIMENSAO, semente, INF, funcao, x);
+//        PSwarm(DIMENSAO, semente, INF, funcao, x);
 //        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
-        cout<<endl<<endl;
-
+//
+//
         Evolutionary_Strategy1(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
+        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
+//
+//
+//        Evolutionary_Strategy2(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
 //        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
-        cout<<endl<<endl;
+//
+//        Evolutionary_Strategy3(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
+//        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
+//
+        Evolutionary_Strategy4(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
+        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
+//        cout<<endl;
 
-        Evolutionary_Strategy2(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
-//        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
-        cout<<endl<<endl;
-
-        Evolutionary_Strategy3(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
-//        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
-        cout<<endl<<endl;
 
         delete []x;
     }
