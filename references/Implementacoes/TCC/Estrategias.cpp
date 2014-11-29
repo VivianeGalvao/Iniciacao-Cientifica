@@ -223,7 +223,7 @@ void PSwarm(int dimension, int seed, double delta_initial, int number_function, 
         int iteracoes = 0, maxEval = Number_Evaluations(number_function);
         criteria = maxEval;
          while(functionEvaluations < maxEval){
-            cout<<fitness_global<<"  ";
+//            cout<<fitness_global<<"  ";
             bool successful = false, test=false;
             for(i=0; i<number_particles && functionEvaluations < maxEval; i++){
                 for(j=0; j<dimension; j++){
@@ -421,7 +421,7 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
         int es = 0, ps  = 0;
         int q = 0;
         while(functionEvaluations < criteria){
-            cout<<best_individual->objective_function<<"  ";
+  //          cout<<best_individual->objective_function<<"  ";
             success = false;
             q++;
             for(i=0; i<MI; i++){
@@ -521,7 +521,7 @@ void Evolutionary_Strategy2(int seed, double expected_mean, int dimension, int n
         int t=0, functionEvaluations=0;
 
         while(functionEvaluations < criteria){
-            cout<<individuo->objective_function<<"  ";
+    //        cout<<individuo->objective_function<<"  ";
             success=false;
             double y[dimension];
             for(i=0; i<dimension; i++){
@@ -624,7 +624,7 @@ void Evolutionary_Strategy1(int seed, double expected_mean, int dimension, int n
         int t=0;
 
         while(functionEvaluations < criteria){
-            cout<<individuo->objective_function<<"  ";
+      //      cout<<individuo->objective_function<<"  ";
             success=false;
             //regra de 1/5 de sucessos
             if(t%dimension == 0 && t>=dimension*10){
