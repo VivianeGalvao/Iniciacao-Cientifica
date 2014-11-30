@@ -427,7 +427,7 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
         int es = 0, ps  = 0, p=0;
         int q = 0;
         while(functionEvaluations < criteria){
-  //          cout<<best_individual->objective_function<<"  ";
+//            cout<<best_individual->objective_function<<"  ";
             int t=0;
             success = false;
             q++;
@@ -443,17 +443,18 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
                     progeny[t]->standard_deviation = progenitor[i]->standard_deviation;
                     progeny[t]->objective_function = Compute_Function(progeny[t]->position, dimension, number_function);
                     functionEvaluations++;
-                    //if(progeny[t]->objective_function < progenitor[i]->objective_function){
+                    if(progeny[t]->objective_function < progenitor[i]->objective_function){
                         if(progeny[t]->objective_function < best_individual->objective_function){
                             best_individual->objective_function = progeny[t]->objective_function;
                             best_individual->standard_deviation = progeny[t]->standard_deviation;
                             for(int w=0; w<dimension; w++){ best_individual->position[w] = progeny[t]->position[w]; }
-                            success = true;
+                            success = true; p++;
                         }
-                    //}
+                    }
                 }
                 progenitor[i]->standard_deviation = progenitor[i]->standard_deviation*exp(Normal_distribution(0, 1/sqrt(dimension)));
             }
+            Selection(progenitor, progeny, dimension);
             if(!success){
                     es++;
                     bool exit = false;
@@ -468,7 +469,6 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
                     }
                     if(exit)ps++;
             }
-            Selection(progenitor, progeny, dimension);
         }
 
         for(i=0; i<dimension; i++){ x[i] = best_individual->position[i]; }
@@ -797,12 +797,12 @@ void Evolutionary_Strategy4(int seed, double expected_mean, int dimension, int n
         }
         for(i=0; i<dimension; i++){ x[i] = best_individuo->position[i]; }
 
-        cout<<"NUMERO FUNCAO ------------------ "<<number_function<<endl;
-        cout<<"AVALIACOES DA FUNCAO OBJETIVO ------- "<<functionEvaluations<<endl;
-        cout<<"NUMERO DE ITERACOES ----------------- "<<q<<endl;
-        cout<<"ITERACOES SEM SUCESSO ES ------------ "<<es<<endl;
-        cout<<"ITERACOES SEM SUCESSO PS ------------ "<<ps<<endl;
-        cout<<"ITERACOES DE SUCESSO ---------------- "<<(q - es) + (es - ps)<<endl;
+//        cout<<"NUMERO FUNCAO ------------------ "<<number_function<<endl;
+//        cout<<"AVALIACOES DA FUNCAO OBJETIVO ------- "<<functionEvaluations<<endl;
+//        cout<<"NUMERO DE ITERACOES ----------------- "<<q<<endl;
+//        cout<<"ITERACOES SEM SUCESSO ES ------------ "<<es<<endl;
+//        cout<<"ITERACOES SEM SUCESSO PS ------------ "<<ps<<endl;
+//        cout<<"ITERACOES DE SUCESSO ---------------- "<<(q - es) + (es - ps)<<endl;
 
         for(i=0; i<MI; i++){
             delete []successful[i];
