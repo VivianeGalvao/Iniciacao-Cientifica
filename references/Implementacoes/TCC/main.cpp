@@ -5,24 +5,27 @@
 #include "Solution.h"
 
 
-#define DIMENSAO 30
-#define DELTA 0.7
+//#define DIMENSAO 2
+//#define DELTA 0.7
 #define INF 3.40282347E+38F
-#define MEDIA_ESPERADA 0.7
-#define DELTA 0.7
+//#define MEDIA_ESPERADA 0.7
+
 
 using namespace std;
 
 int main(int argc, char** argv)
-{
-    if(argc == 3){
+{  // cout.precision();
+    if(argc == 6){
         int funcao = atoi(argv[1]);
         int semente = atoi(argv[2]);
+        double MEDIA_ESPERADA = atof(argv[4]);
+        double DELTA = atof(argv[3]);
+        int DIMENSAO = atoi(argv[5]);
 
         double *x = new double[DIMENSAO];
-        cout<<funcao<<" ; "<<semente<<" ; ";
-        PSwarm(DIMENSAO, semente, INF, funcao, x);
-        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
+        cout<<funcao<<" ; "<<semente<<" ; "<<DELTA<<";"<<MEDIA_ESPERADA<<";"<<DIMENSAO<<";";
+//        PSwarm(DIMENSAO, semente, INF, funcao, x);
+//        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
 //
 //        Evolutionary_Strategy1(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
 //        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
