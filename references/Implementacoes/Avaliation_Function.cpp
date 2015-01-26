@@ -5,6 +5,7 @@
 #include<math.h>
 #include<cmath>
 #include<string.h>
+#include<cfloat>
 #define PI 3.14159265359
 #define EULER 2.71828182845
 #define SEED 0
@@ -13,15 +14,11 @@ using namespace std;
 
 
 double Sphere_function(double *x, int size){
-//    for(int i=0; i<size; i++){
-//        cout<<" >> "<<x[i]<<" ";
-//    }
-//    cout<<endl;
     double fx=0.0;
     for(int i=0; i<size; i++){
         fx += x[i]*x[i];
     }
-//    cout<<" >> "<<(double)fx<<endl;
+
     return (double)fx;
 
     /**Best Values*/
@@ -159,10 +156,10 @@ double f10(double *x, int size){
 double f11(double *x, int size){
     double sum=0, prod=1;
     for(int i = 0; i<size; i++){
-        sum += x[i]*x[i];
+        sum += (x[i]*x[i])/4000.0;
         prod = prod*cos(x[i]/sqrt(i+1));
     }
-    return sum/4000.0 - prod +1.0;
+    return sum - prod +1.0;
 
     //return 1.6*Math.pow(10, -2); //FEP
 	//return 0.036;
@@ -266,6 +263,45 @@ void loadMatriz(string namefile, int row, int colunm, double** M){
     }
     else{cout<<"Problema matriz loadMatriz"<<endl;}
 }
+
+double weierstrass(double* x, int size) {
+        double a = 0.5, b = 3.0;
+        int Kmax = 20;
+		double sum1 = 0.0;
+		for (int i = 0 ; i < size ; i ++) {
+			for (int k = 0 ; k <= Kmax ; k ++) {
+				sum1 += pow(a, k) * cos(PI*2 * pow(b, k) * (x[i] + 0.5));
+			}
+		}
+
+		double sum2 = 0.0;
+		for (int k = 0 ; k <= Kmax ; k ++) {
+			sum2 += pow(a, k) * cos(PI*2 * pow(b, k) * (0.5));
+		}
+
+		return (sum1 - sum2*((double )(size)));
+}
+
+double basic_func(int i, double *test, int size){
+    switch(i){
+        case 0:
+            return f09(test, size);
+        break;
+        case 1:
+            return weierstrass(test, size);
+        break;
+        case 2:
+            return f11(test, size);
+        break;
+        case 3:
+            return f10(test, size);
+        break;
+        case 4:
+            return Sphere_function(test, size);
+        break;
+    }
+}
+
 double f20(double *x, int size){
     string namefile = "/home/viviane/Área de Trabalho/codigo_cec/supportData";
     double bias = 120.0;
@@ -287,14 +323,73 @@ double f20(double *x, int size){
         z[i] = new double[size];
         zM[i] = new double[size];
     }
+    for(int i=0; i<size; i++){
+        for(int j=0; j<size; j++){
+            M[i][j] = new double[size];
+        }
+    }
+    loadMatriz(namefile, 5, size, o);
+    for (int i = 0 ; i < 5 ; i ++) {
+			for (int j = 0 ; j < size ; j ++) {
+				for (int k = 0 ; k < size ; k ++) {
+					M[i][j][k] = 0.0;
+				}
+			}
+			for (int j = 0 ; j < size ; j ++) {
+				M[i][j][j] = 1.0;
+			}
+    }
+    double C = 2000.0;
 
+    for (int i = 0 ; i < 5 ; i ++) {
+			for (int j = 0 ; j < size ; j ++) {
+				testPoint[j] = (5.0 / lambda[i]);
+			}
+			rotate(testPointM, testPoint, M[i], size);
+			fmax[i] = abs(basic_func(i, testPointM, size));
+    }
+
+    double wMax = -FLT_MAX;
+    for (int i = 0 ; i < 5 ; i ++) {
+			double sumSqr = 0.0;
+			shift(z[i], x, o[i], size);
+			for (int j = 0 ; j < size ; j ++) {
+				sumSqr += (z[i][j] * z[i][j]);
+			}
+			w[i] = exp(-1.0 * sumSqr / (2.0 * size * sigma[i] * sigma[i]));
+			if (wMax < w[i]){
+				wMax = w[i];
+			}
+    }
+
+    double wSum = 0.0;
+    double w1mMaxPow = 1.0 - pow(wMax, 10.0);
+    for (int i = 0 ; i < 5 ; i ++) {
+        if (w[i] != wMax) {
+            w[i] *= w1mMaxPow;
+        }
+        wSum += w[i];
+	}
+    for (int i = 0 ; i < 5 ; i ++) {
+			w[i] /= wSum;
+    }
+
+    double sumF = 0.0;
+    for (int i = 0 ; i < 5 ; i ++) {
+        for (int j = 0 ; j < size ; j ++) {
+            z[i][j] /= lambda[i];
+        }
+        rotate(zM[i], z[i], M[i], size);
+        sumF += w[i]*(C * basic_func(i,zM[i], size) / fmax[i] + biases[i]);
+    }
+		return sumF+bias;
 }
 
 double f22(double *x, int size){
     double sum = 0.0;
 
-    for(int i=0; i<size-1; i++)}{
-        sum += -x[i]*sen(sqrt(fabs(x[i] - (x[i+1] + 47)))) - (x[i+1] + 47)*sen(sqrt(x[i+1] + 47 + (x[i]/2)));
+    for(int i=0; i<size-1; i++){
+        sum += -x[i]*sin(sqrt(fabs(x[i] - (x[i+1] + 47)))) - (x[i+1] + 47)*sin(sqrt(x[i+1] + 47 + (x[i]/2)));
     }
 
     return sum;
