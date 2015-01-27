@@ -1,11 +1,12 @@
 #include <iostream>
 #include <fstream>
-#include<stdlib.h>
-#include<stdio.h>
-#include<math.h>
-#include<cmath>
-#include<string.h>
-#include<cfloat>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include <cmath>
+#include <string>
+#include <sstream>
+#include <cfloat>
 #define PI 3.14159265359
 #define EULER 2.71828182845
 #define SEED 0
@@ -234,6 +235,41 @@ double f14(double *x, int size){
 	//return 0.0003913586; //icaris2010
 }
 
+double f15(double *x, int size){
+     double a[4][6] = {{10,3,17,3.5,1.7,8}, {0.05,10,17,0.1,8,14}, {3,3.5,1.7,10,17,8}, {17,8,0.05,10,14}};
+     double c[4] = {1, 1.2, 3, 3.2};
+     double p[4][6] ={{0.1312, 0.1696, 0.5569, 0.0124, 0.8283, 0.5886}, {0.2329, 0.4135, 0.8307, 0.3736, 0.1004, 0.9991},
+                {0.2348, 0.1415, 0.3522, 0.2883, 0.3047, 0.6650}, {0.4047, 0.8828, 0.8732, 0.5743, 0.1091, 0.0381}};
+     double sum=0, aux=0;
+
+     for(int i=0; i<4; i++){
+        for(int j=0; j<6; j++){
+            aux+=a[i][j]*(x[j] - p[i][j])*(x[j] - p[i][j]);
+        }
+        sum += c[i]*exp(-aux);
+     }
+
+     return -sum;
+}
+
+double vectorProduct(double a[], double b[], int tam){
+    double sum=0;
+    for(int i=0; i<tam; i++){
+        sum += a[i]*b[i];
+    }
+    return sum;
+}
+
+double f16(double *x, int size){
+    double a[10][4] = {{4,4,4,4}, {1,1,1,1}, {8,8,8,8}, {6,6,6,6}, {3,7,3,7}, {2,9,2,9}, {5,5,3,3}, {8,1,8,1}, {6,2,6,2}, {7,3.6,7,3.6,}};
+    double c[10] = {0.1, 0.2, 0.2, 0.4, 0.4, 0.6, 0.3, 0.7, 0.5, 0.5};
+    double aux = 0;
+    for(int i=0; i<10; i++){
+        aux += 1/(vectorProduct(a[i], a[i], 4) + c[i]);
+    }
+    return -aux;
+}
+
 void rotate(double *results, double *x, double **A, int size_results){
     for(int i=0; i<size_results; i++){
         results[i] = 0.0;
@@ -251,7 +287,6 @@ void shift(double *results, double *x, double *o, int size_x){
 void loadMatriz(string namefile, int row, int colunm, double** M){
     if(M != NULL){
         ifstream matriz;
-        string line;
         matriz.open(namefile.c_str());
         if(matriz.is_open()){
             for(int i=0; i<row; i++){
@@ -260,8 +295,25 @@ void loadMatriz(string namefile, int row, int colunm, double** M){
                 }
             }
         }
+        matriz.close();
     }
     else{cout<<"Problema matriz loadMatriz"<<endl;}
+}
+
+void loadMatriz_21(string namefile, int a, int b, int c, double ***M){
+    if(M != NULL){
+        ifstream matriz;
+        matriz.open(namefile.c_str());
+        if(matriz.is_open()){
+            for(int i=0; i<c; i++){
+                loadMatriz(namefile, a, b, M[i]);
+            }
+        }else{ cout<<"arquivo nao pode ser aberto"<<endl; }
+    }
+    else{
+        cout<<"Problema matriz loadMatriz_21"<<endl;
+    }
+
 }
 
 double weierstrass(double* x, int size) {
@@ -282,7 +334,58 @@ double weierstrass(double* x, int size) {
 		return (sum1 - sum2*((double )(size)));
 }
 
-double basic_func(int i, double *test, int size){
+double ScafferF6(double x, double y) {
+	double temp1 = x*x + y*y;
+	double temp2 = sin(sqrt(temp1));
+	double temp3 = 1.0 + 0.001 * temp1;
+	return (0.5 + ((temp2 * temp2 - 0.5)/(temp3 * temp3)));
+}
+
+double EScafferF6(double* x, int size) {
+		double sum = 0.0;
+		for (int i = 1 ; i < size ; i ++) {
+			sum += ScafferF6(x[i-1], x[i]);
+		}
+		sum += ScafferF6(x[size-1], x[0]);
+		return (sum);
+}
+
+double F2(double x, double y) {
+    double temp1 = (x * x) - y;
+	double temp2 = x - 1.0;
+	return ((100.0 * temp1 * temp1) + (temp2 * temp2));
+}
+
+double F8(double x) {
+	return (((x * x) / 4000.0) - cos(x) + 1.0);
+}
+
+double F8F2(double* x, int size) {
+		double sum = 0.0;
+		for (int i = 1 ; i < size ; i ++) {
+			sum += F8(F2(x[i-1], x[i]));
+		}
+		sum += F8(F2(x[size-1], x[0]));
+		return sum;
+}
+
+double signum(double x){
+    if(x == 0){ return 0; }
+    else{
+        if(x > 0){ return 1;}
+        else{ return -1; }
+    }
+}
+
+double myRound(double x) {
+	return (signum(x) * round(fabs(x)));
+}
+
+double myXRound(double x, double o) {
+		return ((fabs(x - o) < 0.5) ? x : (myRound(2.0 * x) / 2.0));
+}
+
+double basic_func20(int i, double *test, int size){
     switch(i){
         case 0:
             return f09(test, size);
@@ -302,8 +405,28 @@ double basic_func(int i, double *test, int size){
     }
 }
 
+double basic_func21(int i, double *test, int size){
+    switch(i){
+        case 0:
+            return EScafferF6(test, size);
+        break;
+        case 1:
+            return f09(test, size);
+        break;
+        case 2:
+            return F8F2(test, size);
+        break;
+        case 3:
+            return weierstrass(test, size);
+        break;
+        case 4:
+            return f11(test, size);
+        break;
+    }
+}
+
 double f20(double *x, int size){
-    string namefile = "/home/viviane/Área de Trabalho/codigo_cec/supportData";
+    string namefile = "/home/viviane/Área de Trabalho/codigo_cec/supportData/hybrid_func1_data.txt";
     double bias = 120.0;
     double sigma[] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
     double lambda[] = {1.0, 1.0, 10.0, 10.0, 5.0/60.0, 5.0/60.0, 5.0/32.0, 5.0/32.0, 5.0/100.0, 5.0/100.0};
@@ -323,7 +446,7 @@ double f20(double *x, int size){
         z[i] = new double[size];
         zM[i] = new double[size];
     }
-    for(int i=0; i<size; i++){
+    for(int i=0; i<5; i++){
         for(int j=0; j<size; j++){
             M[i][j] = new double[size];
         }
@@ -346,7 +469,7 @@ double f20(double *x, int size){
 				testPoint[j] = (5.0 / lambda[i]);
 			}
 			rotate(testPointM, testPoint, M[i], size);
-			fmax[i] = abs(basic_func(i, testPointM, size));
+			fmax[i] = fabs(basic_func20(i, testPointM, size));
     }
 
     double wMax = -FLT_MAX;
@@ -380,9 +503,149 @@ double f20(double *x, int size){
             z[i][j] /= lambda[i];
         }
         rotate(zM[i], z[i], M[i], size);
-        sumF += w[i]*(C * basic_func(i,zM[i], size) / fmax[i] + biases[i]);
+        sumF += w[i]*(C * basic_func20(i,zM[i], size) / fmax[i] + biases[i]);
     }
-		return sumF+bias;
+
+    for(int i=0; i<5; i++){
+        for(int j=0; j<size; j++){
+            delete []M[i][j];
+        }
+    }
+
+    for(int i=0; i<5; i++){
+        delete []o[i];
+        delete []M[i];
+        delete []z[i];
+        delete []zM[i];
+    }
+
+    delete []o;
+    delete []M;
+    delete []fmax;
+    delete []w;
+    delete []z;
+    delete []zM;
+    delete []testPoint;
+    delete []testPointM;
+
+	return sumF + bias;
+}
+
+double f21(double* x, int size){
+    ostringstream convert;
+    convert<<"/home/viviane/Área de Trabalho/codigo_cec/supportData/hybrid_func3_M_D"<<size<<".txt";
+    string filename = "/home/viviane/Área de Trabalho/codigo_cec/supportData/hybri  d_func3_data.txt";
+    string filenameM = convert.str();
+    double bias = 360;
+    double sigma[] = {
+		1.0,	1.0,	1.0,	1.0,	1.0,
+		2.0,	2.0,	2.0,	2.0,	2.0
+	};
+	double lambda[] = {
+		5.0*5.0/100.0,	5.0/100.0,	5.0*1.0,	1.0,			5.0*1.0,
+		1.0,			5.0*10.0,	10.0,		5.0*5.0/200.0,	5.0/200.0
+	};
+	double biases[] = {
+		0.0,	100.0,	200.0,	300.0,	400.0,
+		500.0,	600.0,	700.0,	800.0,	900.0
+	};
+    double **o = new double*[5];
+    double ***M = new double**[5];
+    double *testPoint = new double[size];
+    double *testPointM = new double[size];
+    double *fmax = new double[5];
+    double *w = new double[5];
+    double **z = new double*[5];
+    double **zM = new double*[5];
+
+    for(int i=0; i<5; i++){
+        o[i] = new double[size];
+        M[i] = new double*[size];
+        z[i] = new double[size];
+        zM[i] = new double[size];
+    }
+    for(int i=0; i<5; i++){
+        for(int j=0; j<size; j++){
+            M[i][j] = new double[size];
+        }
+    }
+
+    loadMatriz(filename, 5, size, o);
+    loadMatriz_21(filenameM, 5, size, size, M);
+
+    double C = 2000.0;
+
+    for (int i = 0 ; i < 5 ; i ++) {
+        for (int j = 0 ; j < size ; j ++) {
+            testPoint[j] = (5.0 / lambda[i]);
+        }
+        rotate(testPointM, testPoint, M[i], size);
+        fmax[i] = fabs(basic_func21(i, testPointM, size));
+    }
+
+    double* newX = new double[size];
+
+    for (int i = 0 ; i < size ; i ++) {
+        newX[i] = myXRound(x[i], o[0][i]);
+    }
+
+    double wMax = -FLT_MAX;
+    for (int i = 0 ; i < 5 ; i ++) {
+			double sumSqr = 0.0;
+			shift(z[i], x, o[i], size);
+			for (int j = 0 ; j < size ; j ++) {
+				sumSqr += (z[i][j] * z[i][j]);
+			}
+			w[i] = exp(-1.0 * sumSqr / (2.0 * size * sigma[i] * sigma[i]));
+			if (wMax < w[i]){
+				wMax = w[i];
+			}
+    }
+
+    double wSum = 0.0;
+    double w1mMaxPow = 1.0 - pow(wMax, 10.0);
+    for (int i = 0 ; i < 5 ; i ++) {
+        if (w[i] != wMax) {
+            w[i] *= w1mMaxPow;
+        }
+        wSum += w[i];
+	}
+    for (int i = 0 ; i < 5 ; i ++) {
+			w[i] /= wSum;
+    }
+
+    double sumF = 0.0;
+    for (int i = 0 ; i < 5 ; i ++) {
+        for (int j = 0 ; j < size ; j ++) {
+            z[i][j] /= lambda[i];
+        }
+        rotate(zM[i], z[i], M[i], size);
+        sumF += w[i]*(C * basic_func21(i,zM[i], size) / fmax[i] + biases[i]);
+    }
+
+    for(int i=0; i<5; i++){
+        for(int j=0; j<size; j++){
+            delete []M[i][j];
+        }
+    }
+
+    for(int i=0; i<5; i++){
+        delete []o[i];
+        delete []M[i];
+        delete []z[i];
+        delete []zM[i];
+    }
+
+    delete []o;
+    delete []M;
+    delete []fmax;
+    delete []w;
+    delete []z;
+    delete []zM;
+    delete []testPoint;
+    delete []testPointM;
+
+    return sumF + bias;
 }
 
 double f22(double *x, int size){
@@ -440,6 +703,15 @@ double Compute_Function(double* x, int size, int num_func){
         case 14:
             return f14(x,size);
         break;
+        case 15:
+            return f15(x,size);
+        break;
+        case 16:
+            return f16(x,size);
+        break;
+        case 20:
+            return f20(x,size);
+        break;
         case 22:
             return f22(x,size);
         break;
@@ -488,6 +760,15 @@ void Lower_Bounds(int num_fun, int size, double *lb){
             for(int i=0; i<size; i++){ lb[i] = -50.0; }
         break;
         case 14:
+            for(int i=0; i<size; i++){ lb[i] = -5.0; }
+        break;
+        case 15:
+            for(int i=0; i<size; i++){ lb[i] = 0.0; }
+        break;
+        case 16:
+            for(int i=0; i<size; i++){ lb[i] = 0.0; }
+        break;
+        case 20:
             for(int i=0; i<size; i++){ lb[i] = -5.0; }
         break;
         case 22:
@@ -540,6 +821,15 @@ void Upper_Bounds(int num_fun, int size, double* ub){
         case 14:
             for(int i=0; i<size; i++){ ub[i] = 5.0; }
         break;
+        case 15:
+            for(int i=0; i<size; i++){ ub[i] = 1.0; }
+        break;
+        case 16:
+            for(int i=0; i<size; i++){ ub[i] = 10.0; }
+        break;
+        case 20:
+            for(int i=0; i<size; i++){ ub[i] = 5.0; }
+        break;
         case 22:
             for(int i=0; i<size; i++){ ub[i] = 512.0; }
         break;
@@ -590,6 +880,15 @@ int Number_Evaluations(int number_function){
         break;
         case 14:
             return 40000;
+        break;
+        case 15:
+            return 2000;
+        break;
+        case 16:
+            return 1000;
+        break;
+        case 20:
+            return 30000;
         break;
         case 22:
             return 15000;
