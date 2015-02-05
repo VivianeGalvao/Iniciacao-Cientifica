@@ -20,6 +20,14 @@ double f11(double* x, int size);
 double f12(double* x, int size);
 double f13(double* x, int size);
 double f14(double* x, int size);
+double f15(double* x, int size);
+double f16(double* x, int size);
+double f17(double* x, int size);
+double f18(double* x, int size);
+double f19(double* x, int size);
+double f20(double* x, int size);
+double f21(double* x, int size);
+double f17(double* x, int size);
 
 
 

@@ -267,7 +267,28 @@ double f16(double *x, int size){
     for(int i=0; i<10; i++){
         aux += 1/(vectorProduct(a[i], a[i], 4) + c[i]);
     }
+
     return -aux;
+}
+
+double f17(double *x, int size){
+    return 0.0;
+}
+
+double ScafferF6(double x, double y) {
+	double temp1 = x*x + y*y;
+	double temp2 = sin(sqrt(fabs(temp1)));
+	double temp3 = 1.0 + 0.001 * temp1;
+	return (0.5 + ((temp2 * temp2 - 0.5)/(temp3 * temp3)));
+}
+
+double EScafferF6(double* x, int size) {
+		double sum = 0.0;
+		for (int i = 0 ; i < size-1 ; i ++) {
+			sum += ScafferF6(x[i], x[i+1]);
+		}
+		sum += ScafferF6(x[size-1], x[0]);
+		return (sum);
 }
 
 void rotate(double *results, double *x, double **A, int size_results){
@@ -284,15 +305,37 @@ void shift(double *results, double *x, double *o, int size_x){
             results[i] = x[i] - o[i];
         }
 }
+
+void loadVector(string namefile, int row, double *v){
+    if(v != NULL){
+        ifstream vetor;
+        vetor.open(namefile.c_str());
+        if(vetor.is_open()){
+            float aux = 0.0;
+            for(int i=0; i<row; i++){
+                vetor >> aux;
+                v[i] = aux;
+            }
+        }
+    }else{
+        cout<<"Problema vetor leitura loadVector"<<endl;
+    }
+}
+
 void loadMatriz(string namefile, int row, int colunm, double** M){
     if(M != NULL){
         ifstream matriz;
         matriz.open(namefile.c_str());
         if(matriz.is_open()){
+            double aux = 0.0;
             for(int i=0; i<row; i++){
-                for(int j=0; j<colunm; j++){
-                    matriz >> M[i][j];
-                }
+                if(M[i] != NULL){
+                    for(int j=0; j<colunm; j++){
+                        matriz >> aux;
+                        M[i][j] = (double)aux;
+//                        M[i][j] = 0.0;
+                    }
+                }else{cout<<"Problema matriz linha nula loadMatriz";}
             }
         }
         matriz.close();
@@ -300,13 +343,92 @@ void loadMatriz(string namefile, int row, int colunm, double** M){
     else{cout<<"Problema matriz loadMatriz"<<endl;}
 }
 
+double f18(double *x, int size){
+    ostringstream convert;
+    convert<<"/home/viviane/Área de Trabalho/codigo_cec/supportData/elliptic_M_D"<<size<<".txt";
+    string namefileMatrix = convert.str();
+    string namefileVector = "/home/viviane/Área de Trabalho/codigo_cec/supportData/high_cond_elliptic_rot_data.txt";
+
+    double bias = -450;
+
+    double *o = new double[size];
+    double **M = new double*[size];
+    double *z = new double[size];
+    double *zM = new double[size];
+    for(int i=0; i<size; i++){
+        M[i] = new double[size];
+    }
+    double constante = pow(1000000.0, 1.0/(size-1.0));
+
+    loadVector(namefileVector, size, o);
+    loadMatriz(namefileMatrix, size, size, M);
+
+    shift(z, x, o, size);
+    rotate(zM, z, M, size);
+
+    double sum = 0.0;
+
+    for (int i = 0 ; i < size ; i ++) {
+        sum += pow(constante, i) * zM[i] * zM[i];
+    }
+
+    for(int i=0; i<size; i++){
+        delete []M[i];
+    }
+
+    delete []o;
+    delete []M;
+    delete []z;
+    delete []zM;
+
+    return sum + bias;
+}
+
+double f19(double *x, int size){
+    ostringstream convert;
+    convert<<"/home/viviane/Área de Trabalho/codigo_cec/supportData/E_ScafferF6_M_D"<<size<<".txt";
+    string namefileMatrix = convert.str();
+    string namefileVector = "/home/viviane/Área de Trabalho/codigo_cec/supportData/E_ScafferF6_func_data.txt";
+
+    double *o = new double[size];
+    double **M = new double*[size];
+    double *z = new double[size];
+    double *zM = new double[size];
+
+    for(int i=0; i<size; i++){
+        M[i] = new double[size];
+    }
+
+    double bias = -300;
+
+    loadVector(namefileVector, size, o);
+    loadMatriz(namefileMatrix, size, size, M);
+
+    shift(z, x, o, size);
+    rotate(zM, z, M, size);
+
+    double result = EScafferF6(zM, size);
+
+
+    for(int i=0; i<size; i++){
+        delete []M[i];
+    }
+
+    delete []o;
+    delete []M;
+    delete []z;
+    delete []zM;
+
+    return result + bias;
+}
+
 void loadMatriz_21(string namefile, int a, int b, int c, double ***M){
     if(M != NULL){
         ifstream matriz;
         matriz.open(namefile.c_str());
         if(matriz.is_open()){
-            for(int i=0; i<c; i++){
-                loadMatriz(namefile, a, b, M[i]);
+            for(int i=0; i<a; i++){
+                loadMatriz(namefile, b, c, M[i]);
             }
         }else{ cout<<"arquivo nao pode ser aberto"<<endl; }
     }
@@ -332,22 +454,6 @@ double weierstrass(double* x, int size) {
 		}
 
 		return (sum1 - sum2*((double )(size)));
-}
-
-double ScafferF6(double x, double y) {
-	double temp1 = x*x + y*y;
-	double temp2 = sin(sqrt(temp1));
-	double temp3 = 1.0 + 0.001 * temp1;
-	return (0.5 + ((temp2 * temp2 - 0.5)/(temp3 * temp3)));
-}
-
-double EScafferF6(double* x, int size) {
-		double sum = 0.0;
-		for (int i = 1 ; i < size ; i ++) {
-			sum += ScafferF6(x[i-1], x[i]);
-		}
-		sum += ScafferF6(x[size-1], x[0]);
-		return (sum);
 }
 
 double F2(double x, double y) {
@@ -534,7 +640,7 @@ double f20(double *x, int size){
 double f21(double* x, int size){
     ostringstream convert;
     convert<<"/home/viviane/Área de Trabalho/codigo_cec/supportData/hybrid_func3_M_D"<<size<<".txt";
-    string filename = "/home/viviane/Área de Trabalho/codigo_cec/supportData/hybri  d_func3_data.txt";
+    string filename = "/home/viviane/Área de Trabalho/codigo_cec/supportData/hybrid_func3_data.txt";
     string filenameM = convert.str();
     double bias = 360;
     double sigma[] = {
@@ -709,13 +815,24 @@ double Compute_Function(double* x, int size, int num_func){
         case 16:
             return f16(x,size);
         break;
+        case 18:
+            return f18(x,size);
+        break;
+        case 19:
+            return f19(x,size);
+        break;
         case 20:
             return f20(x,size);
+        break;
+        case 21:
+            return f21(x,size);
         break;
         case 22:
             return f22(x,size);
         break;
     }
+    cout<<num_func<<" - Não está implementada. ";
+    return NAN;
 }
 
 void Lower_Bounds(int num_fun, int size, double *lb){
@@ -768,7 +885,16 @@ void Lower_Bounds(int num_fun, int size, double *lb){
         case 16:
             for(int i=0; i<size; i++){ lb[i] = 0.0; }
         break;
+        case 18:
+            for(int i=0; i<size; i++){ lb[i] = -100.0;}
+        break;
+        case 19:
+            for(int i=0; i<size; i++){ lb[i] = -100.0;}
+        break;
         case 20:
+            for(int i=0; i<size; i++){ lb[i] = -5.0; }
+        break;
+        case 21:
             for(int i=0; i<size; i++){ lb[i] = -5.0; }
         break;
         case 22:
@@ -827,7 +953,16 @@ void Upper_Bounds(int num_fun, int size, double* ub){
         case 16:
             for(int i=0; i<size; i++){ ub[i] = 10.0; }
         break;
+        case 18:
+            for(int i=0; i<size; i++){ ub[i] = 100.0;}
+        break;
+        case 19:
+            for(int i=0; i<size; i++){ ub[i] = 100.0;}
+        break;
         case 20:
+            for(int i=0; i<size; i++){ ub[i] = 5.0; }
+        break;
+        case 21:
             for(int i=0; i<size; i++){ ub[i] = 5.0; }
         break;
         case 22:
@@ -887,11 +1022,21 @@ int Number_Evaluations(int number_function){
         case 16:
             return 1000;
         break;
+        case 18:
+            return 30000;
+        break;
+        case 19:
+            return 30000;
+        break;
         case 20:
+            return 30000;
+        break;
+        case 21:
             return 30000;
         break;
         case 22:
             return 15000;
         break;
     }
+    return 0;
 }
