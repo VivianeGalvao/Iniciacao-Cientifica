@@ -758,7 +758,7 @@ double f22(double *x, int size){
     double sum = 0.0;
 
     for(int i=0; i<size-1; i++){
-        sum += -x[i]*sin(sqrt(fabs(x[i] - (x[i+1] + 47)))) - (x[i+1] + 47)*sin(sqrt(x[i+1] + 47 + (x[i]/2)));
+        sum += -x[i]*sin(sqrt(fabs(x[i] - (x[i+1] + 47)))) - (x[i+1] + 47)*sin(sqrt(fabs(x[i+1] + 47 + (x[i]/2))));
     }
 
     return sum;
