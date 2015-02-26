@@ -1,0 +1,52 @@
+# depslib dependency file v1.0
+1424633289 source:/home/viviane/Área de Trabalho/Testes Finais/Estrategias.cpp
+	<iostream>
+	"Estrategias.h"
+	"Solution.h"
+	"Avaliation_Function.h"
+	"Sort.h"
+	"Selection.h"
+	<cmath>
+	<random>
+
+1417261804 /home/viviane/Área de Trabalho/Testes Finais/Estrategias.h
+	"Solution.h"
+
+1424394738 /home/viviane/Área de Trabalho/Testes Finais/Solution.h
+
+1423757798 /home/viviane/Área de Trabalho/Testes Finais/Avaliation_Function.h
+
+1424634691 source:/home/viviane/Área de Trabalho/Testes Finais/main.cpp
+	<iostream>
+	<fstream>
+	"Avaliation_Function.h"
+	"Estrategias.h"
+	"Solution.h"
+
+1424194723 source:/home/viviane/Área de Trabalho/Testes Finais/Avaliation_Function.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<cmath>
+	<string>
+	<sstream>
+	<cfloat>
+
+1424630235 /home/viviane/Área de Trabalho/Testes Finais/Sort.h
+	"Solution.h"
+
+1424630188 /home/viviane/Área de Trabalho/Testes Finais/Selection.h
+	"Solution.h"
+
+1424630219 source:/home/viviane/Área de Trabalho/Testes Finais/Selection.cpp
+	<iostream>
+	"Selection.h"
+	"Solution.h"
+	"Sort.h"
+
+1424630136 source:/home/viviane/Área de Trabalho/Testes Finais/Sort.cpp
+	<iostream>
+	"Sort.h"
+
