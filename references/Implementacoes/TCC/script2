@@ -1,0 +1,25 @@
+g++ -o teste *.cpp -std=c++0x
+
+rm README.txt
+rm resultS.csv
+
+echo "Codigo Compilado"
+f=0
+s=0
+d=0
+m=0
+dim=0
+
+echo "PROBLEMA;SEMENTE;DELTA;MEDIA_ESPERADA;DIMENSAO;ES-PS3;MEDIA ES-PS 3">>resultS.csv
+
+
+for(( f=1; f<2; f++ ))
+  do   
+   for(( s=1; s<2; s++ ))		  
+	  do
+	   ./teste $f $s >> resultS.csv
+	  done          
+  done
+
+gedit resultS.csv
+

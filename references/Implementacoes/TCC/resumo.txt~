@@ -1,0 +1,19 @@
+Análise Comparativa de uma Técnica de Busca Padrão Combinada com Otimização por Enxame de Partículas e Estratégias Evolutivas
+
+Introdução:
+Embora a maioria das informaçoes necessarias para minimizar ou maximizar uma funcao estejam presentes nas derivadas dessa funçao, existem casos em que, por algum motivo, as derivadas da função não são acessíveis ou não são avaliaveis. Dessa forma, a caracterização matemática para a procura de minimos e maximos locais, através dos pontos onde a derivada de primeira ordem da funcao é nula, não é aplicável. Diante de tais circunstancias, uma classe de técnicas de otimização não linear, chamada Derivative-Free Optimization, a qual não faz uso da analise das derivadas da funcao, vem tendo considerável crescimento, principalmente em aplicacoes de otimização à engenharia.
+O problema considerado para este trabalho consiste em minimizar funcoes descritas como f:R->R, das quais nao se tem informacoes da representacao analitica ou aproximada de suas derivadas e, ainda, estao definidas em um dominio D={x | l<= x <= u}, onde $x, l, u \in \mathbb{R}$ e $l,u$ sao limitacoes inferior e superior, repectivamente, do espaço de busca. Este processo de minimização se dá pelo uso do método de busca padrao, combinado tanto com Otimizacao por enxame de particulas quanto com estrategias evolutivas, afim de executar uma analise comparativa do comportamento de ambas combinacoes para alguns problemas comuns na literatura.	 
+
+Técnicas de Otimização Sem uso de Derivadas:
+  Para problemas de otimização onde, para tais, tem-se menos acesso à informações da função objetivo que caracteriza esses problemas, inclusive
+  informações referentes às derivadas dessas funções, a classe de Métodos DFO - Derivative Free Optimization é a mais indicada.
+  Os métodos DFO são aqueles que não necessitam de informações das derivadas da função objetivo, usados em casos nos quais não se tem acesso à forma analítica da caracterização do problema ou, para o caso desta estar disponível, é de tal maneira tão complexa, ao ponto de se desconsiderar a busca pelas derivadas.
+
+Técnica de Busca Padrão:
+
+Otimização por Enxame de Partículas:
+
+Estratégias Evolutivas:
+
+
+
