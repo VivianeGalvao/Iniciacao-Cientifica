@@ -37,7 +37,7 @@ int main(int argc, char** argv)
         if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
 
         Evolutionary_Strategy4(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
-        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<endl; }
+        if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<";"; }
 
         cout<<endl;
 
