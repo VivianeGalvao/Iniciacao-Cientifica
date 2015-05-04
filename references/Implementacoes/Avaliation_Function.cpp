@@ -171,12 +171,13 @@ double u(double x, double a, double k, double m){
     if(x > a)return k*pow((x-a),m);
     if(x >= -a && x <= a)return 0.0;
     if(x < -a)return k*pow((-x-a), m);
+    else return NAN;
 }
 
 double y12(double x){ return (1 + (1/4)*(x + 1)); }
 
 double f12(double *x, int size){
-    double sum1=0, sum2=0, aux1 = 0;
+    double sum1=0, sum2=0;
     double y[size];
     for(int i=0; i<size; i++){
         y[i] = y12(x[i]);
@@ -197,7 +198,7 @@ double f12(double *x, int size){
 }
 
 double f13(double *x, int size){
-    double sum1=0, sum2=0, aux1 = 0;
+    double sum1=0, sum2=0;
 
     for(int i=0; i<size; i++){
         sum2 += u(x[i],5,100,4);
@@ -272,7 +273,7 @@ double f16(double *x, int size){
 }
 
 double f17(double *x, int size){
-    return 0.0;
+    return NAN;
 }
 
 double ScafferF6(double x, double y) {
@@ -345,9 +346,9 @@ void loadMatriz(string namefile, int row, int colunm, double** M){
 
 double f18(double *x, int size){
     ostringstream convert;
-    convert<<"/home/viviane/Área de Trabalho/codigo_cec/supportData/elliptic_M_D"<<size<<".txt";
+    convert<<"codigo_cec/supportData/elliptic_M_D"<<size<<".txt";
     string namefileMatrix = convert.str();
-    string namefileVector = "/home/viviane/Área de Trabalho/codigo_cec/supportData/high_cond_elliptic_rot_data.txt";
+    string namefileVector = "codigo_cec/supportData/high_cond_elliptic_rot_data.txt";
 
     double bias = -450;
 
@@ -386,9 +387,9 @@ double f18(double *x, int size){
 
 double f19(double *x, int size){
     ostringstream convert;
-    convert<<"/home/viviane/Área de Trabalho/codigo_cec/supportData/E_ScafferF6_M_D"<<size<<".txt";
+    convert<<"codigo_cec/supportData/E_ScafferF6_M_D"<<size<<".txt";
     string namefileMatrix = convert.str();
-    string namefileVector = "/home/viviane/Área de Trabalho/codigo_cec/supportData/E_ScafferF6_func_data.txt";
+    string namefileVector = "codigo_cec/supportData/E_ScafferF6_func_data.txt";
 
     double *o = new double[size];
     double **M = new double*[size];
@@ -430,7 +431,7 @@ void loadMatriz_21(string namefile, int a, int b, int c, double ***M){
             for(int i=0; i<a; i++){
                 loadMatriz(namefile, b, c, M[i]);
             }
-        }else{ cout<<"arquivo nao pode ser aberto"<<endl; }
+        }else{ cout<<"arquivo nao pode ser aberto - loadMatriz_21"<<endl; }
     }
     else{
         cout<<"Problema matriz loadMatriz_21"<<endl;
@@ -509,6 +510,7 @@ double basic_func20(int i, double *test, int size){
             return Sphere_function(test, size);
         break;
     }
+    return NAN;
 }
 
 double basic_func21(int i, double *test, int size){
@@ -529,10 +531,11 @@ double basic_func21(int i, double *test, int size){
             return f11(test, size);
         break;
     }
+    return NAN;
 }
 
 double f20(double *x, int size){
-    string namefile = "/home/viviane/Área de Trabalho/codigo_cec/supportData/hybrid_func1_data.txt";
+    string namefile = "codigo_cec/supportData/hybrid_func1_data.txt";
     double bias = 120.0;
     double sigma[] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
     double lambda[] = {1.0, 1.0, 10.0, 10.0, 5.0/60.0, 5.0/60.0, 5.0/32.0, 5.0/32.0, 5.0/100.0, 5.0/100.0};
@@ -639,8 +642,8 @@ double f20(double *x, int size){
 
 double f21(double* x, int size){
     ostringstream convert;
-    convert<<"/home/viviane/Área de Trabalho/codigo_cec/supportData/hybrid_func3_M_D"<<size<<".txt";
-    string filename = "/home/viviane/Área de Trabalho/codigo_cec/supportData/hybrid_func3_data.txt";
+    convert<<"codigo_cec/supportData/hybrid_func3_M_D"<<size<<".txt";
+    string filename = "codigo_cec/supportData/hybrid_func3_data.txt";
     string filenameM = convert.str();
     double bias = 360;
     double sigma[] = {
@@ -764,6 +767,19 @@ double f22(double *x, int size){
     return sum;
 }
 
+double f23(double *x, int size){
+	double aux1=0, aux2=0, aux3=0;
+	for(int i=0; i<4; i++){
+		aux1 += x[i];
+		aux2 += x[i]*x[i];
+	}
+	for(int i=4; i<13; i++){
+		aux3 += x[i];
+	}
+
+	return (5*(aux1-aux2) - aux3);
+}
+
 
 double Compute_Function(double* x, int size, int num_func){
     switch(num_func){
@@ -830,8 +846,11 @@ double Compute_Function(double* x, int size, int num_func){
         case 22:
             return f22(x,size);
         break;
+	case 23:
+	    return f23(x, size);
+	break;
     }
-    cout<<num_func<<" - Não está implementada. ";
+  //  cout<<num_func<<" - Não está implementada. ";
     return NAN;
 }
 
@@ -899,6 +918,9 @@ void Lower_Bounds(int num_fun, int size, double *lb){
         break;
         case 22:
             for(int i=0; i<size; i++){ lb[i] = -512.0; }
+        break;
+	case 23:
+            for(int i=0; i<size; i++){ lb[i] = 0; }
         break;
     }
 }
@@ -968,7 +990,12 @@ void Upper_Bounds(int num_fun, int size, double* ub){
         case 22:
             for(int i=0; i<size; i++){ ub[i] = 512.0; }
         break;
-
+	case 23:
+	    for(int i=0; i<size; i++){
+		if(i<9 || i==13) ub[i] = 1;
+		else if(i>=9 && i<12) ub[i] = 100;
+	    }
+	break;
     }
 }
 
@@ -1036,6 +1063,9 @@ int Number_Evaluations(int number_function){
         break;
         case 22:
             return 15000;
+        break;
+	case 23:
+            return 2000;
         break;
     }
     return 0;

@@ -171,12 +171,13 @@ double u(double x, double a, double k, double m){
     if(x > a)return k*pow((x-a),m);
     if(x >= -a && x <= a)return 0.0;
     if(x < -a)return k*pow((-x-a), m);
+    return NAN;
 }
 
 double y12(double x){ return (1 + (1/4)*(x + 1)); }
 
 double f12(double *x, int size){
-    double sum1=0, sum2=0, aux1 = 0;
+    double sum1=0, sum2=0;
     double y[size];
     for(int i=0; i<size; i++){
         y[i] = y12(x[i]);
@@ -197,7 +198,7 @@ double f12(double *x, int size){
 }
 
 double f13(double *x, int size){
-    double sum1=0, sum2=0, aux1 = 0;
+    double sum1=0, sum2=0;
 
     for(int i=0; i<size; i++){
         sum2 += u(x[i],5,100,4);
@@ -509,6 +510,7 @@ double basic_func20(int i, double *test, int size){
             return Sphere_function(test, size);
         break;
     }
+    return NAN;
 }
 
 double basic_func21(int i, double *test, int size){
@@ -529,6 +531,7 @@ double basic_func21(int i, double *test, int size){
             return f11(test, size);
         break;
     }
+    return NAN;
 }
 
 double f20(double *x, int size){

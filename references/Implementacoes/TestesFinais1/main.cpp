@@ -32,13 +32,14 @@ int main(int argc, char** argv)
 
         Evolutionary_Strategy3(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
         if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
-	
-	Evolutionary_Strategy4(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
+
+        Evolutionary_Strategy4(semente, MEDIA_ESPERADA , DIMENSAO, funcao, DELTA , x);
         if(VerificadorSolucao(x, DIMENSAO, funcao)){ cout<<Compute_Function(x, DIMENSAO, funcao)<<" ; "; }
 
         cout<<endl;
     }
     else{
+
         Evolutionary_Strategy3(1,0.7,30,1,0.7,x);
         if(VerificadorSolucao(x, DIMENSAO, 1)){ cout<<Compute_Function(x, DIMENSAO, 1)<<endl; }
         Evolutionary_Strategy4(1,0.7,30,1,0.7,x);

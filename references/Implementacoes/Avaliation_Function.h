@@ -27,7 +27,8 @@ double f18(double* x, int size);
 double f19(double* x, int size);
 double f20(double* x, int size);
 double f21(double* x, int size);
-double f17(double* x, int size);
+double f22(double* x, int size);
+double f23(double* x, int size);
 
 
 

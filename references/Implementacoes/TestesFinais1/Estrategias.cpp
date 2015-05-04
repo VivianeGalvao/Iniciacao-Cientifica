@@ -209,7 +209,7 @@ void Evolutionary_Strategy3(int seed, double expected_mean, int dimension, int n
             progenitor[i]->position = new double[dimension];
             if(lb != NULL && ub != NULL){
                 for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = (ub[j] - lb[j])*generate_ramdom() + lb[j]; }
-                progenitor[i]->standard_deviation = (ub[0] - lb[0])*Normal_distribution(0,1/sqrt(dimension));
+                progenitor[i]->standard_deviation = Normal_distribution(0,1/sqrt(dimension));
             }
             else{
                 for(int j=0; j<dimension; j++){ progenitor[i]->position[j] = generate_ramdom(); }
@@ -326,7 +326,7 @@ void Evolutionary_Strategy4(int seed, double expected_mean, int dimension, int n
                // double aux = (ub[0] - lb[0])*Normal_distribution(0,1/sqrt(dimension));
                 for(int j=0; j<dimension; j++){
                     progenitor[i]->position[j] = (ub[j] - lb[j])*generate_ramdom() + lb[j];
-                    progenitor[i]->sd[j] = (ub[j] - lb[j])*Normal_distribution(0,1/sqrt(dimension));
+                    progenitor[i]->sd[j] = Normal_distribution(0,1/sqrt(dimension));
                //     progenitor[i]->sd[j] = aux;
                 }
             }

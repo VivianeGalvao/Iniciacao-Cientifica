@@ -47,3 +47,44 @@
 	"Solution.h"
 	"Sort.h"
 
+1424464682 source:/home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/TestesFinais1/Estrategias.cpp
+	<iostream>
+	"Estrategias.h"
+	"Solution.h"
+	"Avaliation_Function.h"
+	"Sort.h"
+	"Selection.h"
+	<cmath>
+	<random>
+
+1424452911 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/TestesFinais1/Estrategias.h
+	"Solution.h"
+
+1424436797 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/TestesFinais1/Solution.h
+
+1423757798 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/TestesFinais1/Avaliation_Function.h
+
+1424459761 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/TestesFinais1/Sort.h
+
+1424457666 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/TestesFinais1/Selection.h
+
+1424459745 source:/home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/TestesFinais1/Selection.cpp
+	<iostream>
+	"Solution.h"
+	"Sort.h"
+
+1424461237 source:/home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/TestesFinais1/Sort.cpp
+	<iostream>
+	"Solution.h"
+
+1424980181 source:/home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/TestesFinais1/Avaliation_Function.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<cmath>
+	<string>
+	<sstream>
+	<cfloat>
+
