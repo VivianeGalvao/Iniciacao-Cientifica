@@ -1,0 +1,160 @@
+# depslib dependency file v1.0
+1424633289 source:/home/viviane/Área de Trabalho/Testes Finais/Estrategias.cpp
+	<iostream>
+	"Estrategias.h"
+	"Solution.h"
+	"Avaliation_Function.h"
+	"Sort.h"
+	"Selection.h"
+	<cmath>
+	<random>
+
+1417261804 /home/viviane/Área de Trabalho/Testes Finais/Estrategias.h
+	"Solution.h"
+
+1424394738 /home/viviane/Área de Trabalho/Testes Finais/Solution.h
+
+1423757798 /home/viviane/Área de Trabalho/Testes Finais/Avaliation_Function.h
+
+1424634691 source:/home/viviane/Área de Trabalho/Testes Finais/main.cpp
+	<iostream>
+	<fstream>
+	"Avaliation_Function.h"
+	"Estrategias.h"
+	"Solution.h"
+
+1424194723 source:/home/viviane/Área de Trabalho/Testes Finais/Avaliation_Function.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<cmath>
+	<string>
+	<sstream>
+	<cfloat>
+
+1424630235 /home/viviane/Área de Trabalho/Testes Finais/Sort.h
+	"Solution.h"
+
+1424630188 /home/viviane/Área de Trabalho/Testes Finais/Selection.h
+	"Solution.h"
+
+1424630219 source:/home/viviane/Área de Trabalho/Testes Finais/Selection.cpp
+	<iostream>
+	"Selection.h"
+	"Solution.h"
+	"Sort.h"
+
+1424630136 source:/home/viviane/Área de Trabalho/Testes Finais/Sort.cpp
+	<iostream>
+	"Sort.h"
+
+1425752886 source:/home/viviane/Área de Trabalho/Classes2/Avaliation_Function.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<cmath>
+	<string>
+	<sstream>
+	<cfloat>
+
+1424630219 source:/home/viviane/Área de Trabalho/Classes2/Selection.cpp
+	<iostream>
+	"Selection.h"
+	"Solution.h"
+	"Sort.h"
+
+1424630188 /home/viviane/Área de Trabalho/Classes2/Selection.h
+	"Solution.h"
+
+1424394738 /home/viviane/Área de Trabalho/Classes2/Solution.h
+
+1424630235 /home/viviane/Área de Trabalho/Classes2/Sort.h
+	"Solution.h"
+
+1424630136 source:/home/viviane/Área de Trabalho/Classes2/Sort.cpp
+	<iostream>
+	"Sort.h"
+
+1425763568 source:/home/viviane/Área de Trabalho/Classes2/Estrategias.cpp
+	<iostream>
+	"Estrategias.h"
+	"Solution.h"
+	"Avaliation_Function.h"
+	"Sort.h"
+	"Selection.h"
+	<cmath>
+	<random>
+
+1425471585 /home/viviane/Área de Trabalho/Classes2/Estrategias.h
+	"Solution.h"
+
+1423757798 /home/viviane/Área de Trabalho/Classes2/Avaliation_Function.h
+
+1425763198 source:/home/viviane/Área de Trabalho/Classes2/main.cpp
+	<iostream>
+	<fstream>
+	"Avaliation_Function.h"
+	"Estrategias.h"
+	"Solution.h"
+	<string>
+	<sstream>
+
+1429995050 source:/home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/Avaliation_Function.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<cmath>
+	<string>
+	<sstream>
+	<cfloat>
+
+1424630219 source:/home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/Selection.cpp
+	<iostream>
+	"Selection.h"
+	"Solution.h"
+	"Sort.h"
+
+1424630188 /home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/Selection.h
+	"Solution.h"
+
+1424394738 /home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/Solution.h
+
+1424630235 /home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/Sort.h
+	"Solution.h"
+
+1424630136 source:/home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/Sort.cpp
+	<iostream>
+	"Sort.h"
+
+1430767426 source:/home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/Estrategias.cpp
+	<iostream>
+	<cmath>
+	<random>
+	"Estrategias.h"
+	"Solution.h"
+	"Avaliation_Function.h"
+	"Sort.h"
+	"Selection.h"
+
+1429798918 /home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/Estrategias.h
+	"Solution.h"
+
+1429990269 /home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/Avaliation_Function.h
+
+1430766452 source:/home/viviane/Área de Trabalho/Iniciação Cientifica/Reuniao22_04_RefazendoPSwarm/main.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	"Avaliation_Function.h"
+	"Estrategias.h"
+	"Solution.h"
+	<string>
+	<sstream>
+

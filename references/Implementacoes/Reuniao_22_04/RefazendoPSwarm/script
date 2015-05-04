@@ -1,0 +1,12 @@
+g++ -o teste *.cpp -std=c++0x
+
+#rm resultS.csv
+
+
+#echo "PROBLEMA;PSO-PS;ES-PS3;ES-PS4">>resultS.csv
+
+./teste
+
+gnuplot outfile
+
+gedit resultS.csv
