@@ -1,0 +1,4 @@
+rm historic.txt
+g++ -o teste *.cpp -std=c++0x
+./teste >> historic.txt
+gedit historic.txt

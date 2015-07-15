@@ -1,0 +1,22 @@
+Análise Comparativa de uma Técnica de Busca Padrão Combinada com Otimização por Enxame de Partículas e Estratégias Evolutivas
+
+Introdução:
+Embora a maioria das informaçoes necessarias para minimizar ou maximizar uma funcao estejam presentes nas derivadas dessa funçao, existem casos em que, por algum motivo, as derivadas da função não são acessíveis ou não são avaliaveis. Dessa forma, a caracterização matemática para a procura de minimos e maximos locais, através dos pontos onde a derivada de primeira ordem da funcao é nula, não é aplicável. Diante de tais circunstancias, uma classe de técnicas de otimização não linear, chamada Derivative-Free Optimization, a qual não faz uso da analise das derivadas da funcao, vem tendo considerável crescimento, principalmente em aplicacoes de otimização à engenharia.
+O problema considerado para este trabalho consiste em minimizar funcoes descritas como f:R->R, das quais nao se tem informacoes da representacao analitica ou aproximada de suas derivadas e, ainda, estao definidas em um dominio D={x | l<= x <= u}, onde $x, l, u \in \mathbb{R}$ e $l,u$ sao limitacoes inferior e superior, repectivamente, do espaço de busca. Este processo de minimização se dá pelo uso do método de busca padrao, combinado tanto com Otimizacao por enxame de particulas quanto com estrategias evolutivas, afim de executar uma analise comparativa do comportamento de ambas combinacoes para alguns problemas comuns na literatura.	 
+
+Técnicas de Otimização Sem uso de Derivadas:
+  Para problemas de otimização onde, para tais, tem-se menos acesso à informações da função objetivo que caracteriza esses problemas, inclusive
+  informações referentes às derivadas dessas funções, a classe de Métodos DFO - Derivative Free Optimization é a mais indicada.
+  Os métodos DFO são aqueles que não necessitam de informações das derivadas da função objetivo, usados em casos nos quais não se tem acesso à forma analítica da caracterização do problema ou, para o caso desta estar disponível, é de tal maneira tão complexa, ao ponto de se desconsiderar a busca pelas derivadas.
+
+Técnica de Busca Padrão:
+
+Otimização por Enxame de Partículas:
+
+Estratégias Evolutivas:
+
+\headerbox{Introdu\c{c}\~ao}{name=introduction,span=1,column=0,row=0.05}{
+Apesar da maioria das informa\c{c}\~oes necess\'arias para minimizar ou maximizar uma fun\c{c}\~ao estejam presentes nas derivadas dessa fun\c{c}\~ao, existem casos em que, por algum motivo, as derivadas da fun\c{c}\~ao n\~ao s\~ao acess\'iveis ou n\~ao s\~ao avali\'aveis. Dessa forma, a caracteriza\c{c}\~ao matem\'atica para a procura de m\'inimos e m\'aximos locais, atrav\'es dos pontos onde a derivada de primeira ordem da fun\c{c}\~ao \'e nula, n\~ao \'e aplic\'avel. Diante de tais circunst\^ancias, uma classe de t\'ecnicas de otimiza\c{c}\~ao n\~ao linear, chamada Derivative-Free Optimization, a qual n\~ao faz uso expl\'icito das derivadas da func\~ao, vem tendo consider\'avel crescimento, principalmente em aplica\c{c}\~oes computacionais e na engenharia.\\
+O problema considerado para este trabalho consiste em minimizar fun\c{c}\~oes descritas como $f : \mathbb{R}^n \rightarrow \mathbb{R}$, das quais n\~ao se tem informa\c{c}\~oes da representa\c{c}\~ao anal\'itica ou aproximada de suas derivadas e, ainda, est\~ao definidas em um dom\'inio $D = \{x \mid l \leq x \leq u\}$, onde $x, l, u \in \mathbb{R}$ e $l,u$ s\~ ao limita\c{c}\~oes inferior e superior, respectivamente, do espa\c{c}o de busca. Este processo de minimiz\c{c}\~ao se d\'a pelo uso do m\'etodo de busca padr\~ao combinado tanto com Otimiza\c{c}\~ao por enxame de part\'iculas quanto com estrat\'egias evolutivas, afim de executar uma an\'alise comparativa do comportamento de ambas combina\c{c}\~oes para alguns problemas comuns na literatura.
+}
+
