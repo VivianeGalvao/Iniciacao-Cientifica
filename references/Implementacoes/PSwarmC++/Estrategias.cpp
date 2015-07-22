@@ -28,71 +28,61 @@ double generate_ramdom() {
 
 void PatternSearch(double *sample, double *function, int dimension, double *lb, double *ub, int numFunction){
     if(sample){
-//        cout<<endl;
         int directions = 2*dimension, best;
         double **points = new double*[directions];
-        double *functions = new double[directions];
+        double functions = INF;
         double aux = INF;
         for(int i=0; i<directions; i++){
             points[i] = new double[dimension];
         }
 
         bool fail;
-        int t=0;
-        for(int i=0; i<directions; i++, t++){
-//            cout<<t<<" ";
-            fail=false;
-            for(int j=0; j<dimension; j++){
-//                cout<<sample[j]<<" ";
-                if(t<dimension){
-                    if(t == j){
-//                        cout<<delta<<" ";
-                        points[t][j] = sample[j] + delta;
+
+        for(int i=0; i<directions; i++){
+             for(int j=0; j<dimension; j++){
+                if(i<dimension){
+                    if(i == j){
+                        points[i][j] = sample[j] + delta;
                     }
                     else{
-//                        cout<<0<<" ";
-                        points[t][j] = sample[j];
+                        points[i][j] = sample[j];
                     }
                 }
                 else{
-                    if((t - j) == dimension){
-//                        cout<<-delta<<" ";
-                        points[t][j] = sample[j] - delta;
+                    if((i - j) == dimension){
+                        points[i][j] = sample[j] - delta;
                     }
                     else{
-//                        cout<<0<<" ";
-                        points[t][j] = sample[j];
+                        points[i][j] = sample[j];
                     }
                 }
-
-
-                if(lb != NULL && ub != NULL){
-                    if(points[t][j] < lb[j] || points[t][j] > ub[j]){ fail=true; }
-                }
-            }
-//            cout<<endl;
-            if(fail){
-//                cout<<"falha nas restriçoes. Com amor, Pattern Search"<<endl;
-                if(t>0){
-                    t--;
-                }
-            }
-            functions[t] = Compute_Function(points[t], dimension, numFunction); functionEval++;
-            if(functions[t] < aux){
-                best = t;
-                aux=functions[t];
             }
         }
-        //cout<<"aux: "<<aux<<endl;
+
+        for(int i=0; i<directions; i++){
+            fail = false;
+            for(int j=0; j<dimension; j++){
+                if(points[i][j] < lb[j] || points[i][j] > ub[j]){
+                    fail = true;
+                    break;
+                }
+            }
+            if(!fail){
+                functions = Compute_Function(points[i], dimension, numFunction); functionEval++;
+                if(functions < aux){
+                    best = i;
+                    aux=functions;
+                }
+            }
+        }
+
 
         if(*function > aux){
             *function = aux;
-//            cout<<"pollStepBEST: "<<*function<<endl;
             for(int i=0; i<dimension; i++){
                 sample[i] = points[best][i];
             }
             if(success_direction == best){
-             //   cout<<"sucesso. com amor, pattern search"<<endl;
                 delta = 2*delta;
             }
             else{
@@ -108,10 +98,10 @@ void PatternSearch(double *sample, double *function, int dimension, double *lb, 
             delete []points[i];
         }
         delete []points;
-        delete []functions;
+
     }
     else{
-//        cout<<"Ponto nulo. Com amor, Pattern Search"<<endl;
+        cout<<"Ponto nulo. Com amor, Pattern Search"<<endl;
     }
 }
 
@@ -184,7 +174,6 @@ void PSO(int dimension, int seed, double delta_initial, int number_function, dou
 
                     if(lb != NULL && ub != NULL){
                         population[i]->position[j] = (ub[j]-lb[j])*generate_ramdom() + lb[j];
-//                        cout<<population[i]->position[j]<<" ";
                         population[i]->velocity[j] = 0.0;
                     }
                     else{
@@ -192,7 +181,6 @@ void PSO(int dimension, int seed, double delta_initial, int number_function, dou
                         population[i]->velocity[j] = 0.0;
                     }
                 }
-//                cout<<endl<<endl;
 
                 population[i]->best_fitness = INF;
             }
@@ -202,17 +190,11 @@ void PSO(int dimension, int seed, double delta_initial, int number_function, dou
             maxEval = 2000;
             maxIter = 2000;
             bool success;
-//            cout<<"cognition param: "<<cognition_parameter<<" social param: "<<social_parameter<<endl;
             while(functionEval < maxEval && iterations < maxIter){
 
-//            while(functionEval < maxEval && iterations < 9){
-//                cout<<"gbest:"<<iterations<<" "<<a0<<endl;
-//                cout<<"best:"<<iterations<<" "<<population[a0]->best_fitness<<endl;
-//                cout<<"BEST: "<<setprecision(10)<<best<<endl;
-//                cout<<"functionEval: "<<functionEval<<endl;
                 success = false;
-                if(maxVNorm<MAX_DELTA && delta<MAX_DELTA){/*cout<<"Stopping by maxVnorm and delta"<<endl;*/ break;}
-                if(actives <=1 && delta<MAX_DELTA){/*cout<<"Stopping by actives and delta"<<endl;*/ break;}
+                if(maxVNorm<MAX_DELTA && delta<MAX_DELTA){cout<<"Stopping by maxVnorm and delta"<<endl; break;}
+                if(actives <=1 && delta<MAX_DELTA){cout<<"Stopping by actives and delta"<<endl; break;}
                 iterations++;
 
                 for(int i=0; i<NUMPARTICLES; i++){
@@ -224,21 +206,12 @@ void PSO(int dimension, int seed, double delta_initial, int number_function, dou
 
                 for(int i=0; i<NUMPARTICLES; i++){
                     if(active[i]){
-//                        cout<<actives<<" ";
-//                        for(int k=0; k<dimension; k++){
-//                            cout<<population[i]->position[k]<<" ";
-//                        }
-                        if(population[i]->fitness < population[i]->best_fitness){
+                           if(population[i]->fitness < population[i]->best_fitness){
                             population[i]->best_fitness = population[i]->fitness;
                             for(int j=0; j<dimension; j++){
                                 population[i]->best_position[j] = population[i]->position[j];
                             }
                             if(population[i]->best_fitness < best){
-//                                cout<<"old: ";
-//                                for(int j=0; j<dimension; j++){
-//                                    cout<<position_global[j]<<" ";
-//                                }
-//                                cout<<endl;
                                 count++;
                                 for(int j=0; j<dimension; j++){
                                     position_global[j] = population[i]->best_position[j];
@@ -247,51 +220,30 @@ void PSO(int dimension, int seed, double delta_initial, int number_function, dou
                                 success=true; success_direction = -1;
                                 best=population[i]->best_fitness;
                                 a0 = i;
-//                                cout<<"new: ";
-//                                for(int j=0; j<dimension; j++){
-//                                    cout<<position_global[j]<<" ";
-//                                }
-//                                cout<<endl;
-//                                cout<<"BEST"<<iterations<<": "<<best<<endl;
-//                                cout<<"BEST2"<<iterations<<": "<<population[a0]->best_fitness<<endl;
                             }
                         }
                     }
-//                    cout<<endl<<endl;
                 }
 
                 if(!success){
                     if(delta >= MAX_DELTA){
-//                        cout<<"pollstep\n";
-//                        for(int k=0; k<dimension; k++){
-//                            cout<<position_global[k]<<" ";
-//                        }
-//                        cout<<endl<<endl;
                         PatternSearch(position_global, &best, dimension, lb, ub, number_function);
                         population[a0]->best_fitness = best;
                         for(int j=0; j<dimension; j++){
                             population[a0]->best_position[j] = position_global[j];
                         }
-//                        cout<<"BEST"<<": "<<best<<endl;
-//                        cout<<"BEST2"<<": "<<population[a0]->best_fitness<<endl;
-                    }
-                    else{
-                        if(delta < delta_initial){
-                            delta*=2;
-                        }
-                        if(delta < MAX_DELTA){
-                            delta = 2*MAX_DELTA;
-                        }
                     }
                 }
-//                cout<<"a0: "<<a0<<"\ best: "<<population[a0]->best_fitness<<endl;
-//                for(int k=0; k<dimension; k++){
-//                    cout<<population[a0]->position[k]<<" ";
-//                }
-//                cout<<endl<<endl;
-//                cout<<iterations<<endl;
+                else{
+                   if(delta < delta_initial){
+                        delta*=2;
+                    }
+                    if(delta < MAX_DELTA){
+                        delta = 2*MAX_DELTA;
+                    }
+                }
+
                 weight = initialWeight - (initialWeight - finalWeight)*((double)iterations)/((double)maxIter);
-                cout<<weight<<endl;
                 for(int i=0; i<NUMPARTICLES; i++){
                     if(active[i]){
                         for(int j=0; j<dimension; j++){
@@ -305,11 +257,9 @@ void PSO(int dimension, int seed, double delta_initial, int number_function, dou
                             if(population[i]->velocity[j] < -maxVelocity[j]){
                                 population[i]->velocity[j] = -maxVelocity[j];
                             }
-//                            cout<<population[i]->velocity[j]<<" ";
 
                             alphaMax[j] = 1;
                         }
-//                        cout<<endl<<endl;
 
                         for(int j=0; j<dimension; j++){
                             alphaMax[j] = 1;
@@ -328,11 +278,8 @@ void PSO(int dimension, int seed, double delta_initial, int number_function, dou
                             if(alphaMax[j] < 0.0){
                                 cout<<"isso não deveria acontecer"<<endl;
                             }
-                           // if(alphaMax[j] != 1){ cout<<iterations<<" "<<i<<" "<<j<<endl;}
-//                            cout<<alphaMax[j]<<" ";
                         }
-//                        cout<<endl<<endl;
-//                        cout<<"i: "<<i<<endl;
+
                         for(int j=0; j<dimension; j++){
                             population[i]->position[j] = population[i]->position[j] + alphaMax[j]*population[i]->velocity[j];
 
@@ -342,19 +289,10 @@ void PSO(int dimension, int seed, double delta_initial, int number_function, dou
                             if(population[i]->position[j] < lb[j]){
                                 population[i]->position[j] = lb[j];
                             }
-//                            if(iterations == 4){
-//                                cout<<population[i]->position[j]<<" ";
-//                            }
 
                         }
-//                        if(iterations == 4){
-//                            cout<<endl<<endl;
-//                        }
-                       // if(iterations == 4) cout<<population[i]->fitness<<" ";
                     }
                 }
-//                cout<<endl;
-//                cout<<"best: "<<best<<endl;
 
                 normtmp = 0.0;
                 for(int j=0; j<dimension; j++){
@@ -386,18 +324,13 @@ void PSO(int dimension, int seed, double delta_initial, int number_function, dou
                         actives++;
                     }
                 }
-//                cout<<"ativos: "<<actives<<endl;
 
             }
-
-//            for(int i=0; i<dimension; i++){
-//                x[i] = position_global[i];
-//            }
 
             cout<<"iteracoes: "<<iterations<<endl;
             cout<<"avaliacoes: "<<functionEval<<endl;
             cout<<"resultado final: "<<setprecision(10)<<best<<endl;
-           // cout<<setprecision(10)<<";"<<best;
+//            cout<<setprecision(10)<<";"<<best;
 
             delete []maxVelocity;
             delete []alphaMax;

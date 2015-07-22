@@ -4,35 +4,31 @@ g++ -o teste *.cpp -std=c++0x
 
 i=0
 
-echo -ne "Sphere Function;" >> r.csv
+echo -ne "Sphere Function" >> r.csv
 for((i=0; i<30; i++)) do
-  ./teste 1 0 10 >> r.csv
+  ./teste 1 $i 10 >> r.csv
   echo >> r.csv
-  sleep 5
  done
 echo "Media;">> r.csv 
 
-echo -ne "Rosenbrock Function;" >> r.csv
+echo -ne "Rosenbrock Function" >> r.csv
 for((i=0; i<30; i++)) do
-  ./teste 5 0 10 >> r.csv
+  ./teste 5 $i 10 >> r.csv
   echo >> r.csv
-  sleep 5
 done
 echo "Media;">> r.csv
 
-echo -ne "Rastrigin Function;" >> r.csv
+echo -ne "Rastrigin Function" >> r.csv
 for((i=0; i<30; i++)) do
-  ./teste 9 0 10 >> r.csv
+  ./teste 9 $i 10 >> r.csv
   echo >> r.csv
-  sleep 5
 done
 echo "Media;">> r.csv
 
-echo -ne "Ackley Function;" >> r.csv
+echo -ne "Ackley Function" >> r.csv
 for((i=0; i<30; i++)) do
-  ./teste 10 0 10 >> r.csv
+  ./teste 10 $i 10 >> r.csv
   echo >> r.csv
-  sleep 5
 done
 echo "Media;">> r.csv
 

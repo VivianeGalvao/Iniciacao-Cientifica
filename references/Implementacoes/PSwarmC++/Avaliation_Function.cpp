@@ -7,8 +7,9 @@
 #include <string>
 #include <sstream>
 #include <cfloat>
+#include <iomanip>
 #define PI 3.14159265359
-#define EULER 2.71828182845
+#define EULER 2.718281828459045235360287471352662497757247093699959574966967627724076630353547594571382178525166427427466391932// 003 059 921 817 413 596 629 043 572 900 334 295 260 595 630 738 132 328 627 943 490 763 233 829 880 753 195 251 019 011 573 834 187 930 702 154 089 149 934 884 167 509 244 761 460 668 082 264 800 168 477 411 853 742 345 442 437 107 539 077 744 992 069 551 702 761 838 606 261 331 384 583 000 752 044 933 826  560 297 606 737 113 200 709 328 709 709 127 443 747 047 230 696 977 209 310 141 692 836 819 025 515 108 657 463 772 111 252 389 784 425 056 953 696 770 785 449 969 967 946 864 454 905 987 931 636 889 230 098 793 127 736 178 215
 #define SEED 0
 using namespace std;
 
@@ -128,11 +129,11 @@ double f08(double* x, int size){
 }
 
 double f09(double *x, int size){
-    double fx=0.0;
+    double fx=0.0, a = (double)size;
     for(int i=0; i<size; i++){
         fx += x[i]*x[i] - 10.0*cos(2.0*PI*x[i]);
     }
-    return fx + ((double)10*size);
+    return fx + (10.0*a);
 
     //return 4.6*Math.pow(10, -2); //FEP
 	//return 42.93;
@@ -140,18 +141,21 @@ double f09(double *x, int size){
 }
 
 double f10(double *x, int size){
-    double sum1=0, sum2=0;
+    double exp1 = EULER;
+    double aux = 20.0;
+    double sum1=0, sum2=0, fx=0;
     for(int i=0; i<size; i++){
         sum1 += x[i]*x[i];
-        sum2 += cos(2*PI*x[i]);
+        sum2 += cos(2*M_PI*x[i]);
     }
+
     sum1 = sum1/(double)size;
     sum2 = sum2/(double)size;
-    return -20.0*exp(-0.2*sqrt(sum1)) - exp(sum2) + 20.0 + EULER;
 
-    //return 1.8*Math.pow(10, -2); //FEP
-	//return 18.96;
-	//return 0.002172668; //icaris2010
+    fx = -aux*exp(-0.2*sqrt(sum1)) + aux - exp(sum2) + exp1;
+
+    return fx;
+
 }
 
 double f11(double *x, int size){

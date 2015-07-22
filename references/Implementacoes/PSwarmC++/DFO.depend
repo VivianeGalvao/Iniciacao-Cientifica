@@ -249,3 +249,128 @@
 	<iostream>
 	"Sort.h"
 
+1436652324 source:/home/viviane/Área de Trabalho/PSwarmC++/Avaliation_Function.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<cmath>
+	<string>
+	<sstream>
+	<cfloat>
+
+1424630219 source:/home/viviane/Área de Trabalho/PSwarmC++/Selection.cpp
+	<iostream>
+	"Selection.h"
+	"Solution.h"
+	"Sort.h"
+
+1424630188 /home/viviane/Área de Trabalho/PSwarmC++/Selection.h
+	"Solution.h"
+
+1424394738 /home/viviane/Área de Trabalho/PSwarmC++/Solution.h
+
+1424630235 /home/viviane/Área de Trabalho/PSwarmC++/Sort.h
+	"Solution.h"
+
+1424630136 source:/home/viviane/Área de Trabalho/PSwarmC++/Sort.cpp
+	<iostream>
+	"Sort.h"
+
+1436896813 source:/home/viviane/Área de Trabalho/PSwarmC++/main.cpp
+	<iostream>
+	<fstream>
+	"Avaliation_Function.h"
+	"Estrategias.h"
+	"Solution.h"
+
+1433615781 /home/viviane/Área de Trabalho/PSwarmC++/Avaliation_Function.h
+
+1434128101 /home/viviane/Área de Trabalho/PSwarmC++/Estrategias.h
+	"Solution.h"
+
+1424630219 source:/home/viviane/Área de Trabalho/PSwarmC++2/Selection.cpp
+	<iostream>
+	"Selection.h"
+	"Solution.h"
+	"Sort.h"
+
+1424630188 /home/viviane/Área de Trabalho/PSwarmC++2/Selection.h
+	"Solution.h"
+
+1424394738 /home/viviane/Área de Trabalho/PSwarmC++2/Solution.h
+
+1424630235 /home/viviane/Área de Trabalho/PSwarmC++2/Sort.h
+	"Solution.h"
+
+1424630136 source:/home/viviane/Área de Trabalho/PSwarmC++2/Sort.cpp
+	<iostream>
+	"Sort.h"
+
+1437254470 source:/home/viviane/Área de Trabalho/PSwarmC++2/Avaliation_Function.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<cmath>
+	<string>
+	<sstream>
+	<cfloat>
+	<iomanip>
+
+1437263430 source:/home/viviane/Área de Trabalho/PSwarmC++2/main.cpp
+	<iostream>
+	<fstream>
+	"Avaliation_Function.h"
+	"Estrategias.h"
+	"Solution.h"
+
+1433615781 /home/viviane/Área de Trabalho/PSwarmC++2/Avaliation_Function.h
+
+1434128101 /home/viviane/Área de Trabalho/PSwarmC++2/Estrategias.h
+	"Solution.h"
+
+1424630219 source:/home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/PSwarmC++/Selection.cpp
+	<iostream>
+	"Selection.h"
+	"Solution.h"
+	"Sort.h"
+
+1424630188 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/PSwarmC++/Selection.h
+	"Solution.h"
+
+1424394738 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/PSwarmC++/Solution.h
+
+1424630235 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/PSwarmC++/Sort.h
+	"Solution.h"
+
+1424630136 source:/home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/PSwarmC++/Sort.cpp
+	<iostream>
+	"Sort.h"
+
+1437254470 source:/home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/PSwarmC++/Avaliation_Function.cpp
+	<iostream>
+	<fstream>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<cmath>
+	<string>
+	<sstream>
+	<cfloat>
+	<iomanip>
+
+1437407134 source:/home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/PSwarmC++/main.cpp
+	<iostream>
+	<fstream>
+	"Avaliation_Function.h"
+	"Estrategias.h"
+	"Solution.h"
+
+1433615781 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/PSwarmC++/Avaliation_Function.h
+
+1434128101 /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/PSwarmC++/Estrategias.h
+	"Solution.h"
+
