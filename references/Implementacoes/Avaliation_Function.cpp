@@ -130,8 +130,9 @@ double f08(double* x, int size){
 double f09(double *x, int size){
     double fx=0.0;
     for(int i=0; i<size; i++){
-        fx += x[i]*x[i] - 10.0*cos(2.0*PI*x[i]) + 10.0;
+        fx += x[i]*x[i] - 10.0*cos(2.0*PI*x[i]);
     }
+    fx = fx + 10*size;
     return fx;
 
     //return 4.6*Math.pow(10, -2); //FEP
@@ -272,10 +273,6 @@ double f16(double *x, int size){
     return -aux;
 }
 
-double f17(double *x, int size){
-    return NAN;
-}
-
 double ScafferF6(double x, double y) {
 	double temp1 = x*x + y*y;
 	double temp2 = sin(sqrt(fabs(temp1)));
@@ -344,7 +341,7 @@ void loadMatriz(string namefile, int row, int colunm, double** M){
     else{cout<<"Problema matriz loadMatriz"<<endl;}
 }
 
-double f18(double *x, int size){
+double f17(double *x, int size){
     ostringstream convert;
     convert<<"codigo_cec/supportData/elliptic_M_D"<<size<<".txt";
     string namefileMatrix = convert.str();
@@ -385,7 +382,7 @@ double f18(double *x, int size){
     return sum + bias;
 }
 
-double f19(double *x, int size){
+double f18(double *x, int size){
     ostringstream convert;
     convert<<"codigo_cec/supportData/E_ScafferF6_M_D"<<size<<".txt";
     string namefileMatrix = convert.str();
@@ -534,7 +531,7 @@ double basic_func21(int i, double *test, int size){
     return NAN;
 }
 
-double f20(double *x, int size){
+double f19(double *x, int size){
     string namefile = "codigo_cec/supportData/hybrid_func1_data.txt";
     double bias = 120.0;
     double sigma[] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
@@ -640,7 +637,7 @@ double f20(double *x, int size){
 	return sumF + bias;
 }
 
-double f21(double* x, int size){
+double f20(double* x, int size){
     ostringstream convert;
     convert<<"codigo_cec/supportData/hybrid_func3_M_D"<<size<<".txt";
     string filename = "codigo_cec/supportData/hybrid_func3_data.txt";
@@ -757,7 +754,7 @@ double f21(double* x, int size){
     return sumF + bias;
 }
 
-double f22(double *x, int size){
+double f21(double *x, int size){
     double sum = 0.0;
 
     for(int i=0; i<size-1; i++){
@@ -767,7 +764,7 @@ double f22(double *x, int size){
     return sum;
 }
 
-double f23(double *x, int size){
+double f22(double *x, int size){
 	double aux1=0, aux2=0, aux3=0;
 	for(int i=0; i<4; i++){
 		aux1 += x[i];
@@ -779,7 +776,6 @@ double f23(double *x, int size){
 
 	return (5*(aux1-aux2) - aux3);
 }
-
 
 double Compute_Function(double* x, int size, int num_func){
     switch(num_func){
@@ -831,6 +827,9 @@ double Compute_Function(double* x, int size, int num_func){
         case 16:
             return f16(x,size);
         break;
+        case 17:
+            return f17(x,size);
+        break;
         case 18:
             return f18(x,size);
         break;
@@ -844,13 +843,9 @@ double Compute_Function(double* x, int size, int num_func){
             return f21(x,size);
         break;
         case 22:
-            return f22(x,size);
+            return f22(x, size);
         break;
-	case 23:
-	    return f23(x, size);
-	break;
     }
-  //  cout<<num_func<<" - Não está implementada. ";
     return NAN;
 }
 
@@ -904,22 +899,22 @@ void Lower_Bounds(int num_fun, int size, double *lb){
         case 16:
             for(int i=0; i<size; i++){ lb[i] = 0.0; }
         break;
+        case 17:
+            for(int i=0; i<size; i++){ lb[i] = -100.0;}
+        break;
         case 18:
             for(int i=0; i<size; i++){ lb[i] = -100.0;}
         break;
         case 19:
-            for(int i=0; i<size; i++){ lb[i] = -100.0;}
+            for(int i=0; i<size; i++){ lb[i] = -5.0; }
         break;
         case 20:
             for(int i=0; i<size; i++){ lb[i] = -5.0; }
         break;
         case 21:
-            for(int i=0; i<size; i++){ lb[i] = -5.0; }
-        break;
-        case 22:
             for(int i=0; i<size; i++){ lb[i] = -512.0; }
         break;
-	case 23:
+        case 22:
             for(int i=0; i<size; i++){ lb[i] = 0; }
         break;
     }
@@ -975,27 +970,27 @@ void Upper_Bounds(int num_fun, int size, double* ub){
         case 16:
             for(int i=0; i<size; i++){ ub[i] = 10.0; }
         break;
+        case 17:
+            for(int i=0; i<size; i++){ ub[i] = 100.0;}
+        break;
         case 18:
             for(int i=0; i<size; i++){ ub[i] = 100.0;}
         break;
         case 19:
-            for(int i=0; i<size; i++){ ub[i] = 100.0;}
+            for(int i=0; i<size; i++){ ub[i] = 5.0; }
         break;
         case 20:
             for(int i=0; i<size; i++){ ub[i] = 5.0; }
         break;
         case 21:
-            for(int i=0; i<size; i++){ ub[i] = 5.0; }
-        break;
-        case 22:
             for(int i=0; i<size; i++){ ub[i] = 512.0; }
         break;
-	case 23:
-	    for(int i=0; i<size; i++){
-		if(i<9 || i==13) ub[i] = 1;
-		else if(i>=9 && i<12) ub[i] = 100;
-	    }
-	break;
+        case 22:
+            for(int i=0; i<size; i++){
+                if(i<9 || i==13) ub[i] = 1;
+                else if(i>=9 && i<12) ub[i] = 100;
+            }
+        break;
     }
 }
 
@@ -1049,6 +1044,9 @@ int Number_Evaluations(int number_function){
         case 16:
             return 1000;
         break;
+        case 17:
+            return 30000;
+        break;
         case 18:
             return 30000;
         break;
@@ -1059,12 +1057,9 @@ int Number_Evaluations(int number_function){
             return 30000;
         break;
         case 21:
-            return 30000;
-        break;
-        case 22:
             return 15000;
         break;
-	case 23:
+        case 22:
             return 2000;
         break;
     }
