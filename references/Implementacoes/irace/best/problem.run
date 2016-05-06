@@ -1,0 +1,3 @@
+include /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/irace/best/Instances//da.mod;
+option solver './solver';
+solve;

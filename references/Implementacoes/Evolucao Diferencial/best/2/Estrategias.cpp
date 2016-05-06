@@ -25,7 +25,7 @@ double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, d
 
     func_eval=0;
     srand(seed);
-    int npop = num_individuos;
+    int npop = 2*num_individuos;
     int active[npop];
 
     Individuo **pop = new Individuo*[npop];
@@ -68,7 +68,7 @@ double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, d
     int parada = 2000;
 
     while(func_eval < parada){
-
+	//cout<<func_eval<<endl;
         int alpha, beta, gamma;
         double mutado[npop][dimension];
         Individuo **tentativa = new Individuo*[npop];
@@ -79,11 +79,13 @@ double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, d
         for(int i=0; i<num_individuos; i++){
             int id = rand()%npop;
             while(active[id] == 1){
+		//cout<<id<<"\t";
                 id++;
                 if(id == npop) id=0;
             }
             active[id] = 1;
         }
+	//cout<<"mutacao"<<endl;
 
         //mutação
         for(int i=0; i<npop; i++){

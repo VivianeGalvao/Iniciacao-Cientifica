@@ -25,7 +25,7 @@ double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, d
 
     func_eval=0;
     srand(seed);
-    int npop = num_individuos;
+    int npop = 2*num_individuos;
     int active[npop];
 
     Individuo **pop = new Individuo*[npop];

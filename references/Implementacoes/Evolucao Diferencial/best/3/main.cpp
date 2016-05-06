@@ -51,7 +51,7 @@ int main(int argc, char** argv)
 
         double mean = 0;
         for(int seed=1; seed<=SD; seed++){
-            mean += EvolucaoDiferencial(&objfun, FP, CR, n_var, NI, SD, lb, ub);
+            mean += EvolucaoDiferencial(&objfun, FP, CR, n_var, NI, seed, lb, ub);
         }
         mean = mean/(double)SD;
 //        EvolucaoDiferencial(&objfun, FP, CR, n_var, NI, SD, lb, ub);
