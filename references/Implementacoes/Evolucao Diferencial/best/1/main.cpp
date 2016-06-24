@@ -47,7 +47,7 @@ int main(int argc, char** argv)
                 ub[i] = LUv[2*i+1];
             }
         }
-        cout<<";"<<n_var;
+       // cout<<";"<<n_var;
 
         double mean = 0;
         for(int seed=1; seed<=SD; seed++){

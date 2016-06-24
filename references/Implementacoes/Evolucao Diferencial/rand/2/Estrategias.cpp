@@ -11,6 +11,8 @@
 
 #define INF 1E+21
 
+#define RATE 2
+
 using namespace std;
 
 int func_eval=0;
@@ -26,7 +28,7 @@ double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, d
     func_eval=0;
     srand(seed);
 
-    int npop = 2*num_individuos;
+    int npop = RATE*num_individuos;
     int active[npop];
 
     Individuo **pop = new Individuo*[npop];

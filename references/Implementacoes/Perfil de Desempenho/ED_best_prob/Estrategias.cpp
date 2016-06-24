@@ -21,11 +21,11 @@ double random_generate(){
     return ((rand())/(RAND_MAX+1.0));
 }
 
-double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, double cr, int dimension, int num_individuos, int seed, double *lb, double *ub){
+double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, double cr, int dimension, int num_individuos, int seed, int prob, double *lb, double *ub){
 
     func_eval=0;
     srand(seed);
-    int npop = num_individuos;
+    int npop = prob*num_individuos;
     int active[npop];
 
     Individuo **pop = new Individuo*[npop];
@@ -64,11 +64,10 @@ double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, d
         best->posicao[i] = pop[ibest]->posicao[i];
     }
 
-//    int parada = Number_Evaluations(num_func);
     int parada = 2000;
 
     while(func_eval < parada){
-
+	//cout<<func_eval<<endl;
         int alpha, beta, gamma;
         double mutado[npop][dimension];
         Individuo **tentativa = new Individuo*[npop];
@@ -76,16 +75,23 @@ double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, d
             tentativa[i] = new Individuo(dimension);
         }
 
+        for(int i=0; i<num_individuos; i++){
+            int id = rand()%npop;
+            while(active[id] == 1){
+		//cout<<id<<"\t";
+                id++;
+                if(id == npop) id=0;
+            }
+            active[id] = 1;
+        }
+	//cout<<"mutacao"<<endl;
+
         //mutação
         for(int i=0; i<npop; i++){
-
-            int ind = rand()%npop;
-            if(pop[i]->valor < pop[ind]->valor){
-                active[i] = 1;
-
+            if(active[i] == 1){
                 alpha = rand()%npop;
                 beta = rand()%npop;
-    //            gamma = rand()%num_individuos;
+    //            gamma = rand()%npop;
 
                 while(alpha == i){
                     alpha = rand()%npop;
@@ -108,17 +114,13 @@ double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, d
                     }
                 }
             }
-            else{
-                active[i] = 0;
-            }
-
         }
 
         //cruzamento
         double r;
         for(int i=0; i<npop; i++){
             if(active[i] == 1){
-               for(int j=0; j<dimension; j++){
+                for(int j=0; j<dimension; j++){
                     r = random_generate();
                     if(r <= cr){
                         tentativa[i]->posicao[j] = mutado[i][j];

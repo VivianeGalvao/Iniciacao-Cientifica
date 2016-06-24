@@ -2,26 +2,29 @@
 rm resultados.csv
 
 d=31
+i=0
+t="dados.txt"
 
-#echo "FUNCAO;DIMENSAO;MEDIA\n" >> resultados.csv
-echo "FUNCAO;MEDIA\n" >> resultados.csv
+echo "FUNCAO;DIMENSAO;MEDIA" >> resultados.csv
 
 for f in Instances/*
 do
+  let i=$i+1
+  t="dados"$i".txt"
+  rm $t
   echo $f
   echo -ne -e $f ";">> resultados.csv
-#  for((d=1; d<31; d++))
-#  do
+  for((d=1; d<31; d++))
+  do    
     rm problem.run
-    g++ -c -g -Iinclude/ *.cpp -D FP=0.55 -D CR=0.93 -D NI=32 -D SD=$d
+    g++ -c -g -Iinclude/ *.cpp -D FP=0.73 -D CR=0.68 -D NI=8 -D SD=$d
     g++ -o solver main.o Estrategias.o Individuo.o libs/funcadd0.o libs/amplsolver.a -w    
    
     echo "include" $f";" >> problem.run
     echo "options solver './solver';" >> problem.run
     echo "solve;" >> problem.run
   
-    ./ampl problem.run >> resultados.csv
-    echo >>resultados.csv
-#  done  
-#  echo "MÉDIA" >> resultados.csv
+    ./ampl problem.run >> $t
+    echo >> $t
+  done  
 done
