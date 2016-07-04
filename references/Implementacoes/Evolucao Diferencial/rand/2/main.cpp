@@ -47,16 +47,15 @@ int main(int argc, char** argv)
                 ub[i] = LUv[2*i+1];
             }
         }
-        cout<<";"<<n_var;
+        //cout<<";"<<n_var;
 
         double mean = 0;
         for(int seed=1; seed<=SD; seed++){
-            mean += EvolucaoDiferencial(&objfun, FP, CR, n_var, NI, seed, lb, ub);
+            mean += EvolucaoDiferencial(&objfun, FP, CR, n_var, NI, seed, PROB, lb, ub);
         }
         mean = mean/(double)SD;
-//        mean = EvolucaoDiferencial(&objfun, FP, CR, n_var, NI, SD, lb, ub);
-
-        cout<<";"<<setprecision(10)<<mean;
+//        EvolucaoDiferencial(&objfun, FP, CR, n_var, NI, SD, lb, ub);
+        cout<<setprecision(10)<<mean;
 
     }
     else{

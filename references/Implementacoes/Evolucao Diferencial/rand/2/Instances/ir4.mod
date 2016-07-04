@@ -16,7 +16,7 @@ param n := 30;
 # variables
 var x{1..n};
 
-option randseed '';
+#option randseed '';
 
 # objective function, minimization problem
 minimize fx:

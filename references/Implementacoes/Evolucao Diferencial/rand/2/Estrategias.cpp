@@ -23,12 +23,12 @@ double random_generate(){
     return ((rand())/(RAND_MAX+1.0));
 }
 
-double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, double cr, int dimension, int num_individuos, int seed, double *lb, double *ub){
+double EvolucaoDiferencial(double (*objfun)(double*), double fator_ponderacao, double cr, int dimension, int num_individuos, int seed, int prob, double *lb, double *ub){
 
     func_eval=0;
     srand(seed);
 
-    int npop = RATE*num_individuos;
+    int npop = prob*num_individuos;
     int active[npop];
 
     Individuo **pop = new Individuo*[npop];
