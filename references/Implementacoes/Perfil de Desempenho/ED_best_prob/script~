@@ -24,7 +24,6 @@ for((d=2; d<=10; d++))
     ./ampl problem.run >> $name
     #./ampl problem.run
     echo >> $name
-    echo $f | sed -e "s/Instances\///g" | sed -e "s/.mod//g"
   done  
 #  echo "MÉDIA" >> resultados.csv
 done

@@ -4,7 +4,8 @@ set xlabel '{/Symbol t}'
 set term postscript eps enhanced color
 set output 'saida.gnu.eps'
 set key right bottom
-set xrange [1:4.716124834630453E28]
+#set xrange [1:4.716124834630453E28]
+set xrange[1:3000]
 set yrange [0:1.01]
 plot 'out_N_1_saida.gnu.dat' u ($1):($2)  title 'N_1' lw 10 lt 0 , 'out_N_10_saida.gnu.dat' u ($1):($2)  title 'N_10' lw 10 lt 1 , 'out_N_2_saida.gnu.dat' u ($1):($2)  title 'N_2' lw 10 lt 2 , 'out_N_3_saida.gnu.dat' u ($1):($2)  title 'N_3' lw 10 lt 3 , 'out_N_4_saida.gnu.dat' u ($1):($2)  title 'N_4' lw 10 lt 4 , 'out_N_5_saida.gnu.dat' u ($1):($2)  title 'N_5' lw 10 lt 5 , 'out_N_6_saida.gnu.dat' u ($1):($2)  title 'N_6' lw 10 lt 6 , 'out_N_7_saida.gnu.dat' u ($1):($2)  title 'N_7' lw 10 lt 7 , 'out_N_8_saida.gnu.dat' u ($1):($2)  title 'N_8' lw 10 lt 8 , 'out_N_9_saida.gnu.dat' u ($1):($2)  title 'N_9' lw 10 lt 9
 set output 'saida.gnu_bar.eps'

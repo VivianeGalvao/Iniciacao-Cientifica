@@ -55,7 +55,6 @@ int main(int argc, char** argv)
         }
         mean = mean/(double)SD;
 //        EvolucaoDiferencial(&objfun, FP, CR, n_var, NI, SD, lb, ub);
-
         cout<<setprecision(10)<<mean;
 
     }

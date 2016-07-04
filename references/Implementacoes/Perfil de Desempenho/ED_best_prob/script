@@ -4,7 +4,7 @@ d=1;
 
 for((d=2; d<=10; d++))
  do
-  name="N_"$d".dat"
+  name="N"$d".dat"
   rm $name
   for f in Instances/*
   do
