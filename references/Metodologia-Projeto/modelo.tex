@@ -1,0 +1,259 @@
+\NeedsTeXFormat{LaTeX2e}
+%-----------------------------------------------------------
+\documentclass[a4paper,12pt]{monografia}
+\usepackage[portuguese, colorinlistoftodos, textsize=tiny]{todonotes}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage[mathcal]{eucal}
+\usepackage{latexsym}
+%\usepackage[brazil]{babel}
+%\usepackage[latin1]{inputenc}
+\usepackage[portuguese]{babel}  
+\usepackage[utf8]{inputenc}
+\usepackage{setspace}
+\usepackage{natbib}
+\usepackage{bm}
+\usepackage[portuguese,algoruled,longend]{algorithm2e}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{verbatim}
+
+\let \hiddentext \comment %renomeia o comando comment do verbatim como hiddentext
+\let \comment \relax %permite que se crie o comando comment do modelo sobrescrevendo o verbatim
+
+\newcounter{todocounter}
+\newcommand{\comment}[2][]
+{\stepcounter{todocounter}\todo[caption={\thetodocounter: #2}, #1] 
+{\begin{spacing}{1}\thetodocounter: #2\end{spacing}}}
+\reversemarginpar
+\setlength{\marginparwidth}{2.5cm}
+\lstloadlanguages{C}
+%-----------------------------------------------------------
+%-----------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem{axiom}{Axioma}[section]
+\newtheorem{corollary}{Corolário}[section]
+\newtheorem{lemma}{Lema}[section]
+\newtheorem{proposition}{Proposição}[section]
+%-----------------------------------------------------------
+\theoremstyle{definition}
+\newtheorem{definition}{Definição}[section]
+\newtheorem{example}{Exemplo}[section]
+%-----------------------------------------------------------
+\theoremstyle{remark}
+\newtheorem{remark}{Observação}[section]
+%-----------------------------------------------------------
+%-----------------------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\id}{\mathbf{1}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\V}{{\cal V}}
+%-----------------------------------------------------------
+\def\ind{\hbox{ ind }}
+%-----------------------------------------------------------
+\include{hifenizacao}
+
+
+
+\begin{document}
+\include{pretexto}
+
+
+
+%----------------------------dedicatória  opcional--------------
+\begin{dedicatoria}
+	Aos meus amigos e irmãos.\\
+	Aos pais, pelo apoio e sustento.\\
+\end{dedicatoria}
+
+
+
+%--------Digite aqui o seu resumo em Português--------------
+\resumo{Resumo} 
+Apesar de serem de fácil compreensão e implementação, os métodos determinísticos independentes de derivadas, como a Busca Padrão, possuem certas limitações devido à sua taxa de convergência lenta e em relação ao quão grande possa ser a dimensão do problema. Já as metaheurísticas, apesar de  sua  robustez,  demandam  demasiado  número  de  avaliações  de  função para  convergirem.
+
+O objetivo deste trabalho é resolver problemas de otimização em espaço de busca contínuo, os quais possuem análise de sua diferenciabilidade inviável e avaliação de alto custo computacional através de métodos de Otimização Sem Uso de Derivadas, além de combinar os métodos de Otimização por Enxame de Partículas e de Evolução Diferencial com a Busca Padrão, avaliar seus resultados e ainda verificar em quais condições este
+tipo de combinação gera boas respostas. Um dos principais objetivos deste trabalho é atingir bons resultados reduzindo o número de cálculos da função objetivo. Além disso, propõem-se melhorar a Busca Padrão a fim de diminuir a quantidade de avaliações de função desnecessárias.
+\noindent \\ \textbf{Palavras-chave:} Otimização Sem Uso de Derivadas, Metaheurística, Busca Padrão.
+
+
+
+%-----------ABSTRACT: Digite aqui o seu resumo em Inglês-------
+% Para o Projeto de TCC o Abstract não é utilizado. Na versão final do seu
+% TCC basta remover os comentários das próximas duas linhas.
+
+%\resumo{Abstract} You must summarize your work in 150-200 words.
+
+%\noindent \\ \textbf{Keywords:} Monograph, latex, instructions.
+
+
+
+
+
+%-----------AGRADECIMENTOS: --------------------------------------
+% Para o Projeto de TCC os agradecimentos não são utilizado. Na versão 
+% final do seu TCC basta remover os comentários das próximas linhas.
+
+%\agradecimento{Agradecimentos} \indent\indent 
+%A todos os meus parentes, pelo encorajamento e
+%apoio.
+%
+%Ao professor Beltrano pela orientação, amizade e
+%principalmente, pela paciência, sem a qual este trabalho não se
+%realizaria.
+%
+%Aos professores do Departamento de Ciência da Computação pelos seus
+%ensinamentos e aos funcionários do curso, que durante esses anos,
+%contribuíram de algum modo para o nosso enriquecimento pessoal e
+%profissional.
+%\newpage
+
+
+%---------------------- EPÍGRAFE I (OPCIONAL)--------------
+\begin{epigrafe}
+``Lembra que o sono é sagrado e alimenta de horizontes o tempo acordado de viver''.\\
+\hfill Beto Guedes (Amor de Índio)
+\end{epigrafe}
+
+
+
+%----Sumário, lista de figura e de tabela ------------
+ \tableofcontents \thispagestyle{empty} \listoffigures
+\thispagestyle{empty} \listoftables \thispagestyle{empty}
+
+
+
+%----Glossário ------------
+\chapter*{Lista de Abreviações} \addcontentsline{toc}{chapter}{Lista de Abreviações}
+\doublespacing  \begin{tabular}{l l}
+
+DCC & Departamento de Ciência da Computação \\
+UFJF & Universidade Federal de Juiz de Fora \\
+
+\end{tabular}  \thispagestyle{empty}
+%---------------------
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%--------------Início do Conteúdo---------------------------
+%
+%
+\pagestyle{ruledheader}
+\chapter{Introdução}
+\section{Apresentação do Tema} %apresentação do tema
+No entanto, algumas dificuldades quanto a obtenção dessas informações induzem o uso de uma classe de métodos apropriada:
+os métodos de Otimização Sem Derivadas (OSD).
+
+%Pode-se encontrar um denso estudo
+%destes métodos em Conn et al. (2009), incluindo análises de convergência e algumas aplicações práticas.
+Dentre os métodos da classe OSD, pode-se citar os Métodos de Busca Direta, que utilizam
+apenas os valores da função objetivo para convergirem até um ponto de ótimo local. 
+%Mais detalhes sobre os Métodos de Busca Direta, como uma abordagem histórica, novas estratégias e um panorama sobre o tratamento de restrições laterais, lineares e não-lineares pode ser encontrado em Kolda et al. (2003).  
+Um método de Busca Direta bastante simples é o método de Busca Padrão, que é uma estratégia que opera com movimentos exploratórios, além de ter uma estrutura flexível
+que permite sua combinação com outras heurísticas.
+
+Ainda, existem os métodos de natureza estocástica que são populares devido à sua
+robustez, mas que possuem alto custo computacional. Estes métodos são conhecidos como metaheurísticas e comumente são inspirados em processos naturais, como é o caso da Otimização por Enxame de Partículas (PSO) o qual é um método populacional inspirado em mecanismos de inteligência coletiva e da Evolução Diferencial (ED) que é inspirado na processo natural de evolução das espécies.
+
+Apesar da sua aplicabilidade, os métodos de otimização sem derivadas têm taxa de convergência baixa e não atingem bons resultados para altas dimensões, diferentemente
+dos métodos baseados em derivadas. Pode-se esperar o sucesso desses métodos em problemas
+que não tenham mais do que uma centena de variáveis, que possuam custo muito alto de avaliação e nos quais uma rápida taxa de convergência não é o objetivo primordial. 
+%Alguns trabalhos
+%tentam melhorar a eficiência e robustez desses métodos, 
+%como no trabalho de Custódio (2007)que aplica 
+%seja aplicando a teoria dos gradientes simpléticos no método de busca padrão 
+%e em Vaz and Vicente (2007) que 
+%ou combinando a técnica de otimização por enxame de partículas com a busca padrão.
+
+\section{Descrição do Problema}%problema
+Frequentemente,  nas Ciências Exatas e nas Engenharias,  são encontrados problemas de
+otimização em espaço contínuo com restrições em que o uso de derivadas é inviável seja
+pela instabilidade no seu cálculo ou pela inacessibilidade à informações, como em problemas conhecidos
+como “caixa preta”,  onde o cálculo da função objetivo e/ou das restrições envolve o uso de
+um  simulador.   Além  disso,  esta  classe  de  problemas  frequentemente exige avaliações  com
+alto custo computacional. Tais características dificultam a utilização de uma aproximação numérica
+das derivadas por diferenças finitas e a de métodos baseados nas técnicas de Newton e quasi-
+Newton por envolver alto custo computacional e possível ruído contido na função objetivo ou
+restrições do problema. Por exemplo, pode-se citar o problema de projeto de pás do rotor de helicópteros onde o objetivo poderia ser
+minimizar a vibração transmitida ao seu ponto central. Neste exemplo, a função objetivo é uma simulação que inclui dinâmica das estruturas e aerodinâmica e cada avaliação de função pode requerer minutos ou até mesmo dias em tempo de CPU.
+
+Além da intenção de resolver o problema de otimização, é necessário obter o máximo de eficiência na busca, encontrando a melhor solução possível demandando o menor número de avaliações de função.
+
+\section{Motivação do Trabalho} %justificativa/motivação
+Desde a década de 1960, a demanda de problemas complexos e com pouca informação disponível motivou o desenvolvimento dos métodos
+da classe OSD que, até os anos 90, não tinham muita teoria relacionada à garantia de convergência. Atualmente, a ênfase tem sido no entendimento dos métodos já existentes com interesse na sua convergência global. O interesse nesses métodos tem crescido em razão da facilidade de implementação e paralelização, e grande aplicabilidade.
+
+A maioria dos métodos OSD são simples. As principais motivações para a utilização dos métodos OSD estão nos casos onde os problemas possuem avaliações com alto custo computacional e ruido, e não se tem acesso às derivadas e nem pode-se aproximá-las por diferenças finitas e nos casos onde o problema não possui código fonte disponível, o que faz a diferenciação automática ser impossível. Esses problemas são bastante comuns em aplicações em Engenharia e Ciencias Exatas, e geralmente exigem complexas simulações.
+
+A combinação da Busca Padrão com metaherística é uma alternativa para se resolver problemas de OSD com eficiência. As metaheuríscas são capazes de explorar o espaço de busca e escapar de mínimos/máximos locais e cada ótimo global conhecido pela metaheurísca pode ser refinado pela Busca Padrão, através da avaliação da sua vizinhança de acordo um padrão de direções, melhorando a solução da metaheurística.
+
+\section{Hipóteses} %hipoteses
+\section{Objetivos} %objetivos
+A proposta deste trabalho consiste em combinar uma Busca Padrão com PSO e com ED para resolver
+problemas de otimização em espaço de busca contínuo com restrições laterais a fim de melhorar o desempenho das metaheurísticas. Além disso, pretende-se modificar a busca padrão inicialmente adotada com o intuito de realizar menos cálculos da função objetivo, bem como inserir uma estratégia de população dinâmica no PSO que
+depende da quantidade de acessos à Busca Padrão. Experimentos computacionais com
+problemas geralmente usados na literatura foram realizados para analisar a técnica proposta.
+
+
+\section{Cronograma}
+
+Para alcançar os objetivos descritos neste projeto, considerando a metodologia apresentada, deve ser desenvolvido o seguinte conjunto de atividades:
+
+\begin{enumerate}
+\item Revisão Bibliográfica;
+\item Definição da estratégia a ser implementada;
+\item Implementação;
+\item Testes/validação;
+\item Escrita da Monografia; e
+\item Defesa da Monografia.
+\end{enumerate}
+
+A Tab. \ref{tab:bullets}  é um exemplo típico de cronograma. O símbolo
+‘\X’ foi usado neste exemplo, mas qualquer outro poderia ter sido
+usado.
+
+\newcommand{\X}{\textbullet}
+
+ \begin{table}[ht]
+ \centering
+ \begin{tabular}{|c|c|c|c|c|c|}
+
+  \hline
+ &\multicolumn{2}{|c|}{\textbf{2016}}&\multicolumn{3}{|c|}{\textbf{2017}} \\
+ \hline
+ \hline
+ Atividades & Nov. & Dez. & Jan. & Fev. & Mar. \\
+ \hline
+ 1    &  \X  &  \X    &     &       &        \\ 
+ 2    &      &  \X    &     &       &        \\ 
+ 3    &      &  \X    &  \X &       &        \\ 
+ 4    &      &  \X    &  \X &  \X   &        \\
+ 5    &      &        &  \X &  \X   &        \\ 
+ 6    &      &        &     &       &  \X    \\ 
+ \hline
+ \hline 
+
+ \end{tabular}
+ \caption{Exemplo de cronograma usando \textit{bullets}}
+ \label{tab:bullets}
+ \end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\singlespacing
+\bibliographystyle{ufjfStyle}
+\bibliography{referencias}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
