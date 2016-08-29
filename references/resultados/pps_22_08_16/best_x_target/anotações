@@ -1,0 +1,13 @@
+N1 ED_best_prob N2
+N2 ED_best_prob N3
+
+N3 ED_best_torneio N1 (torneio irrestrito)
+N4 ED_best_torneio N2
+N5 ED_best_torneio N3
+
+N6 ED_target_prob N2
+N7 ED_target_prob N3
+
+N8 ED_target_torneio N1 (torneio irrestrito)
+N9 ED_target_torneio N2
+N10 ED_target_torneio N3
