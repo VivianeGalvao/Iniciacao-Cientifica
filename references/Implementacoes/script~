@@ -1,0 +1,7 @@
+
+for f in Perfil\ de\ Desempenho/*
+do  
+  echo $f
+  ls
+  cd "$f"
+done
