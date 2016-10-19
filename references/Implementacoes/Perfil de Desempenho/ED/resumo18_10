@@ -1,0 +1,18 @@
+Resultado das comparações entre as técnicas propostas:
+
+1. best: com população de 10 indivíduos, fator de ponderação de 0.5 e triplicando a população (alpha=3) foi a técnica que obteve o melhor desempenho.
+	 Já a técnica com maior robustez foi a com população de 30 indivíduos, fator de ponderação de 0.5 e duplicando a população (alpha = 2).
+
+2. rand: com população de 10 indivíduos, fator de ponderação de 0.5 e duplicando a população (alpha=2), foi a técnica que obteve o melhor desempenho e robustez.
+
+3. target-to-best: com população de 10 indivíduos, fator de ponderação de 0.5 e triplicando a população (alpha=3) foi a técnica que obteve o melhor desempenho.
+		    Já a técnica com maior robustez foi a com população de 30 indivíduos, fator de ponderação de 0.5 e com população sem alterações (alpha = 1).
+		    
+De uma forma geral, a técnica proposta com o melhor desempenho foi a de variação DE/best, com população de 10 indivíduos, triplicando a população (alpha=3) e fator
+de ponderação de 0.5. Porém, ao ser comparada com a melhor original, a de variação DE/target, com população de 30 indivíduos e fator de ponderação de 0.5, ficou um pouco
+atrás da original em questão de robustez e desempenho. A diferença de desempenho não foi muito grande entre a original e a proposta, ao ponto de que os resultados ficaram 
+bem competitivos. 
+
+Algumas observações a mais: as melhores técnicas propostas foram as com população de 10 indivíduos e fator de ponderação de 0.5, diferenciando apenas o quanto se aumenta 
+a população, no caso o valor de alpha que ficou entre 2 e 3. Comparei separadamente o melhor DE/best proposto com o melhor DE/best original, assim como para as outras 
+variações, mas apenas para o DE/best que o melhor proposto foi melhor que o original. 

@@ -1,0 +1,135 @@
+ED com TORNEIO 2.0
+  gerar população de (alpha*npop) indivíduos aleatoriamente;
+  selecionar o melhor da população;
+  
+  Enquanto criterio de parada: (2000 iterações)
+    criar uma população P1 de provisória para novos indivíduos;
+    para cada indivíduo i:
+      se a probabilidade do indivíduo é menor que 1/alpha:
+	selecionar um indivíduo j aleatorio da população;
+	se i < j:
+	  t = mutar(i);
+	  t = cruzar(t);
+	  se i já foi mutado:
+	    se P1[i] < t:
+	      P1[i] = t;	
+	  senão :
+	      P1[i] = t;
+	    
+	senao:
+	  t = mutar(j);
+	  t = cruzar(t);
+	  se j já foi mutado:
+	    se P1[j] < t:
+	      P1[j] = t;
+	  senão:
+	    P1[j] = t;
+    
+    
+    selecionar os melhores para a proxima geração;
+    
+   retorna o melhor indivíduo encontrado
+FIM
+	
+    
+Observações:
+LEGENDA:
+  * maior chance de acerto => maior probabilidade de encontrar o ótimo
+  * maior robustez => maior área
+
+ED/best/torneio2.0
+  => pop10
+    - alpha = 1: as abordagens com o torneio2.0 com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas, em especial, a abordagem com fp=0.5. Estas tambem tiveram os maiores acertos. 
+    - alpha = 2: as abordagens com o torneio2.0 com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas, em especial, a abordagem com fp=0.6. Estas tambem tiveram os maiores acertos, sendo que 
+por pouco, a abordagem com fp=0.6 obteve a maior chance de acerto. 
+    - alpha = 3: as abordagens com o torneio2.0 com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas, em especial, a abordagem com fp=0.5. Estas tambem tiveram os maiores acertos, sendo que
+a abordagem com fp=0.5 obteve a maior chance de acertos.
+
+  => pop30
+    - alpha = 1: as três abordagens com maior robustez foram as ED/best com o torneio2.0 com fp=0.5 e ED/best originais com fp=0.6 e fp=0.7, em especial, a mais robusta sendo
+    a ED/best com o torneio2.0 com fp=0.5. A abordagem com maior chance de acertos foi a ED/best com o torneio2.0 com fp=0.5, bem como ED/best com o torneio2.0 com fp=0.6. 
+    - alpha = 2: as três abordagens com maior robustez foram as ED/best com o torneio2.0 com fp=0.5 e fp=0.6 e ED/best original com fp=0.7, em especial, a mais robusta foi a 
+    ED/best como torneio2.0 com fp=0.5, seguida com a de fp=0.6. A abordagem com maior chance de acerto foi o ED/best com torneio2.0 com fp=0.5.
+    - alpha = 3: as três abordagens com maior robustez foram as ED/best com o torneio2.0 com fp=0.5 e ED/best original com fp=0.7 e fp=0.5, em especial, a mais robusta foi
+    a ED/best com torneio2.0 com fp=0.5. A abordagem com maior chance de acertos ficou entre a ED/best com torneio2.0 e fp=0.5 e entre a ED/best original com fp=0.7. A abordagem
+    com a mais baixa robustez foi a ED/best com torneio2.0 e fp=0.7, bem como a que obteve menos chance de acerto.
+    
+  => pop50
+    - alpha = 1: as três abordagens com maior robustez foram as ED/best originais com fp=0.5 e fp=0.6 e a ED/best com torneio2 com fp=0.5, em especial, a mais robusta foi a 
+    ED/best com torneio2 com fp=0.5. A abordagem com maior chance de acertos está entre a ED/best com torneio2 com fp=0.5 e ED/best original com fp=0.6. A abordagem com a mais baixa
+    robustez foi a ED/best com torneio2 com fp=0.7, bem como a que obteve menos chance de acertos.
+    - alpha = 2: as três abordagens com maior robustez e com maior chance de acertos foram as ED/best originais com fp=0.5 e fp=0.6 e a ED/best com torneio2 com fp=0.5, em especial, a mais robusta foi a 
+    ED/best original com fp=0.5. As abordagens ED/best com torneio2 com fp=0.6 e fp=0.7 tiveram menor robustez e menor chances de acertos.
+    - alpha = 3: as três abordagens com maior robustez foram as ED/best com torneio2 com fp=0.6, fp=0.7 e fp=0.5, nesta ordem. No entanto, as com maior probabilidade de acertar
+    o ótimo foram as ED/best originais com fp=0.5, fp=0.6 e fp=0.7.
+    
+  => pop100
+    - alpha = 1: as três abordagens com maior robustez foram as ED/best original com fp=0.5, ED/best com torneio2.0 com fp=0.5 e a ED/best original com fp=0.6, nessa ordem. 
+    A abordagem com maior chance de acertos foi a ED/best original com fp=0.5.
+    - alpha = 2: as três abordagens com maior robustez foram as ED/best com torneio2.0 com fp=0.5 e fp=0.6 e ED/best original com fp=0.5, nessa ordem. A abordagem com maior
+    chance de acertos foi a ED/best original com fp=0.5.
+    - alpha = 3: as três abordagens com maior robustez foram as ED/best originais com fp=0.5, fp=0.6 e fp=0.7, nesta ordem. A abordagem com maior chance de acertos foi a 
+    ED/best original com fp=0.5.
+    
+ED/rand/torneio2.0
+    => pop10
+      - alpha = 1: as três abordagens mais robustas foram as ED/rand com torneio2.0 com fp=0.6 e fp=0.7 e ED/rand original com fp=0.7, nesta ordem. A abordagem com mais aparencia de maior 
+      probabilidade de acerto é a ED/rand original fp=0.7.
+      - alpha = 2: as três abordagens com maior robustez foram ED/rand com torneio2.0 com fp=0.5 e fp=0.6 e ED/rand original com fp=0.7, nesta ordem. Aparentemente, a abordagem
+      com maior chance de acerto está entre a ED/rand original com fp=0.7 ED/rand com torneio2.0 com fp=0.5.
+      - alpha = 3: as três abordagens com maior robustez foram ED/rand com torneio2.0 com fp=0.5 e fp=0.6 e ED/rand original com fp=0.7, nesta ordem. A abordagem com maior chance 
+      de acerto foi a ED/rand original com fp=0.7.
+    
+    => pop30
+      - alpha = 1: as três abordagens mais robustas foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7, nessa ordem. A abordagens com maior chance de acerto foram as
+      ED/rand originais com fp=0.5 e fp=0.6.
+      - alpha = 2: as três abordagens mais robustas foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7, nessa ordem. A abordagens com maior chance de acerto foram as
+      ED/rand originais com fp=0.5, fp=0.6 e fp=0.7.
+      - alpha = 3:  as três abordagens mais robustas foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7, nessa ordem. A abordagens com maior chance de acerto foram as
+      ED/rand originais com fp=0.5, fp=0.6 e fp=0.7.
+      
+    => pop50
+      - alpha = 1: as três abordagens mais robustas foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7, nessa ordem. A abordagens com maior chance de acerto foram as
+      ED/rand originais com fp=0.5 e fp=0.6.
+      - alpha = 2: as três abordagens mais robustas foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7, nessa ordem. A abordagens com maior chance de acerto foram as
+      ED/rand originais com fp=0.5, fp=0.6 e fp=0.7.
+      - alpha = 3: as três abordagens mais robustas foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7, nessa ordem. A abordagens com maior chance de acerto foram as
+      ED/rand originais com fp=0.5, fp=0.6 e fp=0.7.
+      
+    => pop100
+      - alpha = 1: as três abordagens mais robustas foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7, nessa ordem. As abordagens com torneio2.0 tiveram área bem
+      menor que a encontrada para elas nas versões anteriores. A abordagens com maior chance de acerto foram as ED/rand originais com fp=0.5 e fp=0.6.
+      - alpha = 2: as três abordagens mais robustas foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7, nessa ordem. Outra vez, as abordages com torneio2.0 tiveram área bem
+      menor que a encontrada para elas nas versões anteriores. A abordagens com maior chance de acerto foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7.
+      - alpha = 3:  as três abordagens mais robustas foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7, nessa ordem. Outra vez, as abordages com torneio2.0 tiveram área bem
+      menor que a encontrada para elas nas versões anteriores. A abordagens com maior chance de acerto foram as ED/rand originais com fp=0.5, fp=0.6 e fp=0.7.
+
+ED/target_to_best/torneio2.0
+    => pop10
+      - alpha = 1: as abordagens com o torneio2.0 com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas, em especial, a abordagem com fp=0.7. Estas tambem tiveram os maiores acertos.
+      - alpha = 2: as abordagens com o torneio2.0 com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas, em especial, a abordagem com fp=0.5. Estas tambem tiveram os maiores acertos.
+      - alpha = 3: as abordagens com o torneio2.0 com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas, em especial, a abordagem com fp=0.5. As maiores chances de acertos foram 
+      obtidas das técnicas com o torneio2.0 com fp=0.5 e fp=0.6.
+      
+    => pop30
+      - alpha = 1: as abordagens ED/target_to_best originais com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas e tiveram maior chance de acerto, em especial com fp=0.6. 
+      As abordagens com torneio2.0 tiveram área um pouco menor, bem como as menores de acertos.
+      - alpha = 2: as abordagens ED/target_to_best originais com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas e tiveram maior chance de acerto, em especial com fp=0.6. 
+      As abordagens com torneio2.0 tiveram área um pouco menor, bem como as menores de acertos.
+      - alpha = 3: as abordagens ED/target_to_best originais com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas e tiveram maior chance de acerto, em especial com fp=0.6. 
+      As abordagens com torneio2.0 tiveram área um pouco menor, bem como as menores de acertos.
+    
+    => pop50
+      - alpha = 1: as abordagens ED/target_to_best originais com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas e tiveram maior chance de acerto, em especial com fp=0.5. 
+      - alpha = 2: as abordagens ED/target_to_best originais com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas e tiveram maior chance de acerto, em especial com fp=0.6. 
+      As abordagens com torneio2.0 tiveram área um pouco menor, bem como as menores de acertos.
+      - alpha = 3: as abordagens ED/target_to_best originais com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas e tiveram maior chance de acerto, em especial com fp=0.6. 
+      As abordagens com torneio2.0 tiveram área um pouco menor, bem como as menores de acertos.
+    
+    => pop100
+      - alpha = 1: as abordagens ED/target_to_best originais com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas e tiveram maior chance de acerto, em especial com fp=0.5. 
+      As abordagens com torneio2.0 tiveram área um pouco menor, bem como as menores de acertos.
+      - alpha = 2: as abordagens ED/target_to_best originais com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas e tiveram maior chance de acerto, em especial com fp=0.5. 
+      As abordagens com torneio2.0 tiveram área um pouco menor, bem como as menores de acertos.
+      - alpha = 3:as abordagens ED/target_to_best originais com fp=0.5, fp=0.6 e fp=0.7 foram as mais robustas e tiveram maior chance de acerto, em especial com fp=0.5. 
+      As abordagens com torneio2.0 tiveram área bem menor, bem como as menores de acertos.
