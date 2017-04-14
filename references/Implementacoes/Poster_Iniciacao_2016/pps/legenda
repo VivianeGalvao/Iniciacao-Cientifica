@@ -1,0 +1,15 @@
+N1 : PSwarm
+N2 : PSO
+N3 : PSOBL
+N4 : PSOBLM
+N5 : PSwarmBLM
+N6 : ED/rand
+N7 : ED/best
+N8 : ED/targettobest
+N9 : ED/rand + BL
+N10 : ED/best + BL
+N11 : ED/targettobest + BL
+N12 : ED/rand + BLM
+N13 : ED/best + BLM
+N14 : ED/targettobest + BLM
+
