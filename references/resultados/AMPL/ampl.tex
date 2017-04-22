@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper, 12pt]{article}
 
 \usepackage[brazilian]{babel}
 \usepackage[utf8]{inputenc}
@@ -7,7 +7,8 @@
 \usepackage{hyperref}
 
 \title{Manual AMPL}
-\date{ }
+\author{Viviane J Galvão}
+\date{\today}
 
 \begin{document}
 \maketitle
@@ -17,7 +18,7 @@ A instalação do pacote gratuito do AMPL (versão para estudantes) pode ser rea
 
 Essa é uma versão grátis, a qual permite a resolução de problemas com até 500 variáveis, com 500 restrições lineares ou com 300 restrições não-lineares. Ainda, essa versão acompanha os principais resolvedores disponíveis para AMPL.\\
 
-Os principais necessários para o uso do ambiente AMPL são o executável \verb|ampl| e a sua licensa \verb|ampl.lic|, os quais podem ser movidos diretamente para o diretório onde se encontra o resolvedor a ser utilizado.\\
+Os principais arquivos para o uso do ambiente AMPL são o executável \verb|ampl| e a sua licensa \verb|ampl.lic|, os quais podem ser movidos diretamente para o diretório onde se encontra o resolvedor a ser utilizado.\\
 
 Após, para que seja possível incluir o nosso resolvedor em C\verb|++| ao AMPL, é preciso baixar o diretório com todos os arquivos disponíveis em: 
 \begin{center}
@@ -32,21 +33,24 @@ Esse diretório contém a fonte para a biblioteca de rotinas que auxiliam resolv
 para criar o diretório \verb|sys.'uname -m'.'uname -s'|, específico para o sistema operacional utilizado. 
 \item Execute:
 \begin{verbatim}
-cd sys.'uname -m'.'uname -s'
+cd sys.`uname -m'.`uname -s'
 make
 \end{verbatim}
 e a biblioteca \verb|amplsolver.a| será criada nesse diretório específico para o sistema.
 \end{enumerate} 
 
 \section{Resolvendo Problemas em AMPL}
-Para códigos em C\verb|++|, é necessário incluir o arquivo \verb|asl.h|, o qual facilita a leitura e acesso às informações dos problema a ser resolvido, como número de variáveis, restrições e objetivos.\\
+Para códigos em C\verb|++|, é necessário incluir o arquivo \verb|asl.h|, o qual facilita a leitura e acesso às informações dos problema a ser resolvido, como número de variáveis, restrições e objetivos.
+\begin{verbatim}
+#include `asl.h'
+\end{verbatim}
 
 Esse arquivo \verb|asl.h| é encontrado na pasta de \textit{includes} necessários para a conexão do nosso resolvedor e o AMPL. No caso, essa pasta contém todos os arquivos \verb|*.h| e \verb|*.c| contidos do subdiretório \verb|sys.'uname -m'.'uname -s'|. \\
 
 A partir do arquivo $asl.h$ é necessário declarar um ponteiro do tipo \verb|ASL|, o qual será utilizado diretamente para ler e acessar o modelo do problema. 
 A função \verb|ASL_alloc|($ASLtype$) aloca um objeto do tipo \verb|ASL| e o parâmetro $ASLtype$ determina quantas não-linearidades são tratadas. No caso, como parâmetro foi utilizado \verb|ASL_read_fg|, o qual auxilia na leitura e tratamento de problemas não-lineares. Mais argumentos e suas características podem ser encontrados em \textbf{[1]}. \\
 
-Inicialmente, o nome do problema no formato \textit{.mod} deve ser informado como parâmetro para o código principal do seu resolvedor. O nome da instância é armazenado na variável \verb|stub| e é utilizada para acessar o arquivo através da função \verb|jac0dim(char *stub, fint stub_len)|. \\ 
+Inicialmente, o nome do problema no formato \textit{.mod} deve ser informado como parâmetro para o código principal do seu resolvedor (no caso, o próprio ambiente AMPL informa o problema como parâmetro como resolvedor). O nome da instância é armazenado na variável \verb|stub| e é utilizada para acessar o arquivo através da função \verb|jac0dim(char *stub, fint stub_len)|. \\ 
 
 A partir do arquivo \verb|.nl| retornado por \verb|jac0dim(char *stub, fint stub_len)|, é possível extrair todas as informações do problema informado através da função \verb|fg_read_ASL(ASL *asl, FILE *nl, int flag)|, a qual auxilia na leitura e tratamento de problemas não-lineares.\\  
 
@@ -69,7 +73,7 @@ ampl: include ack.mod;
 ampl: solve;
 \end{verbatim}
 
-Quando o comando \verb|solve| é executado, então o problema incluído é resolvido pelo resolvedor padrão que acompanha o AMPL, o MINOS. Para utilizar o nosso resolvedor, é necessário que ele tenha sido compilado a priori e gerado um arquivo executável. Suponha que após compilar no nosso resolver tenha sido gerado o executável \verb|solver|. Então, modificamos o resolvedor do AMPL através de:
+Quando o comando \verb|solve| é executado, então o problema incluído é resolvido pelo resolvedor padrão que acompanha o AMPL, o MINOS. Para utilizar o nosso resolvedor, é necessário que ele tenha sido compilado a priori e gerado um arquivo executável. Suponha que após compilar no nosso resolvedor tenha sido gerado o executável \verb|solver|. Então, modificamos o resolvedor do AMPL através de:
 \begin{verbatim}
 ampl: include ack.mod;
 ampl: options solver `./solver';
@@ -78,7 +82,7 @@ ampl: solve;
 
 Além de permitir que o resolvedor seja modificado, o comando \verb|options| permite modificar outros parâmetros para o ambiente AMPL.\\
 
-Outra alternativa para resolver problemas em AMPL é escrever um \textit{script} de execução em um arquivo \textit{.run}. Uma vez possuindo um \verb|script.run| não é necessário entrar no ambiente \verb|ampl| para incluir os problemas e modificar o resolvedor, basta apenas ter tais comandos no arquivo \verb|script.run| e executá-lo através de:
+Outra alternativa para resolver problemas em AMPL é escrever um \textit{script} de execução em um arquivo \textit{.run}. Uma vez possuindo um \verb|script.run| não é necessário entrar no ambiente \verb|ampl| para incluir os problemas e modificar o resolvedor, basta apenas ter os comandos necessários no arquivo \verb|script.run| e executá-lo através de:
 \begin{verbatim}
 ./ampl script.run
 \end{verbatim}
@@ -91,7 +95,7 @@ g++ -o solver main.o Estrategias.o libs/funcadd0.o libs/amplsolver.a -w
 
 Nesse caso, além do \verb|main.o|, podem ser colocados os nomes de todos os arquivos \verb|*.cpp| que estão incluídos no \verb|main.cpp|. Além, a biblioteca \verb|amplsolver.a| e o arquivo \verb|funcadd0.o| devem também informados no processo de compilação. O arquivo \verb|funcadd0.o| é necessário para quando o modelo \textit{.mod} utiliza funções que são definidas pelo usuário e o resolvedor precisa avaliar essas funções. \\
 
-Note que, se o resolvedor necessita de parâmetros (além do nome do problema, pois esse é informado ao resolvedor de forma automática no ambiente AMPL), é mais fácil informá-los nesse momento, através de \verb|-D Param1=$a -D Param2=$b|, onde \verb|Param1| e \verb|Param2| são os nomes parâmetros necessários no resolvedor e \verb|$a| e \verb|$b| são seus valores.
+Note que, se o resolvedor necessita de parâmetros (além do nome do problema, pois esse é informado ao resolvedor de forma automática no ambiente AMPL), é mais fácil informá-los nesse momento, através de \verb|-D Param1=$a| \verb|-D Param2=$b|, onde \verb|Param1| e \verb|Param2| são os nomes parâmetros necessários no resolvedor e \verb|$a| e \verb|$b| são seus valores.
 
 \section{Exemplo de Utilização do AMPL} \label{exem1}
 (desenvolvido a partir de exemplos encontrados em \url{http://ampl.com/resources/the-ampl-book/example-files/})
