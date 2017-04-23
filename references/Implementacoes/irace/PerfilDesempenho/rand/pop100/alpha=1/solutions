@@ -1,0 +1,172 @@
+irace	version: 1.07.1202
+********************************************************************************
+* irace: An implementation in R of Iterated Race                               *
+* Copyright (C) 2010-2014                                                      *
+* Manuel Lopez-Ibanez     <manuel.lopez-ibanez@ulb.ac.be>                      *
+* Jeremie Dubois-Lacoste  <jeremie.dubois-lacoste@ulb.ac.be>                   *
+*                                                                              *
+* This is free software, and you are welcome to redistribute it under certain  *
+* conditions.  See the GNU General Public License for details. There is NO     *
+* warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  *
+*                                                                              *
+* irace builds upon previous code from the race package                        *
+* Copyright (C) 2003 Mauro Birattari                                           *
+********************************************************************************
+Warning: A default configuration file './tune-conf' has been found and will be read
+# 0 expression(s) specifying forbidden configurations read from '/media/Particao/fapemig_universal2013_eng/references/Implementacoes/irace/PerfilDesempenho/rand/pop100/alpha=1/forbidden'
+# 2016-10-19 14:36:51 BRST: Initialization
+# nbIterations: 3
+# minNbSurvival: 3
+# nbParameters: 2
+# seed: 1976391979
+# confidence level: 0.95
+# remainingBudget: 5000
+# mu: 5
+
+# 2016-10-19 14:36:51 BRST: Iteration 1 of 3
+# experimentsUsedSoFar: 0
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 5000
+# currentBudget: 1666
+# nbCandidates: 277
+
+                            Markers:
+                               x No test is performed.
+                               - The test is performed and
+                                 some candidates are discarded.
+                               = The test is performed but
+                                 no candidate is discarded.
+
++-+-----------+-----------+-----------+-----------+-----------+--------+
+| |       Task|      Alive|       Best|  Mean best| Exp so far|Run Time|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+|x|          1|        277|        113|  8.851e-06|        277|00:04:55|
+|x|          2|        277|        123|       5806|        554|00:04:53|
+|x|          3|        277|        113|       4680|        831|00:04:55|
+|x|          4|        277|        123|       2902|       1108|00:04:54|
+|-|          5|         62|        118|       3410|       1385|00:04:56|
+|=|          6|         62|        118|       2841|       1447|00:01:06|
+|=|          7|         62|        118|       2436|       1509|00:01:05|
+|=|          8|         62|        118|       2131|       1571|00:01:06|
+|-|          9|         11|        118|       1894|       1633|00:01:06|
+|=|         10|         11|        118|       1705|       1644|00:00:12|
+|=|         11|         11|        118|       1550|       1655|00:00:11|
+|=|         12|         11|        118|       1421|       1666|00:00:11|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+
+Selected candidate:         118	mean value:       1421
+
+Description of the selected candidate:
+    .ID. fator_pond criterio_cruz .PARENT.
+118  118       0.11          0.89       NA
+
+
+# Elite candidates:
+    fator_pond criterio_cruz
+118       0.11          0.89
+48        0.24          0.83
+8         0.15          0.68
+# 2016-10-19 15:06:26 BRST: Iteration 2 of 3
+# experimentsUsedSoFar: 1666
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 3334
+# currentBudget: 1667
+# nbCandidates: 238
+
+                            Markers:
+                               x No test is performed.
+                               - The test is performed and
+                                 some candidates are discarded.
+                               = The test is performed but
+                                 no candidate is discarded.
+
++-+-----------+-----------+-----------+-----------+-----------+--------+
+| |       Task|      Alive|       Best|  Mean best| Exp so far|Run Time|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+|x|          1|        238|        154|  5.788e+04|        238|00:04:14|
+|x|          2|        238|        183|  4.137e+04|        476|00:04:13|
+|x|          3|        238|         21|  3.844e+04|        714|00:04:19|
+|x|          4|        238|         21|  2.883e+04|        952|00:04:23|
+|-|          5|        121|         45|  1.732e+04|       1190|00:04:22|
+|=|          6|        121|         21|  1.506e+04|       1311|00:02:11|
+|=|          7|        121|         21|  1.291e+04|       1432|00:02:10|
+|=|          8|        121|         65|  1.022e+04|       1553|00:02:09|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+
+Selected candidate:          65	mean value:  1.022e+04
+
+Description of the selected candidate:
+    .ID. fator_pond criterio_cruz .PARENT.
+339  339        0.1          0.89      118
+
+
+# Elite candidates:
+    fator_pond criterio_cruz
+339       0.10          0.89
+279       0.17          0.86
+427       0.26          0.80
+# 2016-10-19 15:34:34 BRST: Iteration 3 of 3
+# experimentsUsedSoFar: 3219
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 1781
+# currentBudget: 1781
+# nbCandidates: 222
+
+                            Markers:
+                               x No test is performed.
+                               - The test is performed and
+                                 some candidates are discarded.
+                               = The test is performed but
+                                 no candidate is discarded.
+
++-+-----------+-----------+-----------+-----------+-----------+--------+
+| |       Task|      Alive|       Best|  Mean best| Exp so far|Run Time|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+|x|          1|        222|         40|    0.02835|        222|00:04:00|
+|x|          2|        222|        180|    0.01632|        444|00:03:58|
+|x|          3|        222|        148|    -0.6194|        666|00:03:58|
+|x|          4|        222|         22|    -0.8647|        888|00:03:59|
+|-|          5|        110|        161|    -0.5768|       1110|00:03:59|
+|=|          6|        110|        130|     0.2464|       1220|00:01:57|
+|=|          7|        110|        144|    -0.2538|       1330|00:01:58|
+|=|          8|        110|        130|    0.05626|       1440|00:01:59|
+|=|          9|        110|        130|    -0.3076|       1550|00:01:58|
+|=|         10|        110|        130|    -0.2759|       1660|00:01:58|
+|=|         11|        110|        130|    -0.2721|       1770|00:01:59|
++-+-----------+-----------+-----------+-----------+-----------+--------+
+
+Selected candidate:         130	mean value:    -0.2721
+
+Description of the selected candidate:
+    .ID. fator_pond criterio_cruz .PARENT.
+639  639       0.11          0.89      339
+
+
+# Elite candidates:
+    fator_pond criterio_cruz
+639       0.11          0.89
+653       0.17          0.82
+578       0.13          0.87
+# 2016-10-19 16:06:25 BRST: Stopped because there is no enough budget left to race newly sampled configurations
+# Iteration: 4
+# nbIterations: 4
+# experimentsUsedSoFar: 4989
+# timeUsedSoFar: 0
+# timeEstimate: 0
+# remainingBudget: 11
+# currentBudget: 11
+# number of elites: 3
+# nbCandidates: 1
+# mu: 5
+# Best candidates
+    fator_pond criterio_cruz
+639       0.11          0.89
+653       0.17          0.82
+578       0.13          0.87
+# Best candidates (as commandlines)
+1  --fator_pond 0.11 --criterio_cruz 0.89
+2  --fator_pond 0.17 --criterio_cruz 0.82
+3  --fator_pond 0.13 --criterio_cruz 0.87
