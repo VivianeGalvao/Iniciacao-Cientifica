@@ -1,0 +1,117 @@
+FUNCAO;DIMENSAO;MEDIA\n
+Instances/ack.mod ;;10;2.071340964
+Instances/ap.mod ;;2;-0.3523860738
+Instances/bf1.mod ;;2;0
+Instances/bf2.mod ;;2;0
+Instances/bhs.mod ;;2;-3.428493842
+Instances/bl.mod ;;2;1.586154543e-13
+Instances/bp.mod ;;2;0.3978873577
+Instances/cb3.mod ;;2;2.347400071e-31
+Instances/cb6.mod ;;2;-1.031628453
+Instances/cm2.mod ;;2;-2.2
+Instances/cm4.mod ;;4;-4.4
+Instances/da.mod ;;2;-24776.51834
+Instances/em_10.mod ;;10;-4.936033201
+Instances/em_5.mod ;;5;-2.92723811
+Instances/ep.mod ;;2;-1
+Instances/exp.mod ;;10;0.006737946999
+Instances/fls.mod ;;2;-2.021806783
+Instances/fr.mod ;;2;65.67594123
+Instances/fx_10.mod ;;10;-0.3689390005
+Instances/fx_5.mod ;;5;-1.737239261
+Instances/gp.mod ;;2;3
+Instances/gw.mod ;;10;15.49361579
+Instances/h3.mod ;;3;-3.862782127
+Instances/h6.mod ;;6;-3.31010237
+Instances/hm1.mod ;<BREAK>
+
+Instances/hm2.mod ;<BREAK>
+
+Instances/hm3.mod ;<BREAK>
+
+Instances/hm4.mod ;;2;0
+Instances/hm5.mod ;;3;8.404527972e-35
+Instances/hm.mod ;;2;4.651012242e-08
+Instances/hsk.mod ;;2;-2.345811576
+Instances/hv.mod ;;3;8.447864756e-34
+Instances/ir0.mod ;;4;813.4227887
+Instances/ir1.mod ;;3;3.193230114e-33
+Instances/ir2.mod ;;2;0
+Instances/ir3.mod ;;5;1
+Instances/ir4.mod ;option randseed 2160053474;
+;30;0.9122573123
+Instances/ir5.mod ;;2;0.001999333555
+Instances/kl.mod ;;4;0.000307487369
+Instances/ks.mod ;<BREAK>
+
+Instances/lm1.mod ;;3;1.603130921e-08
+Instances/lm2_10.mod ;;10;0.7566000951
+Instances/lm2_5.mod ;;5;0.0112234279
+Instances/lv8.mod ;;3;1.499660722e-32
+Instances/mc.mod ;;2;-1.913222955
+Instances/mcp.mod ;;4;0.0001187651835
+Instances/mgp.mod ;;2;2.777588773e-11
+Instances/mgw_10.mod ;;10;0.06721682762
+Instances/mgw_20.mod ;;20;0.152441792
+Instances/mgw_2.mod ;;2;1.426974539e-09
+Instances/ml_10.mod ;;10;-1.897544266e-22
+Instances/ml_5.mod ;;5;-0.7977657796
+Instances/mr.mod ;;3;0.05104084565
+Instances/mrp.mod ;;2;1.232595164e-32
+Instances/nf2.mod ;;4;0.09495069002
+Instances/nf3_10.mod ;;10;428.541853
+Instances/nf3_15.mod ;;15;7236.459766
+Instances/nf3_20.mod ;;20;67488.95146
+Instances/nf3_25.mod ;;25;49827.11574
+Instances/nf3_30.mod ;;30;468951.2499
+Instances/osp_10.mod ;;10;-3.733414544e-10
+Instances/osp_20.mod ;;20;-3.582159238e-21
+Instances/prd.mod ;;2;0.9000998438
+Instances/ptm.mod ;;9;138.6573243
+Instances/pwq.mod ;;4;0.266087311
+Instances/rb.mod ;;10;141904.504
+Instances/rg_10.mod ;;10;29.33923151
+Instances/rg_2.mod ;;2;4.999204052e-06
+Instances/s10.mod ;;4;-10.53627756
+Instances/s5.mod ;;4;-10.15319968
+Instances/s7.mod ;;4;-3.706961944
+Instances/sal_10.mod ;;10;2.203274606
+Instances/sal_5.mod ;;5;0.2998841209
+Instances/sbt.mod ;;2;-186.7309088
+Instances/sf1.mod ;;2;0.009715917419
+Instances/shv1.mod ;<BREAK>
+
+Instances/shv2.mod ;;2;-3.552713679e-15
+Instances/sin_10.mod ;;10;-2.114986821
+Instances/sin_20.mod ;;20;-0.1835518046
+Instances/st_17.mod ;;17;164074679.2
+Instances/st_9.mod ;;9;10412.18958
+Instances/stg.mod ;<BREAK>
+
+Instances/swf.mod ;;10;-3011.126543
+Instances/sz.mod ;<BREAK>
+
+Instances/szzs.mod ;<BREAK>
+
+Instances/wf.mod ;;4;1.136684981
+Instances/xor.mod ;;9;0.8683438611
+Instances/zkv_10.mod ;;10;78.3179772
+Instances/zkv_20.mod ;;20;140.0360911
+Instances/zkv_2.mod ;;2;1.680715038e-45
+Instances/zkv_5.mod ;;5;0.2481769603
+Instances/zlk1.mod ;<BREAK>
+
+Instances/zlk2a.mod ;<BREAK>
+
+Instances/zlk2b.mod ;<BREAK>
+
+Instances/zlk3a.mod ;<BREAK>
+
+Instances/zlk3b.mod ;<BREAK>
+
+Instances/zlk3c.mod ;<BREAK>
+
+Instances/zlk4.mod ;;2;0.3978876938
+Instances/zlk5.mod ;;3;-3.862782127
+Instances/zzs.mod ;<BREAK>
+
