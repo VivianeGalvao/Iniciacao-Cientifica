@@ -1,0 +1,3 @@
+include /media/Particao/fapemig_universal2013_eng/references/Implementacoes/irace/PerfilDesempenho/target-to-best/pop10/alpha=3/Instances//ir2.mod;
+option solver './solver';
+solve;
