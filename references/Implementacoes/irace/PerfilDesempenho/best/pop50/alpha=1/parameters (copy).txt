@@ -1,0 +1,47 @@
+## Template for parameter configuration file for Iterated Race.
+##
+## The format is one parameter per line. Each line contains:
+##
+## 1: Name of the parameter. An unquoted alphanumeric string,
+##    example: ants
+
+## 2: Switch to pass the parameter. A quoted (possibly empty) string, 
+##    if the value and the switch must be separated, add a space at
+##    the end of the string. Example : "--version1 --ants "
+
+## 3: Type. An unquoted single letter, among 
+##     i: Integer, c: categorical, o: ordinal, r: real.
+
+## 4: For c and o: All possible values, that is, a variable number of
+##    quoted or unquoted strings separated by commas within
+##    parenthesis. Empty strings and strings containing commas or
+##    spaces must be quoted.
+##    For i,r: a pair of unquoted numbers representing minimum and
+##    maximum values. 
+
+## 5: A conditional parameter can be defined according to the values of
+##    one or several other parameters.  This is done by adding a
+##    character '|' followed by an R expression involving the names of
+##    other parameters. This expression must return TRUE if the 
+##    condition is satisfied, FALSE otherwise.
+
+# 1:           			 	2:          		3: 		4:     		 5:
+ITERATIONS			"--iterations "			i	   (200,2000)	
+ANTS          			"--ants "          		i   	   (10, 80) 
+alphaJob       			"--alphaJob "          		r          (0, 5)
+betaJob        			"--betaJob "       	   	r   	   (0, 5)
+alphaSequence  			"--alphaSequence " 		r   	   (0, 5)
+betaSequence    		"--betaSequence "  		r   	   (0, 5)
+localEvaporationJob		"--localEvaporationJob "	r   	   (0.01, 0.99)	| updatePheromoneJob %in% c(4, 5, 6, 7)
+localReinforceJob		"--localReinforceJob "		r   	   (0.01, 0.99)	| updatePheromoneJob %in% c(2, 3, 6, 7)
+globalEvaporationJob		"--globalEvaporationJob "	r   	   (0.01, 0.99)	| updatePheromoneJob %in% c(1, 3, 5, 7)
+localEvaporationSequence	"--localEvaporationSequence "	r   	   (0.01, 0.99)	| updatePheromoneSequence %in% c(4, 5, 6, 7)
+localReinforceSequence		"--localReinforceSequence "	r   	   (0.01, 0.99)	| updatePheromoneSequence %in% c(2, 3, 6, 7)
+globalEvaporationSequence	"--globalEvaporationSequence "	r   	   (0.01, 0.99)	| updatePheromoneSequence %in% c(1, 3, 5, 7)
+linearPressure			"--linearPressure "		r   	   (0.5, 2)
+localSearch			"--localSearch "		c	   (1,2,3)
+intervalTime			"--intervalTime "		c	   (20,30,40,50,60,70,80)
+updatePheromoneJob		"--pheromoneJob "		i	   (1,7)
+updatePheromoneSequence		"--pheromoneSequence "		i	   (1,7)
+maxExecutionsPR			"--maxExecutionsPR "		i	   (5,50)
+similarityChoicePR		"--similarityChoicePR "		i	   (5,90)
