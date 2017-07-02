@@ -1,0 +1,11 @@
+N1 : alpha=1; fp=0.5
+N2 : alpha=2; fp=0.5 ** maior rho(tau=1) ** maior area **
+N3 : alpha=3; fp=0.5
+
+N4 : alpha=1; fp=0.6
+N5 : alpha=2; fp=0.6
+N6 : alpha=3; fp=0.6
+
+N7 : alpha=1; fp=0.7
+N8 : alpha=2; fp=0.7
+N9 : alpha=3; fp=0.7
