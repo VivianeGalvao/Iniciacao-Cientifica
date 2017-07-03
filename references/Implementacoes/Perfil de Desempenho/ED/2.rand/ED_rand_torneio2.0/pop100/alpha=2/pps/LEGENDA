@@ -1,0 +1,7 @@
+N1 => original; F=0.5
+N2 => original; F=0.6
+N3 => original; F=0.7
+
+N4 => alpha=1; F=0.5
+N5 => alpha=1; F=0.6
+N6 => alpha=1; F=0.7

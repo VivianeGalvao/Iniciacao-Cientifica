@@ -1,0 +1,32 @@
+
+seed=31
+
+d=4;
+rm resolvedores.dat
+
+#for((d=1; d<=10; d++))
+# do
+  name="N"$d".dat"
+  rm $name
+  for f in Instances/*
+  do
+    echo $f
+    echo $name
+    
+    echo -ne -e $f | sed -e "s/Instances\///g" | sed -e "s/.mod/ /g" >> $name   
+    
+    rm problem.run
+    g++ -c -g -Iinclude/ *.cpp -D FP=0.5 -D CR=0.9 -D NI=50 -D SD=$seed -D PROB=1
+    g++ -o solver main.o Estrategias.o Individuo.o libs/funcadd0.o libs/amplsolver.a -w    
+   
+    echo "include" $f";" >> problem.run
+    echo "options solver './solver';" >> problem.run
+    echo "solve;" >> problem.run
+    
+    
+    ./ampl problem.run >> $name
+#    ./ampl problem.run
+    echo >> $name
+  done  
+#done
+

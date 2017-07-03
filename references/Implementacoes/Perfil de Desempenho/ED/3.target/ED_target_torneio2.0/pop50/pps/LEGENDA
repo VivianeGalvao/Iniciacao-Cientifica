@@ -1,0 +1,11 @@
+N1 => alpha=1; F=0.5 ** melhor desempenho **
+N2 => alpha=1; F=0.6 ** melhor robustez **
+N3 => alpha=1; F=0.7
+
+N4 => alpha=2; F=0.5
+N5 => alpha=2; F=0.6
+N6 => alpha=2; F=0.7
+
+N7 => alpha=3; F=0.5
+N8 => alpha=3; F=0.6
+N9 => alpha=3; F=0.7

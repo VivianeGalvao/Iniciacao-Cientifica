@@ -1,0 +1,6 @@
+
+g++ -o teste leitura.cpp
+./teste 100 2
+rm saida
+./script >> saida
+gnuplot saida.gnu

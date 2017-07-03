@@ -1,0 +1,15 @@
+N1 => pop10; F=0.5
+N2 => pop10; F=0.6
+N3 => pop10; F=0.7
+
+N4 => pop30; F=0.5 ** melhor desempenho **
+N5 => pop30; F=0.6
+N6 => pop30; F=0.7 
+
+N7 => pop50; F=0.5
+N8 => pop50; F=0.6
+N9 => pop50; F=0.7 ** melhor robustez **
+
+N10 => pop100; F=0.5
+N11 => pop100; F=0.6
+N12 => pop100; F=0.7
