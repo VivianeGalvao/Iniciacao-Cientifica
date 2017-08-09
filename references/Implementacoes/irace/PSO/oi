@@ -1,0 +1,477 @@
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9022 --fw 0.3578 --cp 0.571 --sp 0.3211
+11: --sp
+12: 0.3211
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9825 --fw 0.2134 --cp 0.1297 --sp 0.9802
+11: --sp
+12: 0.9802
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9378 --fw 0.1602 --cp 0.4559 --sp 0.6201
+11: --sp
+12: 0.6201
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9034 --fw 0.3316 --cp 0.9987 --sp 0.6327
+11: --sp
+12: 0.6327
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9172 --fw 0.3406 --cp 0.2525 --sp 0.113
+11: --sp
+12: 0.113
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9318 --fw 0.1762 --cp 0.171 --sp 0.7863
+11: --sp
+12: 0.7863
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9022 --fw 0.3578 --cp 0.571 --sp 0.3211
+11: --sp
+12: 0.3211
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9825 --fw 0.2134 --cp 0.1297 --sp 0.9802
+11: --sp
+12: 0.9802
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9378 --fw 0.1602 --cp 0.4559 --sp 0.6201
+11: --sp
+12: 0.6201
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9034 --fw 0.3316 --cp 0.9987 --sp 0.6327
+11: --sp
+12: 0.6327
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9172 --fw 0.3406 --cp 0.2525 --sp 0.113
+11: --sp
+12: 0.113
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9318 --fw 0.1762 --cp 0.171 --sp 0.7863
+11: --sp
+12: 0.7863
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9022 --fw 0.3578 --cp 0.571 --sp 0.3211
+11: --sp
+12: 0.3211
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9825 --fw 0.2134 --cp 0.1297 --sp 0.9802
+11: --sp
+12: 0.9802
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9378 --fw 0.1602 --cp 0.4559 --sp 0.6201
+11: --sp
+12: 0.6201
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9034 --fw 0.3316 --cp 0.9987 --sp 0.6327
+11: --sp
+12: 0.6327
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9172 --fw 0.3406 --cp 0.2525 --sp 0.113
+11: --sp
+12: 0.113
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9318 --fw 0.1762 --cp 0.171 --sp 0.7863
+11: --sp
+12: 0.7863
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9022 --fw 0.3578 --cp 0.571 --sp 0.3211
+11: --sp
+12: 0.3211
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9825 --fw 0.2134 --cp 0.1297 --sp 0.9802
+11: --sp
+12: 0.9802
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9378 --fw 0.1602 --cp 0.4559 --sp 0.6201
+11: --sp
+12: 0.6201
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9034 --fw 0.3316 --cp 0.9987 --sp 0.6327
+11: --sp
+12: 0.6327
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9172 --fw 0.3406 --cp 0.2525 --sp 0.113
+11: --sp
+12: 0.113
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9318 --fw 0.1762 --cp 0.171 --sp 0.7863
+11: --sp
+12: 0.7863
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9022 --fw 0.3578 --cp 0.571 --sp 0.3211
+11: --sp
+12: 0.3211
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9825 --fw 0.2134 --cp 0.1297 --sp 0.9802
+11: --sp
+12: 0.9802
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9378 --fw 0.1602 --cp 0.4559 --sp 0.6201
+11: --sp
+12: 0.6201
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9034 --fw 0.3316 --cp 0.9987 --sp 0.6327
+11: --sp
+12: 0.6327
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9172 --fw 0.3406 --cp 0.2525 --sp 0.113
+11: --sp
+12: 0.113
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9318 --fw 0.1762 --cp 0.171 --sp 0.7863
+11: --sp
+12: 0.7863
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9022 --fw 0.3578 --cp 0.571 --sp 0.3211
+11: --sp
+12: 0.3211
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9825 --fw 0.2134 --cp 0.1297 --sp 0.9802
+11: --sp
+12: 0.9802
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9378 --fw 0.1602 --cp 0.4559 --sp 0.6201
+11: --sp
+12: 0.6201
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9034 --fw 0.3316 --cp 0.9987 --sp 0.6327
+11: --sp
+12: 0.6327
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9172 --fw 0.3406 --cp 0.2525 --sp 0.113
+11: --sp
+12: 0.113
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9318 --fw 0.1762 --cp 0.171 --sp 0.7863
+11: --sp
+12: 0.7863
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9022 --fw 0.3578 --cp 0.571 --sp 0.3211
+11: --sp
+12: 0.3211
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9825 --fw 0.2134 --cp 0.1297 --sp 0.9802
+11: --sp
+12: 0.9802
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9378 --fw 0.1602 --cp 0.4559 --sp 0.6201
+11: --sp
+12: 0.6201
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9297 --fw 0.2627 --cp 0.5159 --sp 0.8511
+11: --sp
+12: 0.8511
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9196 --fw 0.2589 --cp 0.5329 --sp 0.6251
+11: --sp
+12: 0.6251
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9226 --fw 0.2013 --cp 0.8037 --sp 0.3583
+11: --sp
+12: 0.3583
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9108 --fw 0.3848 --cp 0.9044 --sp 0.6989
+11: --sp
+12: 0.6989
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9049 --fw 0.2478 --cp 0.3845 --sp 0.315
+11: --sp
+12: 0.315
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9858 --fw 0.2227 --cp 0.2875 --sp 0.9596
+11: --sp
+12: 0.9596
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9297 --fw 0.2627 --cp 0.5159 --sp 0.8511
+11: --sp
+12: 0.8511
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9196 --fw 0.2589 --cp 0.5329 --sp 0.6251
+11: --sp
+12: 0.6251
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9226 --fw 0.2013 --cp 0.8037 --sp 0.3583
+11: --sp
+12: 0.3583
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9108 --fw 0.3848 --cp 0.9044 --sp 0.6989
+11: --sp
+12: 0.6989
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9049 --fw 0.2478 --cp 0.3845 --sp 0.315
+11: --sp
+12: 0.315
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9858 --fw 0.2227 --cp 0.2875 --sp 0.9596
+11: --sp
+12: 0.9596
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9297 --fw 0.2627 --cp 0.5159 --sp 0.8511
+11: --sp
+12: 0.8511
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9196 --fw 0.2589 --cp 0.5329 --sp 0.6251
+11: --sp
+12: 0.6251
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9226 --fw 0.2013 --cp 0.8037 --sp 0.3583
+11: --sp
+12: 0.3583
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9108 --fw 0.3848 --cp 0.9044 --sp 0.6989
+11: --sp
+12: 0.6989
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9049 --fw 0.2478 --cp 0.3845 --sp 0.315
+11: --sp
+12: 0.315
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/sin_20.mod --seed 717639424 --iw 0.9858 --fw 0.2227 --cp 0.2875 --sp 0.9596
+11: --sp
+12: 0.9596
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9297 --fw 0.2627 --cp 0.5159 --sp 0.8511
+11: --sp
+12: 0.8511
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9196 --fw 0.2589 --cp 0.5329 --sp 0.6251
+11: --sp
+12: 0.6251
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9226 --fw 0.2013 --cp 0.8037 --sp 0.3583
+11: --sp
+12: 0.3583
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9108 --fw 0.3848 --cp 0.9044 --sp 0.6989
+11: --sp
+12: 0.6989
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9049 --fw 0.2478 --cp 0.3845 --sp 0.315
+11: --sp
+12: 0.315
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk2a.mod --seed 1393781005 --iw 0.9858 --fw 0.2227 --cp 0.2875 --sp 0.9596
+11: --sp
+12: 0.9596
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9297 --fw 0.2627 --cp 0.5159 --sp 0.8511
+11: --sp
+12: 0.8511
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9196 --fw 0.2589 --cp 0.5329 --sp 0.6251
+11: --sp
+12: 0.6251
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9226 --fw 0.2013 --cp 0.8037 --sp 0.3583
+11: --sp
+12: 0.3583
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9108 --fw 0.3848 --cp 0.9044 --sp 0.6989
+11: --sp
+12: 0.6989
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9049 --fw 0.2478 --cp 0.3845 --sp 0.315
+11: --sp
+12: 0.315
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/shv2.mod --seed 797285953 --iw 0.9858 --fw 0.2227 --cp 0.2875 --sp 0.9596
+11: --sp
+12: 0.9596
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9297 --fw 0.2627 --cp 0.5159 --sp 0.8511
+11: --sp
+12: 0.8511
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9196 --fw 0.2589 --cp 0.5329 --sp 0.6251
+11: --sp
+12: 0.6251
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9226 --fw 0.2013 --cp 0.8037 --sp 0.3583
+11: --sp
+12: 0.3583
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9108 --fw 0.3848 --cp 0.9044 --sp 0.6989
+11: --sp
+12: 0.6989
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9049 --fw 0.2478 --cp 0.3845 --sp 0.315
+11: --sp
+12: 0.315
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9858 --fw 0.2227 --cp 0.2875 --sp 0.9596
+11: --sp
+12: 0.9596
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9297 --fw 0.2627 --cp 0.5159 --sp 0.8511
+11: --sp
+12: 0.8511
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9196 --fw 0.2589 --cp 0.5329 --sp 0.6251
+11: --sp
+12: 0.6251
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9226 --fw 0.2013 --cp 0.8037 --sp 0.3583
+11: --sp
+12: 0.3583
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9108 --fw 0.3848 --cp 0.9044 --sp 0.6989
+11: --sp
+12: 0.6989
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9049 --fw 0.2478 --cp 0.3845 --sp 0.315
+11: --sp
+12: 0.315
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/mrp.mod --seed 192108870 --iw 0.9858 --fw 0.2227 --cp 0.2875 --sp 0.9596
+11: --sp
+12: 0.9596
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/hsk.mod --seed 162486995 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/hsk.mod --seed 162486995 --iw 0.9022 --fw 0.3578 --cp 0.571 --sp 0.3211
+11: --sp
+12: 0.3211
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/hsk.mod --seed 162486995 --iw 0.9825 --fw 0.2134 --cp 0.1297 --sp 0.9802
+11: --sp
+12: 0.9802
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/hsk.mod --seed 162486995 --iw 0.9378 --fw 0.1602 --cp 0.4559 --sp 0.6201
+11: --sp
+12: 0.6201
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/hsk.mod --seed 162486995 --iw 0.9326 --fw 0.2438 --cp 0.5014 --sp 0.5985
+11: --sp
+12: 0.5985
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/hsk.mod --seed 162486995 --iw 0.9246 --fw 0.3096 --cp 0.3436 --sp 0.6285
+11: --sp
+12: 0.6285
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/hsk.mod --seed 162486995 --iw 0.9885 --fw 0.1905 --cp 0.2935 --sp 0.7653
+11: --sp
+12: 0.7653
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/hsk.mod --seed 162486995 --iw 0.9535 --fw 0.2106 --cp 0.6022 --sp 0.5913
+11: --sp
+12: 0.5913
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/hsk.mod --seed 162486995 --iw 0.9118 --fw 0.2303 --cp 0.8825 --sp 0.1048
+11: --sp
+12: 0.1048
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9326 --fw 0.2438 --cp 0.5014 --sp 0.5985
+11: --sp
+12: 0.5985
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9246 --fw 0.3096 --cp 0.3436 --sp 0.6285
+11: --sp
+12: 0.6285
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9885 --fw 0.1905 --cp 0.2935 --sp 0.7653
+11: --sp
+12: 0.7653
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9535 --fw 0.2106 --cp 0.6022 --sp 0.5913
+11: --sp
+12: 0.5913
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/exp.mod --seed 2018468016 --iw 0.9118 --fw 0.2303 --cp 0.8825 --sp 0.1048
+11: --sp
+12: 0.1048
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9326 --fw 0.2438 --cp 0.5014 --sp 0.5985
+11: --sp
+12: 0.5985
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9246 --fw 0.3096 --cp 0.3436 --sp 0.6285
+11: --sp
+12: 0.6285
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9885 --fw 0.1905 --cp 0.2935 --sp 0.7653
+11: --sp
+12: 0.7653
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9535 --fw 0.2106 --cp 0.6022 --sp 0.5913
+11: --sp
+12: 0.5913
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9118 --fw 0.2303 --cp 0.8825 --sp 0.1048
+11: --sp
+12: 0.1048
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9326 --fw 0.2438 --cp 0.5014 --sp 0.5985
+11: --sp
+12: 0.5985
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9246 --fw 0.3096 --cp 0.3436 --sp 0.6285
+11: --sp
+12: 0.6285
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/zlk3a.mod --seed 1712112182 --iw 0.9885 --fw 0.1905 --cp 0.2935 --sp 0.7653
+11: --sp
+12: 0.7653
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+12
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/lm1.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313
+11: --sp
+12: 0.4313
+-i /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/PSO/Instances/ack.mod --seed 1349158070 --iw 0.9241 --fw 0.2497 --cp 0.6767 --sp 0.4313

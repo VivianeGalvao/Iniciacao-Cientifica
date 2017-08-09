@@ -70,12 +70,12 @@ void Exploratory_Moves(double (*objfun)(double *), Individuo *sample, int size, 
                     for(int j=0; j<size; j++){
                         sample->posicao[j] = points[i][j];
                     }
-                    if(success_direction == i){
+//                     if(success_direction == i){
                         delta = 2*delta;
-                    }
-                    else{
-                        success_direction = i;
-                    }
+//                     }
+//                     else{
+//                         success_direction = i;
+//                     }
                     exit = true;
                 }
             }

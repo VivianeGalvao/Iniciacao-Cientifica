@@ -76,8 +76,19 @@ arglist {			/* Information sent to user-defined functions */
 	AmplExports *AE;	/* functions made visible (via #defines below) */
 	function *f;		/* for internal use by AMPL */
 	TVA *tva;		/* for internal use by AMPL */
-	char *Errmsg;		/* to indicate an error, set this to a */
-				/* description of the error */
+	char *Errmsg;		/* To indicate an error, set this to a */
+				/* description of the error.  When derivs */
+				/* is nonzero and the error is that first */
+				/* derivatives cannot or are not computed, */
+				/* a single quote character (') should be */
+				/* the first character in the text assigned */
+				/* to Errmsg, followed by the actual error */
+				/* message.  Similarly, if hes is nonzero */
+				/* and the error is that second derivatives */
+				/* are not or cannot be computed, a double */
+				/* quote character (") should be the first */
+				/* character in Errmsg, followed by the */
+				/* actual error message text. */
 	TMInfo *TMI;		/* used in Tempmem calls */
 	Char *Private;
 				/* The following fields are relevant */
@@ -106,23 +117,27 @@ typedef real (ufunc) ANSI((arglist *));
 
  enum FUNCADD_TYPE {			/* bits in "type" arg to addfunc */
 
-		/* The type arg to funcadd should consist of one of the */
+		/* The type arg to addfunc should consist of one of the */
 		/* following values ... */
 
 	FUNCADD_REAL_VALUED = 0,	/* real (double) valued function */
-	FUNCADD_STRING_VALUED = 2,	/* char* valued function */
+	FUNCADD_STRING_VALUED = 2,	/* char* valued function (AMPL only) */
 	FUNCADD_RANDOM_VALUED = 4,	/* real random valued */
 	FUNCADD_012ARGS = 6,		/* Special case: real random valued */
 					/* with 0 <= nargs <= 2 arguments */
 					/* passed directly, rather than in */
-					/* an arglist structure. */
-
-	/* FUNCADD_TUPLE_VALUED = 8, */	/* possible later extension */
+					/* an arglist structure (AMPL only). */
 
 		/* possibly or-ed with the following... */
 
 	FUNCADD_STRING_ARGS = 1,	/* allow string args */
-	FUNCADD_OUTPUT_ARGS = 16	/* allow output args (AMPL only) */
+	FUNCADD_OUTPUT_ARGS = 16,	/* allow output args (AMPL only) */
+	FUNCADD_TUPLE_VALUED = 32,	/* not yet allowed */
+
+		/* internal use */
+	FUNCADD_NO_ARGLIST = 8,
+	FUNCADD_NO_DUPWARN = 64,	/* no complaint if already defined */
+	FUNCADD_NONRAND_BUILTIN = 128	/* mean, variance, moment, etc. */
 	};
 
 /* If a constraint involves an imported function and presolve fixes all
@@ -152,7 +167,21 @@ typedef void AddFunc ANSI((
 		AmplExports *ae
 		));
 
- typedef void Exitfunc ANSI((void*));
+typedef void AddRand ANSI((
+		const char *name,
+		rfunc f,	/* assumed to be a random function */
+		rfunc icdf,	/* inverse CDF */
+		int type,	/* FUNCADD_STRING_ARGS or 0 */
+		int nargs,	/* >=  0 ==> exactly that many args
+				 * <= -1 ==> at least -(nargs+1) args
+				 */
+		void *funcinfo,	/* for use by the function (if desired) */
+		AmplExports *ae
+		));
+
+typedef void (*RandSeedSetter) ANSI((void*, unsigned long));
+typedef void AddRandInit ANSI((AmplExports *ae, RandSeedSetter, void*));
+typedef void Exitfunc ANSI((void*));
 
  struct
 AuxInfo {
@@ -230,18 +259,24 @@ AmplExports {
 	/* Items available with ASLdate >= 20020501 start here. */
 	int (*SnprintF) ANSI((char*, size_t, const char*, ...));
 	int (*VsnprintF) ANSI((char*, size_t, const char*, VA_LIST));
+
+	AddRand *Addrand;	/* for random function/inverse CDF pairs */
+	AddRandInit *Addrandinit; /* for adding a function to receive a new random seed */
 	};
 
-extern char *i_option_ASL, *ix_details_ASL[];
+extern const char *i_option_ASL, *ix_details_ASL[];
 
 #define funcadd funcadd_ASL
 
-extern void func0add ANSI((AmplExports*));	/* statically linked */
-extern void func1add ANSI((AmplExports*));	/* for amplodbc.dll  */
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(__MINGW32__)
 __declspec(dllexport)
 #endif
-extern void funcadd  ANSI((AmplExports*));	/* dynamically linked */
+extern void funcadd ANSI((AmplExports*));	/* dynamically linked */
+extern void af_libnamesave_ASL ANSI((AmplExports*, const char *fullname, const char *name, int nlen));
+extern void note_libuse_ASL ANSI((void));	/* If funcadd() does not provide any imported */
+						/* functions, it can call note_libuse_ASL() to */
+						/* keep the library loaded; note_libuse_ASL() is */
+						/* called, e.g., by the tableproxy table handler. */
 
 #ifdef __cplusplus
 	}
@@ -309,6 +344,8 @@ enum {	/* bits in flags field of TableInfo */
 #undef vsnprintf
 #define Stderr (ae->StdErr)
 #define addfunc(a,b,c,d,e) (*ae->Addfunc)(a,b,c,d,e,ae)
+#define addrand(a,b,c,d,e,f) (*ae->Addrand)(a,b,c,d,e,f,ae)
+#define addrandinit(a,b) (*ae->Addrandinit)(ae,a,b)
 #define printf	(*ae->PrintF)
 #define fprintf (*ae->FprintF)
 #define snprintf (*ae->SnprintF)

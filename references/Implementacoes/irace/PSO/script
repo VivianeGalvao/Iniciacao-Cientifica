@@ -1,0 +1,43 @@
+
+#rm problem.run
+#rm solver
+
+#echo $# >> oi
+#echo $@ >> oi
+#echo "1: "$1 >> oi
+#echo "2: "$2 >> oi
+#echo "3: "$3 >> oi
+#echo "4: "$4 >> oi
+#echo "5: "$5 >> oi
+#echo "6: "$6 >> oi
+#echo "7: "$7 >> oi
+#echo "8: "$8 >> oi
+#echo "9: "$9 >> oi
+#echo "10: "$10 >> oi
+#echo "11: "${11} >> oi
+#echo "12: "${12} >> oi
+
+
+if [ "$#" = "12" ];
+then
+
+  g++ -c -g -Iinclude/ *.cpp -D IW=$6 -D FW=$8 -D CP=${10} -D SP=${12} -D SD=$4
+  g++ -o solver main.o Estrategias.o Solution.o libs/funcadd0.o libs/amplsolver.a -w
+  
+  echo "include" $2";" >>  problem.run
+  echo "option solver './solver';" >> problem.run
+  echo "solve;" >> problem.run
+  #touch solver.mod;
+  
+  ./ampl problem.run
+else
+  echo "85.0"
+fi
+
+# Best configurations as commandlines (first number is the configuration ID; same order as above):
+1  --iw 0.7775 --fw 0.1217 --cp 0.899 --sp 0.9986
+2  --iw 0.9439 --fw 0.1931 --cp 0.3618 --sp 0.7865
+4  --iw 0.9657 --fw 0.3797 --cp 0.5121 --sp 0.9036
+6  --iw 0.6795 --fw 0.1303 --cp 0.3178 --sp 0.1479
+
+

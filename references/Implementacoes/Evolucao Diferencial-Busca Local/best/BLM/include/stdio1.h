@@ -51,6 +51,11 @@ typedef unsigned int size_t;
 #endif
 
 #ifndef NO_STDIO1
+#ifdef _WIN32
+/* Avoid Microsoft bug that perrror may appear in stdlib.h. */
+/* It should only be declared in stdio.h. */
+#include <stdlib.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -89,6 +94,8 @@ extern void fflush_ASL ANSI((FILE*));
 #undef vsprintf
 #define printf Printf
 #define fprintf Fprintf
+#undef snprintf		/* for MacOSX */
+#undef vsnprintf	/* for MacOSX */
 #define snprintf Snprintf
 #define sprintf Sprintf
 #define perror Perror
