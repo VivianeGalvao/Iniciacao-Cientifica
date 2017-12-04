@@ -1,0 +1,3 @@
+include /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/DE-torneio_prob/1.best/torneio+prob/Instances/fr.mod;
+option solver './solver';
+solve;

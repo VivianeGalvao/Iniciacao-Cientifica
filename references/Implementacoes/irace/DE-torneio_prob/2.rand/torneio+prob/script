@@ -1,0 +1,42 @@
+
+rm problem.run
+rm solver
+
+
+#echo "1: "$1 >> oi #nome
+#echo "2: "$2 >> oi #instancia
+#echo "3: "$3 >> oi #nome
+#echo "4: "$4 >> oi #fator ponderacao
+#echo "5: "$5 >> oi #nome
+#echo "6: "$6 >> oi #criterio cruz
+#echo "7: "$7 >> oi #nome
+#echo "8: "$8 >> oi #num indiviuos
+#echo "9: "$9 >> oi
+#echo "10: "$10 >> oi
+
+
+if [ "$#" = "8" ];
+then
+
+  g++ -c -g -Iinclude/ *.cpp -D FP=0.55 -D CR=0.93 -D NI=$8 -D PROB=$6
+  g++ -o solver main.o Estrategias.o Individuo.o libs/funcadd0.o libs/amplsolver.a -w
+  
+  echo "include" $2";" >>  problem.run
+  echo "option solver './solver';" >> problem.run
+  echo "solve;" >> problem.run
+  #touch solver.mod;
+  
+  ./ampl problem.run
+else
+  echo "85.0"
+fi
+
+#05/10
+# Best configurations as commandlines (first number is the configuration ID; same order as above):
+#33  --prob 2 --num_ind 46
+#39  --prob 2 --num_ind 43
+#17  --prob 2 --num_ind 51
+
+
+
+
