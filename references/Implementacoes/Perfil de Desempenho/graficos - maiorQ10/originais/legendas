@@ -1,0 +1,18 @@
+N1 DE/best
+N2 DE/best + BL
+N3 DE/best + BLM
+
+N4 DE/rand 
+N5 DE/rand + BL
+N6 DE/rand + BLM
+
+N7 DE/target
+N8 DE/target + BL
+N9 De/target + BLM
+
+N10 PSO
+N11 PSO + PS
+N12 PSO + PSA
+
+N13 PSWARM
+N14 PSWARM + PSA
