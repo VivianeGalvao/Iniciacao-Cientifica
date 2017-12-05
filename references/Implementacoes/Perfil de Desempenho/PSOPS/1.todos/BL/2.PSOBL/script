@@ -1,0 +1,49 @@
+
+#rm resultados.csv
+
+d=31
+
+#echo "FUNCAO;DIMENSAO;MEDIA" >> resultados.csv
+
+#for f in Instances/*
+#do
+#  echo $f
+#  echo -ne -e $f ";">> resultados.csv
+#  for((d=1; d<31; d++))
+#  do
+#    rm problem.run
+#    g++ -c -g -Iinclude/ *.cpp -D SD=$d
+#    g++ -o solver main.o Estrategias.o Solution.o libs/funcadd0.o libs/amplsolver.a -w    
+   
+#    echo "include" $f";" >> problem.run
+#    echo "options solver './solver';" >> problem.run
+#    echo "solve;" >> problem.run
+  
+#    ./ampl problem.run >> resultados.csv
+#    echo >>resultados.csv
+#  done  
+#  echo "MÉDIA" >> resultados.csv
+#done
+
+p=1
+name="N"$p".dat"
+rm $name
+for f in Instances/*
+do
+  echo $f
+  echo $name
+  echo -ne -e $f | sed -e "s/Instances\///g" | sed -e "s/.mod/ /g" >> $name   
+  
+  rm problem.run
+  g++ -c -g -Iinclude/ *.cpp -D IW=0.8314 -D FW=0.3165 -D CP=0.3815 -D SP=0.3727 -D SD=$d
+  g++ -o solver main.o Estrategias.o Solution.o libs/funcadd0.o libs/amplsolver.a -w 
+  
+  echo "include" $f";" >> problem.run
+  echo "options solver './solver';" >> problem.run
+  echo "solve;" >> problem.run
+  
+  
+  ./ampl problem.run >> $name
+  #./ampl problem.run
+  echo >> $name
+done

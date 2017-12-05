@@ -1,0 +1,3 @@
+include Instances/zzs.mod;
+options solver './solver';
+solve;
