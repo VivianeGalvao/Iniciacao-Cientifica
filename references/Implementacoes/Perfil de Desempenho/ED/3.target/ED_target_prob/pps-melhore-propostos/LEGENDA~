@@ -1,0 +1,4 @@
+N1 : pop10/ alpha=3; fp=0.5
+N2 : pop30/ alpha=2; fp=0.5
+N3 : pop50/ alpha=1; fp=0.5
+N4 : pop100/ alpha=1; fp=0.5

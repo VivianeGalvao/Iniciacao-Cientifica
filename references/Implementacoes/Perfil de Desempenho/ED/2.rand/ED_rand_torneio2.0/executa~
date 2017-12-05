@@ -1,0 +1,55 @@
+
+cd pop10/
+cd alpha=1/
+./script
+cd ..
+
+cd alpha=2/
+./script
+cd ..
+
+cd alpha=3/
+./script
+
+cd ..
+
+cd ..
+cd pop30/
+cd alpha=1/
+./script
+cd ..
+
+cd alpha=2/
+./script
+cd ..
+
+cd alpha=3/
+./script
+
+cd ..
+
+cd ..
+cd pop50/
+cd alpha=1/
+./script
+cd ..
+
+cd alpha=2/
+./script
+cd ..
+
+cd alpha=3/
+./script
+
+cd ..
+cd pop100/
+cd alpha=1/
+./script
+cd ..
+
+cd alpha=2/
+./script
+cd ..
+
+cd alpha=3/
+./script
