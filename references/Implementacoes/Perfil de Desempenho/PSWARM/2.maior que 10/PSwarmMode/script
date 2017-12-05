@@ -1,0 +1,28 @@
+
+seed=31
+d=1;
+
+rm N2.dat
+
+make ampl
+
+
+  name="N2.dat"
+  rm $name
+  for f in Instances/*
+  do
+    echo $f
+    echo $name
+    
+    echo -ne -e $f | sed -e "s/Instances\///g" | sed -e "s/.mod/ /g" >> $name   
+    
+    rm problem.run   
+    echo "include" $f";" >> problem.run
+    echo "options solver './pswarm';" >> problem.run
+    echo "solve;" >> problem.run
+    
+    
+    ./ampl problem.run >> $name
+    #./ampl problem.run
+    echo >> $name
+  done  
