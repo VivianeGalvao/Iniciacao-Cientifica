@@ -1,3 +1,0 @@
-include /home/viviane/Repository/fapemig_universal2013_eng/references/Implementacoes/irace/rand/Instances//s5.mod;
-option solver './solver';
-solve;

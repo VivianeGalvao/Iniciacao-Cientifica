@@ -1,3 +1,0 @@
-include /media/Particao/fapemig_universal2013_eng/references/Implementacoes/irace/PerfilDesempenho/best/pop50/alpha=1/Instances//rg_10.mod;
-option solver './solver';
-solve;

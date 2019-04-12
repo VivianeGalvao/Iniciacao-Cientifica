@@ -1,3 +1,0 @@
-N1 => best/ pop30/ alpha=2; fp=0.5 ** maior rho(tau=1) **
-N2 => rand/ pop10/ alpha=2; fp=0.5
-N3 => target/ pop10/ alpha=3; fp=0.5 ** maior area **

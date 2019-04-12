@@ -1,3 +1,0 @@
-include /media/DATA/subversion/fapemig_universal2013_eng/references/Implementacoes/irace/DE-torneio_prob/3.target_to_best/torneio+prob/Instances/shv2.mod;
-option solver './solver';
-solve;

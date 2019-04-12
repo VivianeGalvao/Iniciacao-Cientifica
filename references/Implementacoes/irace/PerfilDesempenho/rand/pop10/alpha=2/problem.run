@@ -1,3 +1,0 @@
-include /media/Particao/fapemig_universal2013_eng/references/Implementacoes/irace/PerfilDesempenho/rand/pop10/alpha=2/Instances//xor.mod;
-option solver './solver';
-solve;

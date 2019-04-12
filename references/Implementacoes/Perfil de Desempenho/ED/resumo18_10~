@@ -1,9 +1,0 @@
-Resultado das comparações entre as técnicas propostas:
-
-1. best: com população de 10 indivíduos, fator de ponderação de 0.5 e triplicando a população (alpha=3) foi a técnica que obteve o melhor desempenho.
-	 Já a técnica com maior robustez foi a com população de 30 indivíduos, fator de ponderação de 0.5 e duplicando a população (alpha = 2).
-
-2. rand: com população de 10 indivíduos, fator de ponderação de 0.5 e duplicando a população (alpha=2), foi a técnica que obteve o melhor desempenho e robustez.
-
-3. target-to-best: com população de 10 indivíduos, fator de ponderação de 0.5 e triplicando a população (alpha=3) foi a técnica que obteve o melhor desempenho.
-		    Já a técnica com maior robustez foi a com população de 30 indivíduos, fator de ponderação de 0.5 e com população sem alterações (alpha = 1).

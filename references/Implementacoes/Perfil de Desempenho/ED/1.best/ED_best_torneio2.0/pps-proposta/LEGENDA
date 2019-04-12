@@ -1,4 +1,0 @@
-N1 => pop10; alpha=3; F=0.5 ** melhor desempenho **
-N2 => pop30; alpha=2; F=0.5 ** melhor robustez **
-N3 => pop50; alpha=1; F=0.5
-N4 => pop100; alpha=1; F=0.5

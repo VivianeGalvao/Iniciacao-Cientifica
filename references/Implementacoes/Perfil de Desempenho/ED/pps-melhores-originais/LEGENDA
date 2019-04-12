@@ -1,3 +1,0 @@
-N1 => best/pop30; F=0.7
-N2 => rand/pop30; F=0.5
-N3 => target/pop30; F=0.5 ** melhor desempenho **

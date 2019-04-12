@@ -1,3 +1,0 @@
-include /media/Particao/fapemig_universal2013_eng/references/Implementacoes/irace/PerfilDesempenho/rand/pop30/alpha=2/Instances//rg_10.mod;
-option solver './solver';
-solve;

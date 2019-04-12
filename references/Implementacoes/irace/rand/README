@@ -1,5 +1,0 @@
-#$ R
-#R> library(irace)
-#R> system.file(package="irace")
-
-/home/viviane/R/i686-pc-linux-gnu-library/2.14/irace/bin/irace

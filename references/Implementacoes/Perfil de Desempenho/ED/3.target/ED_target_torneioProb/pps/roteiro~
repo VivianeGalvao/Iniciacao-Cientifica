@@ -1,6 +1,0 @@
-rm outfile
-g++ -o teste leitura.cpp
-./teste 100 10 >> outfile
-rm saida
-./script >> saida
-gnuplot saida.gnu
