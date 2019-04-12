@@ -1,0 +1,3 @@
+include Instances/zkv_20.mod;
+options solver './solver';
+solve;
